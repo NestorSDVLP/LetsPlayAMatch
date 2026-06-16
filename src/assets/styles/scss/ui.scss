@@ -1,0 +1,172 @@
+/*
+
+    Containers
+
+*/
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm,
+.container {
+    @media (min-width: 1200px) {
+        max-width: 1190px;
+    }
+}
+
+/*
+
+    MainHeader
+
+*/
+#mainHeader {
+    .navbar {
+        .navbar-brand {
+            .logo {
+                width: 120px;
+            }
+        }
+    }
+}
+
+/*
+
+   Loading Global (AppLoading)
+
+*/
+.app-loading-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75); /* Fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999990;
+
+    .app-loading-spinner {
+    width: 3.5rem;
+    height: 3.5rem;
+    }
+}
+
+/*
+
+    Sidebar Filter Sticky
+
+*/
+.sidebar-sticky-top {
+    top: 100px;
+}
+
+/*
+
+    ListGroup
+
+*/
+.list-group {
+    &.list-has-chevron {
+        .list-group-item-action {
+            position: relative;
+
+            .bi-chevron-right {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: .25s ease-in-out;
+            }
+
+            &:hover {
+                .bi-chevron-right {
+                    transform: translate(5px,-50%);
+                }
+            }
+
+            &.active {
+                color: $dark;
+                background-color: $primary;
+
+                .bi-chevron-right {
+                    transform: translate(10px,-50%) scale(120%);
+                }
+            }
+        }
+    }
+}
+
+/*
+
+    Buttons Global
+
+*/
+.btn {
+    position: relative;
+
+    .bi-chevron-right {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: .25s ease-in-out;
+    }
+
+    &:hover {
+        .bi-chevron-right {
+            transform: translate(5px,-50%);
+        }   
+    }
+}
+
+/*
+
+    Breadcrumbs Views
+
+*/
+.breadcrumb {
+    .breadcrumb-item {
+        a {
+            text-decoration: none;
+            color: $dark;
+        }
+    }
+}
+
+/*
+
+    Pagination List
+
+*/
+.pagination {
+    .page-item {
+        .page-link {
+            color: $dark;
+
+            /*&.active {}*/
+        }
+    }
+}
+
+/*
+
+    Swiper Carousel
+
+*/
+.swiper {
+  /* solo este carrusel */
+  --swiper-theme-color: #{$primary};
+  --swiper-navigation-color: #{$primary};
+  --swiper-pagination-color: #{$primary};
+
+  /* bullets inactivos */
+  // bullets
+  --swiper-pagination-bullet-size: 16px;          // 8px es el default
+  --swiper-pagination-bullet-horizontal-gap: 8px; // separación
+  --swiper-pagination-color: #{$primary};             // color activo
+  --swiper-pagination-bullet-inactive-color: #{$primary};
+  --swiper-pagination-bullet-inactive-opacity: 0.6;
+
+  /* tamaño de flechas */
+  --swiper-navigation-size: 30px;
+}
