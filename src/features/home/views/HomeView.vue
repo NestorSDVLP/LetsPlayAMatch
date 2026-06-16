@@ -5,13 +5,17 @@
         <section class="py-5">
             <div class="container">
                 <div class="card text-bg-dark box-shadow">
-                    <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: rgba(0,0,0,.5); z-index: 999;">
+                    <div class="card-img-overlay d-flex align-items-end rounded-0" style="background: rgba(0,0,0,.4); z-index: 999;">
                         <div class="w-100 p-3 p-sm-5">
                             <div class="row justify-content-center">
-                                <div class="col-lg-7">
-                                    <h1 class="lh-1 mb-2">¿Tenés ganas de jugar hoy? <br>Acá se arma el equipo</h1>
-                                    <p class="opacity-75 mb-4">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos.<br><strong>Compartís un link, confirman todos y vas a jugar</strong></p>
-                                    <router-link class="btn btn-primary rounded-pill px-5" to="/login">Ingresar como entrenador <i class="bi bi-chevron-right"></i></router-link>
+                                <div class="col-lg-8 text-center">
+                                    <h1 class="display-5 h1 lh-1 mb-3">¿Tenés ganas de jugar hoy? <br>Acá se arma el equipo</h1>
+                                    <p class="opacity-75 m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos.<br><strong>Compartís un link, confirman todos y vas a jugar</strong></p>
+                                    
+                                    <div v-if="!authStore.isAuthenticated">
+                                        <router-link class="btn btn-primary rounded-pill px-5 mt-4" to="/login">Ingresar como entrenador <i class="bi bi-chevron-right"></i></router-link>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -39,6 +43,9 @@
 <script setup>
 
     import { ref } from 'vue'
+    import { useAuthStore } from '@/features/auth/stores/auth.store'
+
+    const authStore = useAuthStore()
 
     import volley from '@/assets/images/hero/volley.webp';
     import soccer from '@/assets/images/hero/soccer.webp';

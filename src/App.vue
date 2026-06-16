@@ -30,7 +30,7 @@
 <script setup>
 
   import { onMounted } from 'vue'
-  import { useAuthStore } from '@/features/auth/store/auth.store' // <-- Importamos tu store
+  import { useAuthStore } from '@/features/auth/stores/auth.store' // <-- Importamos tu store
   import AppHeader from '@/shared/components/AppHeader.vue'
   import AppFooter from '@/shared/components/AppFooter.vue'
   import AppLoading from '@/shared/components/AppLoading.vue'

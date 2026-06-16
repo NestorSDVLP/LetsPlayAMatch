@@ -40,7 +40,7 @@ import router from '@/router/router.js'
 * mantener sincronizado el estado de Firebase Auth.
 */
 
-import { useAuthStore } from '@/features/auth/store/auth.store'
+import { useAuthStore } from '@/features/auth/stores/auth.store'
 
 /*
 * Crea la instancia principal de Vue.
@@ -63,7 +63,7 @@ app.use(pinia)
 * Firebase Auth y actualiza el estado global.
 */
 
-const authStore = useAuthStore(pinia)
+const authStore = useAuthStore()
 
 authStore.initAuth()
 

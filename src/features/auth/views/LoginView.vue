@@ -1,97 +1,101 @@
 <template>
-  <section>
-    <section class="py-5">
-      <div class="container">
-        <h1>Ingresar</h1>
-        <hr class="mb-4">
-        <div class="row g-5 align-items-center justify-content-center">
-          <div class="col-sm-8 col-lg-5">
-            <div class="bg-primary box-shadow px-4 py-5 p-sm-5">
+
+  <section class="py-5">
+    <div class="container">
+      <h1 class="h2">Ingresar como Entrenador</h1>
+      <hr class="mb-4">
+      <div class="row g-5 align-items-center justify-content-center">
+        <div class="col-sm-8 col-lg-5">
+          <div class="bg-light text-dark box-shadow px-4 py-5 p-sm-5">
+            
+            <p v-if="errorFirebase" class="alert alert-danger text-center mb-4 small " role="alert">
+              <i class="bi bi-exclamation-circle opacity-75 me-1"></i>
+              {{ errorFirebase }}
+            </p>
+
+            <form novalidate @submit.prevent="handleLogin">
               
-              <p v-if="errorFirebase" class="alert alert-danger text-center mb-4 small " role="alert">
-                <i class="bi bi-exclamation-circle opacity-75 me-1"></i>
-                {{ errorFirebase }}
-              </p>
-
-              <form novalidate @submit.prevent="handleLogin">
-                
-                <div class="row justify-content-center">
-                  <div class="col-5 col-sm-4">
-                    <img src="@/assets/images/logo.svg" class="w-100 mb-4">
-                  </div>
+              <div class="row justify-content-center">
+                <div class="col-5 col-sm-8">
+                  <img src="@/assets/images/logo.svg" class="w-100 mb-4" style="transform: rotate(-5deg);">
                 </div>
-                <h4 class="h4 text-center mb-1">Ingresá a AdoptAPet&reg; para adoptar tu nuevo amigo</h4>
-                <p class="text-center opacity-75 mb-4">Completá tus datos de ingreso</p>
-                
-                <div class="form-floating mb-3">
-                  <input 
-                    v-model="email" 
-                    type="email" 
-                    class="form-control" 
-                    :class="{ 'is-invalid': emailError }"
-                    id="inputEmail" 
-                    placeholder="E-mail *"
-                    autocomplete="email"
-                  >
-                  <label for="inputEmail">E-mail *</label>
-                  <div class="invalid-feedback">{{ emailError }}</div>
-                </div>
-
-                <div class="form-floating mb-2">
-                  <input 
-                    v-model="password" 
-                    type="password" 
-                    class="form-control" 
-                    :class="{ 'is-invalid': passwordError }"
-                    id="inputPassword" 
-                    placeholder="Contraseña *"
-                    autocomplete="current-password"
-                  >
-                  <label for="inputPassword">Contraseña *</label>
-                  <div class="invalid-feedback">{{ passwordError }}</div>
-                </div>
-
-                <p class="small opacity-75 mb-3">(*) Datos requeridos</p>
-
-                <!-- Mostrar un spiner mientras se procesa el loging -->
-                <button class="btn btn-dark w-100 py-2" type="submit" :disabled="loading">
-
-                  <template v-if="loading">
-                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Ingresando...
-                  </template>
-
-                  <template v-else>
-                    Ingresar
-                  </template>
-
-                </button>
-
-              </form>
-
-            </div>
-          </div>
-          <div class="col-sm-4">
-              <div class="text-center">
-                <h4 class="h4 mb-1">Ingresá a AdoptAPet&reg; usando tu cuenta de Google&reg;</h4>
-                <p class="lh-sm opacity-75 mb-4">Te recordamos que no recopilaremos ninguna información sobre tu cuenta. Este modo de ingreso es para validar tu usuario en Google&reg;</p>
-                <button 
-                  class="btn btn-primary btn-lg w-100 rounded-pill p-0"
-                  @click="handleGoogleLogin">
-                      <h5 class="py-3 m-0"><i class="bi bi-google opacity-50 me-2"></i> Iniciar con Google&reg;</h5>
-                </button>
               </div>
+              <h4 class="h4 text-center mb-2">Ingresá como Entrenador para administrar tu próximo partido</h4>
+              <p class="text-center opacity-75 mb-4">Completá tus datos de ingreso</p>
+              
+              <div class="form-floating mb-3">
+                <input 
+                  v-model="email" 
+                  type="email" 
+                  class="form-control" 
+                  :class="{ 'is-invalid': emailError }"
+                  id="inputEmail" 
+                  placeholder="E-mail *"
+                  autocomplete="email"
+                >
+                <label for="inputEmail">E-mail *</label>
+                <div class="invalid-feedback">{{ emailError }}</div>
+              </div>
+
+              <div class="form-floating mb-2">
+                <input 
+                  v-model="password" 
+                  type="password" 
+                  class="form-control" 
+                  :class="{ 'is-invalid': passwordError }"
+                  id="inputPassword" 
+                  placeholder="Contraseña *"
+                  autocomplete="current-password"
+                >
+                <label for="inputPassword">Contraseña *</label>
+                <div class="invalid-feedback">{{ passwordError }}</div>
+              </div>
+
+              <p class="small opacity-75 mb-3">(*) Datos requeridos</p>
+
+              <!-- Mostrar un spiner mientras se procesa el loging -->
+              <button class="btn btn-primary rounded-pill w-100 py-2" type="submit" :disabled="loading">
+
+                <template v-if="loading">
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Ingresando...
+                </template>
+
+                <template v-else>
+                  Ingresar
+                </template>
+
+              </button>
+
+            </form>
+
           </div>
         </div>
+
+        <!--
+        <div class="col-sm-4">
+            <div class="text-center">
+              <h4 class="h4 mb-1">Ingresá a LetsPlayAMatch&reg; usando tu cuenta de Google&reg;</h4>
+              <p class="lh-sm opacity-75 mb-4">Te recordamos que no recopilaremos ninguna información sobre tu cuenta. Este modo de ingreso es para validar tu usuario en Google&reg;</p>
+              <button 
+                class="btn btn-primary btn-lg w-100 rounded-pill p-0"
+                @click="handleGoogleLogin">
+                    <h5 class="py-3 m-0"><i class="bi bi-google opacity-50 me-2"></i> Iniciar con Google&reg;</h5>
+              </button>
+            </div>
+        </div>
+        -->
+
       </div>
-    </section>
+    </div>
   </section>
+
 </template>
 
 <script setup>
 
   import { ref, computed } from 'vue'
-  import { useAuthStore } from '@/features/auth/store/auth.store'
+  import { useAuthStore } from '@/features/auth/stores/auth.store'
   import { useRouter } from 'vue-router'
 
   /*
@@ -109,10 +113,10 @@
   * 
   */
 
-  const email = ref('')          // Almacena el texto que escribe el usuario en el input de email
-  const password = ref('')       // Almacena la contraseña escrita
-  const enviado = ref(false)     // Controla si el usuario ya intentó clickear el botón "Ingresar"
-  const errorFirebase = ref('')  // Almacena los mensajes de error que regresan del backend (Firebase)
+  const email = ref('trainer@letsplayamatch.com')   // Almacena el texto que escribe el usuario en el input de email
+  const password = ref('123456')                    // Almacena la contraseña escrita
+  const enviado = ref(false)                        // Controla si el usuario ya intentó clickear el botón "Ingresar"
+  const errorFirebase = ref('')                     // Almacena los mensajes de error que regresan del backend (Firebase)
 
   // Expresión regular estándar para verificar estructuras válidas de correo (ej: usuario@dominio.com)
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

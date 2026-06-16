@@ -70,15 +70,27 @@ const router = createRouter({
 import { useUiStore } from '@/shared/stores/ui.store'
 
 /*
-* Navigation Guards para activar y desactivar el loader global.
+* Importación del store de Auth para controlar el acceso.
 */
+
+import { useAuthStore } from '@/features/auth/stores/auth.store'
 
 router.beforeEach(async (to, from) => {
     const uiStore = useUiStore()
     uiStore.setLoading(true)
     
     // Simula una demora de 250ms para poder ver el diseño del spinner *****************************
-    await new Promise(resolve => setTimeout(resolve, 250))
+    // await new Promise(resolve => setTimeout(resolve, 250)) // Opcional
+
+    const authStore = useAuthStore();
+
+    // 1. Si la ruta requiere autenticación y NO estamos autenticados, retornamos la ruta de login
+    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+        return { name: 'login' }; // Vue Router hace la redirección al retornar este objeto
+    } 
+    
+    // 2. Si todo está bien, retornamos true para permitir la navegación
+    return true;
 })
 
 router.afterEach(() => {
