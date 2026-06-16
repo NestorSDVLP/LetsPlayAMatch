@@ -11,7 +11,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav align-items-center fw-strong ms-auto me-0">
-                        
+
                         <li v-if="!authStore.isAuthenticated" class="nav-item">
                             <router-link class="nav-link text-dark" to="/login">
                                 <i class="bi bi-person-fill opacity-75"></i> Ingresar como entrenador
@@ -27,7 +27,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link class="dropdown-item" to="/login">
+                                    <router-link class="dropdown-item" to="/matches/new-match">
                                         <i class="bi bi-plus-circle me-1"></i> Crear partido
                                     </router-link>
                                 </li>

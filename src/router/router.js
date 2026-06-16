@@ -35,6 +35,12 @@ const routes = [
         name: 'login',
         component: LoginView
     },
+    {
+        path: '/matches/new-match',
+        name: 'new-match',
+        component: () => import('@/features/matches/views/MatchNewView.vue'),
+        meta: { requiresAuth: true }
+    },
     // Esta ruta tiene que ir ÚLTIMA SIÉMPRE:
     {
         path: '/:pathMatch(.*)*',

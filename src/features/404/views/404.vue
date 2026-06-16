@@ -8,14 +8,11 @@
 
             <h2 class="mb-3">No encontramos la <br>página que estas buscando</h2>
 
-            <p class="opacity-75 mb-5">Probá ir al <strong>refugio</strong> o volver al <strong>inicio</strong></p>
+            <p class="opacity-75 mb-5">Probá <strong>yendo al inicio</strong></p>
 
             <div class="row g-4">
-                <div class="col-sm-6 text-end">
+                <div class="col-sm-6 text-center">
                     <router-link class="btn btn-outline-dark rounded-pill px-5" to="/">Ir al inicio <i class="bi bi-chevron-right"></i></router-link>
-                </div>
-                <div class="col-sm-6 text-start">
-                    <router-link class="btn btn-primary rounded-pill px-5" to="/pets">Ir al Refugio <i class="bi bi-chevron-right"></i></router-link>
                 </div>
             </div>
         </div>
