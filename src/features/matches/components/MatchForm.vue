@@ -7,28 +7,27 @@
 
             <div class="bg-light text-dark box-shadow p-3 p-sm-5">
                 <form novalidate>
+                    <input type="hidden" v-model="formData.teamTrainerId">
 
                     <h2 class="h5"><i class="bi bi-house-fill opacity-50 me-1"></i> Actividad y Dirección</h2>
                     <hr class="mb-4">
                     <div class="row g-3">
                         <div class="col-3">
                             <label class="h6">Actividad *</label>
-                            <select class="form-select" required>
-                                <option selected>Seleccionar</option>
-                                <option value="1">Voley</option>
-                                <option value="2">Fútbol</option>
-                                <option value="3">Básquet</option>
-                                <option value="4">Handball</option>
-                                <option value="5">Hockey</option>
+                            <select class="form-select" v-model="formData.matchActivityId">
+                                <option value="" selected disabled>Seleccionar</option>
+                                <option v-for="act in MATCH_ACTIVITIES" :key="act.id" :value="act.id">
+                                    {{ act.label }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-3">
                             <label class="h6">Lugar *</label>
-                            <input type="text" class="form-control" placeholder="Lugar" required>
+                            <input type="text" class="form-control" placeholder="Lugar" required v-model="formData.matchPlace">
                         </div>
                         <div class="col-6">
                             <label class="h6">Dirección *</label>
-                            <input type="text" class="form-control" placeholder="Dirección" required>
+                            <input type="text" class="form-control" placeholder="Dirección" required v-model="formData.matchPlaceAddress">
                         </div>
                     </div>
 
@@ -37,18 +36,12 @@
                     <div class="row g-3">
                         <div class="col-4">
                             <label class="h6">Comienzo *</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Fecha" required>
-                                <input type="text" class="form-control" placeholder="Hora" required>
-                            </div>
+                            <input type="text" class="form-control" placeholder="Fecha y Hora" v-model="formData.matchStartAt" required>
                             
                         </div>
                         <div class="col-4">
                             <label class="h6">Finalización *</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Fecha" required>
-                                <input type="text" class="form-control" placeholder="Hora" required>
-                            </div>
+                            <input type="text" class="form-control" placeholder="Fecha y Hora" v-model="formData.matchEndAt" required>
                         </div>
                     </div>
 
@@ -57,45 +50,46 @@
                     <div class="row g-3 align-items-end">
                         <div class="col-3">
                             <label class="h6">Cantidad mínima <br>de jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Mínimo" required>
+                            <input type="text" class="form-control" placeholder="Mínimo" required v-model="formData.matchMinPlayers">
                         </div>
                         <div class="col-3">
                             <label class="h6">Cantidad máxima <br>de jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Máximo" required>
+                            <input type="text" class="form-control" placeholder="Máximo" required v-model="formData.matchMaxPlayers">
                         </div>
                         <div class="col-3">
                             <label class="h6">Tipo *</label>
-                            <select class="form-select" required>
-                                <option selected>Seleccionar</option>
-                                <option value="1">Recreativo</option>
-                                <option value="2">Competitivo</option>
+                            <select class="form-select" required v-model="formData.matchTypeId">
+                                <option value="" selected disabled>Seleccionar</option>
+                                <option v-for="type in MATCH_TYPES" :key="type.id" :value="type.id">
+                                    {{ type.label }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-3">
                             <label class="h6">Genero/s *</label>
-                            <select class="form-select" required>
-                                <option selected>Seleccionar</option>
-                                <option value="1">Masculino</option>
-                                <option value="2">Femenino</option>
-                                <option value="3">Mixto</option>
+                            <select class="form-select" required v-model="formData.matchGenderId">
+                                <option value="" selected disabled>Seleccionar</option>
+                                <option v-for="gender in MATCH_GENDERS" :key="gender.id" :value="gender.id">
+                                    {{ gender.label }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-3">
                             <label class="h6">Nivel *</label>
-                            <select class="form-select" required>
-                                <option selected>Seleccionar</option>
-                                <option value="1">Principiante</option>
-                                <option value="2">Intermedio</option>
-                                <option value="3">Avanzado</option>
+                            <select class="form-select" required v-model="formData.matchLevelId">
+                                <option value="" selected disabled>Seleccionar</option>
+                                <option v-for="level in MATCH_LEVELS" :key="level.id" :value="level.id">
+                                    {{ level.label }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-3">
                             <label class="h6">Edad mínima <br>de los jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Mínimo" required>
+                            <input type="text" class="form-control" placeholder="Mínimo" required v-model="formData.matchMinAge">
                         </div>
                         <div class="col-3">
                             <label class="h6">Edad máxima <br>de los jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Máximo" required>
+                            <input type="text" class="form-control" placeholder="Máximo" required v-model="formData.matchMaxAge">
                         </div>
                     </div>
 
@@ -104,13 +98,13 @@
                     <div class="row g-3 align-items-end">
                         <div class="col-6">
                             <label class="h6">URL *</label>
-                            <input type="text" class="form-control" placeholder="URL" required>
+                            <input type="text" class="form-control" placeholder="URL" required v-model="formData.matchURL">
                         </div>
                         <div class="col-4">
                             <label class="h6">Pin de Acceso *</label>
                             <div class="input-group">
-                                <button class="btn btn-secondary" type="button">Generar Pin</button>
-                                <input type="text" class="form-control" placeholder="Pin" readonly required>
+                                <button class="btn btn-secondary" type="button" @click="generatePin">Generar Pin</button>
+                                <input type="text" class="form-control" placeholder="Pin" readonly required v-model="formData.matchPin">
                             </div>
                         </div>
                     </div>
@@ -138,3 +132,57 @@
     </section>
 
 </template>
+
+<script setup>
+
+    import { 
+        MATCH_ACTIVITIES, 
+        MATCH_TYPES,
+        MATCH_GENDERS,
+        MATCH_LEVELS 
+    } from '@/features/matches/constants/matches.constants'
+
+    import { ref } from 'vue';
+
+    // Define el estado inicial
+
+    const initialState = {
+        id: '',
+        teamTrainerId: '',
+        matchActivityId: '',
+        matchPlace: '',
+        matchPlaceAddress: '',
+        matchStartAt: '',
+        matchEndAt: '',
+        matchMinPlayers: '',
+        matchMaxPlayers: '',
+        matchTypeId: '',
+        matchGenderId: '',
+        matchLevelId: '',
+        matchMinAge: '',
+        matchMaxAge: '',
+        matchStatusId: '',
+        matchPin: '',
+        matchURL: '',
+        createdAt: '',
+    };
+
+    const formData = ref({ ...initialState });
+
+    const loading = ref(false); // Para el spinner del botón
+
+    // Genera un número de 6 dígitos aleatorio
+
+    const generatePin = () => {
+        formData.value.matchPin = Math.floor(100000 + Math.random() * 900000).toString();
+    };
+
+    const emit = defineEmits(['create-match']);
+
+    const submitForm = () => {
+        loading.value = true;
+        emit('create-match', { ...formData.value });
+        // loading.value = false; // Esto lo manejarás cuando recibas la respuesta del servicio
+    };
+
+</script>
