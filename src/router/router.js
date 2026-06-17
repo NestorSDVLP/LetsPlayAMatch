@@ -36,6 +36,12 @@ const routes = [
         component: LoginView
     },
     {
+        path: '/trainers/edit-trainer',
+        name: 'edit-trainer',
+        component: () => import('@/features/trainers/views/TrainerEditView.vue'),
+        meta: { requiresAuth: true }
+    },
+    {
         path: '/matches/new-match',
         name: 'new-match',
         component: () => import('@/features/matches/views/MatchNewView.vue'),

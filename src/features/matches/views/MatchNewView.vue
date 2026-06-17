@@ -1,11 +1,11 @@
 <template>
 
-    <MatchNewView/>
+    <MatchForm/>
 
 </template>
 
 <script setup>
 
-    import MatchNewView from '@/features/matches/components/MatchForm.vue'
+    import MatchForm from '@/features/matches/components/MatchForm.vue'
 
 </script>

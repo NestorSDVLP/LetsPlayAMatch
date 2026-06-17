@@ -22,10 +22,11 @@
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-person-fill opacity-50"></i> Hola, {{ authStore.user.email.split('@')[0] }} <i class="bi bi-chevron-down ms-1"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                 <li>
-                                    <router-link class="dropdown-item" to="/login">
-                                        <i class="bi bi-calendar3 me-1"></i> Panel de Entrenador
+                                    <router-link class="dropdown-item" to="/trainers/edit-trainer">
+                                        <i class="bi bi-person-fill opacity-75 me-1"></i> Perfil del Entrenador
                                     </router-link>
                                 </li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <router-link class="dropdown-item" to="/matches/new-match">
                                         <i class="bi bi-plus-circle me-1"></i> Crear partido
