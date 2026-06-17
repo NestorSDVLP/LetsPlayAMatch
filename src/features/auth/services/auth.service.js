@@ -6,7 +6,8 @@ import {
     signInWithPopup,    // Importar el método para abrir el popup
     signInWithRedirect
 } from 'firebase/auth'
-import { firebaseApp } from './firebase'
+
+import { firebaseApp } from '@/shared/services/firebase'
 
 export const auth = getAuth(firebaseApp)
 

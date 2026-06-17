@@ -10,11 +10,17 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
-                    <ul class="navbar-nav align-items-center fw-strong ms-auto me-0">
+                    <ul class="navbar-nav align-items-center h6 ms-auto me-0">
+                        
+                        <li class="nav-item">
+                            <router-link class="nav-link text-dark" to="/">
+                                <i class="bi bi-house-fill opacity-50"></i> Inicio
+                            </router-link>
+                        </li>
 
                         <li v-if="!authStore.isAuthenticated" class="nav-item">
                             <router-link class="nav-link text-dark" to="/login">
-                                <i class="bi bi-person-fill opacity-75"></i> Ingresar como entrenador
+                                <i class="bi bi-person-fill opacity-75"></i> Ingresar como Entrenador
                             </router-link>
                         </li>
 
@@ -22,19 +28,18 @@
                             <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-person-fill opacity-50"></i> Hola, {{ authStore.user.email.split('@')[0] }} <i class="bi bi-chevron-down ms-1"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                 <li>
-                                    <router-link class="dropdown-item" to="/trainers/edit-trainer">
+                                    <router-link class="dropdown-item py-2" to="/matches/new-match">
+                                        <i class="bi bi-plus-circle me-1"></i> Crear partido
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link class="dropdown-item py-2" to="/trainers/edit-trainer">
                                         <i class="bi bi-person-fill opacity-75 me-1"></i> Perfil del Entrenador
                                     </router-link>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <router-link class="dropdown-item" to="/matches/new-match">
-                                        <i class="bi bi-plus-circle me-1"></i> Crear partido
-                                    </router-link>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <button class="dropdown-item" @click="handleLogout"><i class="bi bi-box-arrow-right me-1"></i> Salir</button>
+                                    <button class="dropdown-item py-2" @click="handleLogout"><i class="bi bi-box-arrow-right me-1"></i> Salir</button>
                                 </li>
                             </ul>
                         </li>
