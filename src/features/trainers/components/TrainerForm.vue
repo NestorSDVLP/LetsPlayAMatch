@@ -6,7 +6,7 @@
             <hr class="mb-4">
 
             <div class="bg-light text-dark box-shadow p-3 p-sm-5">
-                <form novalidate>
+                <form novalidate @submit.prevent="handleSubmit">
 
                     <h2 class="h5"><i class="bi bi-person-fill opacity-50 me-1"></i> Datos Personales</h2>
                     <hr class="mb-4">
@@ -57,12 +57,21 @@
 
 <script setup>
 
+    /*
+    * Dependencias
+    */
+
     import { ref } from 'vue';
+    import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+    import { useRouter } from 'vue-router'
+
+    const trainerStore = useTrainerStore()
+
+    const router = useRouter()
 
     // Define el estado inicial
 
     const initialState = {
-        id: '',
         trainerUserName: '',
         trainerFirstName: '',
         trainerLastName: '',
@@ -90,5 +99,32 @@
     });
 
     const loading = ref(false); // Para el spinner del botón
+
+    /****************************************** */
+
+    const handleSubmit = async () => {
+
+        try {
+
+            loading.value = true
+
+            await trainerStore.updateTrainerProfile(formData.value)
+
+            await router.push('/matches/new-match')
+
+        } catch(error) {
+
+            console.error(
+                'handleSubmit: Error al guardar el perfil:',
+                error
+            )
+
+        } finally {
+
+            loading.value = false
+
+        }
+
+    }
 
 </script>
