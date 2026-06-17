@@ -36,15 +36,18 @@ const routes = [
         component: LoginView
     },
     {
-        path: '/trainers/edit-trainer',
-        name: 'edit-trainer',
-        component: () => import('@/features/trainers/views/TrainerEditView.vue'),
-        meta: { requiresAuth: true }
-    },
-    {
         path: '/matches/new-match',
         name: 'new-match',
         component: () => import('@/features/matches/views/MatchNewView.vue'),
+        meta: { 
+            requiresAuth: true,
+            requiresCompletedProfile: true
+        }
+    },
+    {
+        path: '/trainers/edit-trainer',
+        name: 'edit-trainer',
+        component: () => import('@/features/trainers/views/TrainerEditView.vue'),
         meta: { requiresAuth: true }
     },
     // Esta ruta tiene que ir ÚLTIMA SIÉMPRE:
@@ -87,6 +90,12 @@ import { useUiStore } from '@/shared/stores/ui.store'
 
 import { useAuthStore } from '@/features/auth/stores/auth.store'
 
+/*
+* Importación del store de Trainer para controlar la edicion del perfil del entrenador.
+*/
+
+import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+
 router.beforeEach(async (to, from) => {
     const uiStore = useUiStore()
     uiStore.setLoading(true)
@@ -95,13 +104,22 @@ router.beforeEach(async (to, from) => {
     // await new Promise(resolve => setTimeout(resolve, 250)) // Opcional
 
     const authStore = useAuthStore();
+    const trainerStore = useTrainerStore()
 
-    // 1. Si la ruta requiere autenticación y NO estamos autenticados, retornamos la ruta de login
+    console.log('isAuthenticated:', authStore.isAuthenticated)
+    console.log('user:', authStore.user)
+
+    // Si la ruta requiere autenticación y NO estamos autenticados, retornamos la ruta de login
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-        return { name: 'login' }; // Vue Router hace la redirección al retornar este objeto
-    } 
+        return { name: 'login' }; // Vue Router hace la redirección al retornar este objeto        
+    }
+
+    if (authStore.isAuthenticated && !trainerStore.trainer) {
+        await trainerStore.initializeTrainer(authStore.user)
+        console.log(trainerStore.trainer)
+    }
     
-    // 2. Si todo está bien, retornamos true para permitir la navegación
+    // Si todo está bien, retornamos true para permitir la navegación
     return true;
 })
 

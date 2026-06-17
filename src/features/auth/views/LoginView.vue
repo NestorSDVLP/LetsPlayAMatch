@@ -96,6 +96,7 @@
 
   import { ref, computed } from 'vue'
   import { useAuthStore } from '@/features/auth/stores/auth.store'
+  import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
   import { useRouter } from 'vue-router'
 
   /*
@@ -106,6 +107,7 @@
 
   const authStore = useAuthStore() // Instancia del store global de Pinia
   const router = useRouter()       // Instancia del enrutador de Vue Router
+  const trainerStore = useTrainerStore()
 
   /*
   *
@@ -184,12 +186,20 @@
 
       try {
           // Despachamos la acción asíncrona hacia el servicio que maneja el SDK de Firebase Auth
+        
           const result = await authStore.loginUser(email.value, password.value)
-          
+
           console.log('LOGIN OK:', result.user)
+
+          await trainerStore.initializeTrainer(result.user)
+
+          console.log('TRAINER OK:', trainerStore.trainer)
           
-          // Si las credenciales son válidas, Vue Router nos redirige al Home de la App
-          router.push('/')
+          if (trainerStore.trainer.profileCompleted) {
+              router.push('/')
+          } else {
+              router.push('/trainers/edit-trainer')
+          }
           
       } catch (error) {
 
