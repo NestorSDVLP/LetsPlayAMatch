@@ -58,12 +58,37 @@
     */
 
     import { computed } from 'vue'
+    import { useRouter } from 'vue-router'
     import { useAuthStore } from '@/features/auth/stores/auth.store'
+    import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+
+    const router = useRouter()
+
+    const trainerStore = useTrainerStore()
 
     const authStore = useAuthStore()
 
+    /***************************************** */
+
     const handleLogout = async () => {
-        await authStore.logoutUser()
+
+        try {
+
+            await authStore.logoutUser()
+
+            trainerStore.clearTrainer()
+
+            await router.push('/login')
+
+        } catch (error) {
+
+            console.error(
+                'handleLogout: Error al cerrar sesión:',
+                error
+            )
+
+        }
+
     }
 
 </script>
