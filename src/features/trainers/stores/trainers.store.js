@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
-import { checkAndCreateTrainerProfile } from '@/features/trainers/services/trainers.service'
+import { 
+    checkAndCreateTrainerProfile,
+    updateTrainer 
+} from '@/features/trainers/services/trainers.service'
 
 export const useTrainerStore = defineStore('trainer', {
     
@@ -26,8 +29,38 @@ export const useTrainerStore = defineStore('trainer', {
 
         // Una acción extra que vamos a necesitar pronto para cuando completen los datos
 
-        updateTrainerProfile(newData) {
-            this.trainer = { ...this.trainer, ...newData }
+        /*********************updateTrainerProfile(newData) {
+            this.trainer = { ...this.trainer, ...newData }***************************/
+
+        async updateTrainerProfile(newData) {
+
+            try {
+
+                const updatedTrainer = {
+                    ...this.trainer,
+                    ...newData,
+                    profileCompleted: true,
+                    updatedAt: Date.now()
+                }
+
+                await updateTrainer(
+                    this.trainer.uid,
+                    updatedTrainer
+                )
+
+                this.trainer = updatedTrainer
+
+            } catch(error) {
+
+                console.error(
+                    'updateTrainerProfile: Error al actualizar el perfil:',
+                    error
+                )
+
+                throw error
+
+            }
+
         },
 
         clearTrainer() {

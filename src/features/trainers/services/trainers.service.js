@@ -43,3 +43,17 @@ export const checkAndCreateTrainerProfile = async (authUser) => {
         return newTrainerData
     }
 }
+
+/************************ */
+
+export const updateTrainer = async (uid, trainerData) => {
+
+    const trainerRef = doc(db, 'trainers', uid)
+
+    await setDoc(
+        trainerRef,
+        trainerData,
+        { merge: true }
+    )
+
+}

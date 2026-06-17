@@ -48,7 +48,9 @@ const routes = [
         path: '/trainers/edit-trainer',
         name: 'edit-trainer',
         component: () => import('@/features/trainers/views/TrainerEditView.vue'),
-        meta: { requiresAuth: true }
+        meta: { 
+            requiresAuth: true 
+        }
     },
     // Esta ruta tiene que ir ÚLTIMA SIÉMPRE:
     {
