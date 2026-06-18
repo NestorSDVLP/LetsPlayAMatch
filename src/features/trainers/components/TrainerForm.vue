@@ -1,8 +1,8 @@
 <template>
 
-    <section class="py-5">
+    <section class="has-padding-top">
         <div class="container">
-            <h1 class="h2">Perfil del Entrenador</h1>
+            <h1 class="h2 text-center">Perfil del Entrenador</h1>
             <hr class="mb-4">
 
             <div class="bg-light text-dark box-shadow p-3 p-sm-5">

@@ -9,7 +9,7 @@
 .container-sm,
 .container {
     @media (min-width: 1200px) {
-        max-width: 1100px;
+        max-width: 900px;
     }
 }
 
@@ -19,12 +19,23 @@
 
 */
 #mainHeader {
-    .navbar {
-        .navbar-brand {
-            .logo {
-                width: 120px;
-            }
+    z-index: 9999;
+    nav {
+        .logo {
+            max-width: 140px;
+            filter: invert(1);
         }
+    }
+}
+
+/*
+
+    main-wrapper
+
+*/
+.main-wrapper {
+    .has-padding-top {
+        padding-top: 230px;
     }
 }
 

@@ -1,8 +1,8 @@
 <template>
 
-    <section class="py-5">
+    <section class="has-padding-top">
         <div class="container">
-            <h1 class="h2">Crear Partido</h1>
+            <h1 class="h1 text-center">Crear Partido</h1>
             <hr class="mb-4">
 
             <div class="bg-light text-dark box-shadow p-3 p-sm-5">
@@ -12,7 +12,7 @@
                     <h2 class="h5"><i class="bi bi-house-fill opacity-50 me-1"></i> Actividad y Dirección</h2>
                     <hr class="mb-4">
                     <div class="row g-3">
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Actividad *</label>
                             <select class="form-select" v-model="formData.matchActivityId">
                                 <option value="" selected disabled>Seleccionar</option>
@@ -21,7 +21,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Lugar *</label>
                             <input type="text" class="form-control" placeholder="Lugar" required v-model="formData.matchPlace">
                         </div>
@@ -48,15 +48,15 @@
                     <h2 class="h5 mt-5"><i class="bi bi-info-circle-fill opacity-50 me-1"></i> Sobre el Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Cantidad mínima <br>de jugadores *</label>
                             <input type="text" class="form-control" placeholder="Mínimo" required v-model="formData.matchMinPlayers">
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Cantidad máxima <br>de jugadores *</label>
                             <input type="text" class="form-control" placeholder="Máximo" required v-model="formData.matchMaxPlayers">
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Tipo *</label>
                             <select class="form-select" required v-model="formData.matchTypeId">
                                 <option value="" selected disabled>Seleccionar</option>
@@ -65,7 +65,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Genero/s *</label>
                             <select class="form-select" required v-model="formData.matchGenderId">
                                 <option value="" selected disabled>Seleccionar</option>
@@ -74,7 +74,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Nivel *</label>
                             <select class="form-select" required v-model="formData.matchLevelId">
                                 <option value="" selected disabled>Seleccionar</option>
@@ -83,11 +83,11 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Edad mínima <br>de los jugadores *</label>
                             <input type="text" class="form-control" placeholder="Mínimo" required v-model="formData.matchMinAge">
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <label class="h6">Edad máxima <br>de los jugadores *</label>
                             <input type="text" class="form-control" placeholder="Máximo" required v-model="formData.matchMaxAge">
                         </div>
@@ -96,9 +96,12 @@
                     <h2 class="h5 mt-5"><i class="bi bi-link-45deg opacity-50 me-1"></i> Accesos al Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
-                        <div class="col-6">
+                        <div class="col-8">
                             <label class="h6">URL *</label>
-                            <input type="text" class="form-control" placeholder="URL" required v-model="formData.matchURL">
+                            <div class="input-group">
+                                <button class="btn btn-secondary" type="button" @click="generatePin">Generar URL</button>
+                                <input type="text" class="form-control" placeholder="URL" readonly required v-model="formData.matchURL">
+                            </div>
                         </div>
                         <div class="col-4">
                             <label class="h6">Pin de Acceso *</label>

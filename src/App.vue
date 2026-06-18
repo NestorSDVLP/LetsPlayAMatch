@@ -4,7 +4,7 @@
 
   <AppHeader/>
 
-  <main class="pt-5">
+  <main class="main-wrapper">
 
         <!--
           Área principal donde Vue Router renderiza

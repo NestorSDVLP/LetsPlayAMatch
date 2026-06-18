@@ -1,12 +1,10 @@
 <template>
 
-  <section class="py-5">
+  <section class="has-padding-top mt-5">
     <div class="container">
-      <h1 class="h2">Ingresar como Entrenador</h1>
-      <hr class="mb-4">
       <div class="row g-5 align-items-center justify-content-center">
-        <div class="col-sm-8 col-lg-5">
-          <div class="bg-light text-dark box-shadow px-4 py-5 p-sm-5">
+        <div class="col-sm-8 col-lg-6">
+          <div class="bg-primary text-light box-shadow px-4 py-5 p-sm-5 mb-5">
             
             <p v-if="errorFirebase" class="alert alert-danger text-center mb-4 small " role="alert">
               <i class="bi bi-exclamation-circle opacity-75 me-1"></i>
@@ -14,13 +12,7 @@
             </p>
 
             <form novalidate @submit.prevent="handleLogin">
-              
-              <div class="row justify-content-center">
-                <div class="col-5 col-sm-8">
-                  <img src="@/assets/images/logo.svg" class="w-100 mb-4" style="transform: rotate(-5deg);">
-                </div>
-              </div>
-              <h4 class="h4 text-center mb-2">Ingresá como Entrenador para administrar tu próximo partido</h4>
+              <h4 class="h4 text-center mb-2">Ingresá como entrenador para administrar tu próximo partido</h4>
               <p class="text-center opacity-75 mb-4">Completá tus datos de ingreso</p>
               
               <div class="form-floating mb-3">
@@ -53,19 +45,23 @@
 
               <p class="small opacity-75 mb-3">(*) Datos requeridos</p>
 
-              <!-- Mostrar un spiner mientras se procesa el loging -->
-              <button class="btn btn-primary rounded-pill w-100 py-2" type="submit" :disabled="loading">
+              <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                  <!-- Mostrar un spiner mientras se procesa el loging -->
+                  <button class="btn btn-dark rounded-pill w-100" type="submit" :disabled="loading">
 
-                <template v-if="loading">
-                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                  Ingresando...
-                </template>
+                    <template v-if="loading">
+                      <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      Ingresando...
+                    </template>
 
-                <template v-else>
-                  Ingresar
-                </template>
+                    <template v-else>
+                      Ingresar <i class="bi bi-chevron-right ms-1"></i>
+                    </template>
 
-              </button>
+                  </button>
+                </div>
+              </div>
 
             </form>
 

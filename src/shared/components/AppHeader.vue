@@ -1,52 +1,48 @@
 <template>
 
-    <header id="mainHeader" class="bg-primary bg-gradient box-shadow fixed-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg px-0">
-                <router-link class="navbar-brand text-dark" to="/">
-                    <img src="@/assets/images/logo.svg" class="logo" style="transform: rotate(5deg);">
-                </router-link>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-auto-close="inside" data-bs-target="#mainNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNav">
-                    <ul class="navbar-nav align-items-center h6 ms-auto me-0">
-                        
-                        <li class="nav-item">
-                            <router-link class="nav-link text-dark" to="/">
-                                <i class="bi bi-house-fill opacity-50"></i> Inicio
-                            </router-link>
-                        </li>
+    <header id="mainHeader" class="bg-transparent position-absolute top-0 w-100">
+        <nav class="my-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-4">
+                    <router-link to="/">
+                        <img src="@/assets/images/logo.svg" class="logo w-100">
+                    </router-link>
+                    </div>
+                    <div class="col-4 offset-4 text-end">
+                        <div class="d-flex justify-content-end">
+                            <div v-if="!authStore.isAuthenticated">
+                                <router-link class="btn btn-primary rounded-pill ps-4 pe-5" to="/login">
+                                    <i class="bi bi-person-fill opacity-75 me-1"></i> Entrenadores <i class="bi bi-chevron-right ms-1"></i>
+                                </router-link>
+                            </div>
 
-                        <li v-if="!authStore.isAuthenticated" class="nav-item">
-                            <router-link class="nav-link text-dark" to="/login">
-                                <i class="bi bi-person-fill opacity-75"></i> Ingresar como Entrenador
-                            </router-link>
-                        </li>
-
-                        <li v-if="authStore.isAuthenticated" class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-person-fill opacity-50"></i> Hola, {{ authStore.user.email.split('@')[0] }} <i class="bi bi-chevron-down ms-1"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
-                                <li>
-                                    <router-link class="dropdown-item py-2" to="/matches/new-match">
-                                        <i class="bi bi-plus-circle me-1"></i> Crear partido
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link class="dropdown-item py-2" to="/trainers/edit-trainer">
-                                        <i class="bi bi-person-fill opacity-75 me-1"></i> Perfil del Entrenador
-                                    </router-link>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <button class="dropdown-item py-2" @click="handleLogout"><i class="bi bi-box-arrow-right me-1"></i> Salir</button>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                            <div v-if="authStore.isAuthenticated" class="dropdown">
+                                <a class="dropdown-toggle btn btn-primary rounded-pill px-4" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-fill opacity-50"></i> Hola, <span class="text-capitalize">{{ authStore.user.email.split('@')[0] }}</span> <i class="bi bi-chevron-down ms-1"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
+                                    <li><h6 class="dropdown-header">Partidos</h6></li>
+                                    <li>
+                                        <router-link class="dropdown-item py-2" to="/matches/new-match">
+                                            <i class="bi bi-plus-circle me-1"></i> Crear partido
+                                        </router-link>
+                                    </li>
+                                    <li><h6 class="dropdown-header">Entrenadores</h6></li>
+                                    <li>
+                                        <router-link class="dropdown-item py-2" to="/trainers/edit-trainer">
+                                            <i class="bi bi-pencil-square opacity-75 me-1"></i> Editar datos personales
+                                        </router-link>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <button class="dropdown-item py-2" @click="handleLogout"><i class="bi bi-box-arrow-right me-1"></i> Salir</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </header>
 
 </template>
