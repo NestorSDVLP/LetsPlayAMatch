@@ -3,7 +3,7 @@
     <section class="has-padding-top">
         <div class="container">
             <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
-                <form novalidate>
+                <form novalidate @submit.prevent="handleSubmit">
                     <input type="hidden" v-model="formData.teamTrainerId">
 
                     <h1 class="h1 mb-5"><i class="bi bi-plus-circle me-1"></i> Crear Partido</h1>
@@ -15,8 +15,8 @@
                             <label class="h6 d-block">Actividad *</label>
                             <div class="btn-group-match-activity btn-group w-100 mb-5">
 
-                                <div class="btn-check-wrapper"  v-for="act in MATCH_ACTIVITIES" :key="act.id" :value="act.id">
-                                    <input type="radio" class="btn-check" name="radio-match-activity" :id="`btnradio-${act.id}`" autocomplete="off" v-model="formData.matchActivityId">
+                                <div class="btn-check-wrapper"  v-for="act in MATCH_ACTIVITIES" :key="act.id">
+                                    <input type="radio" class="btn-check" name="radio-match-activity" :id="`btnradio-${act.id}`" :value="act.id" autocomplete="off" v-model="formData.matchActivityId">
                                     <label class="btn btn-outline-dark py-2" :for="`btnradio-${act.id}`">
                                         <img :src="act.icon" class="icon mb-2" :alt="act.label">
                                         <h6 class="m-0">{{ act.label }}</h6>
@@ -29,15 +29,6 @@
                     <h2 class="h5">Sede y Dirección</h2>
                     <hr class="mb-4">
                     <div class="row g-3">
-                        <!--<div class="col-4">
-                            <label class="h6">Actividad *</label>
-                            <select class="form-select" v-model="formData.matchActivityId">
-                                <option value="" selected disabled>Seleccionar</option>
-                                <option v-for="act in MATCH_ACTIVITIES" :key="act.id" :value="act.id">
-                                    {{ act.label }}
-                                </option>
-                            </select>
-                        </div>-->
                         <div class="col-4">
                             <label class="h6">Lugar *</label>
                             <input type="text" class="form-control" placeholder="Lugar" required v-model="formData.matchPlace">
@@ -162,32 +153,23 @@
         MATCH_LEVELS 
     } from '@/features/matches/constants/matches.constants'
 
+    import { useRouter } from 'vue-router'
+    import { useMatchesStore } from '@/features/matches/stores/matches.store'
+    import { createEmptyMatch } from '@/features/matches/models/matches.model'
+
     import { ref } from 'vue';
 
-    // Define el estado inicial
+    const props = defineProps({
+        initialData: {
+            type: Object,
+            default: () => ({})
+        }
+    })
 
-    const initialState = {
-        id: '',
-        teamTrainerId: '',
-        matchActivityId: '',
-        matchPlace: '',
-        matchPlaceAddress: '',
-        matchStartAt: '',
-        matchEndAt: '',
-        matchMinPlayers: '',
-        matchMaxPlayers: '',
-        matchTypeId: '',
-        matchGenderId: '',
-        matchLevelId: '',
-        matchMinAge: '',
-        matchMaxAge: '',
-        matchStatusId: '',
-        matchPin: '',
-        matchURL: '',
-        createdAt: '',
-    };
-
-    const formData = ref({ ...initialState });
+    const formData = ref({
+        ...createEmptyMatch(),
+        ...props.initialData
+    })
 
     const loading = ref(false); // Para el spinner del botón
 
@@ -197,12 +179,35 @@
         formData.value.matchPin = Math.floor(100000 + Math.random() * 900000).toString();
     };
 
-    const emit = defineEmits(['create-match']);
+    const matchesStore = useMatchesStore()
 
-    const submitForm = () => {
-        loading.value = true;
-        emit('create-match', { ...formData.value });
-        // loading.value = false; // Esto lo manejarás cuando recibas la respuesta del servicio
-    };
+    const router = useRouter()
+
+    const handleSubmit = async () => {
+
+        try {
+
+            loading.value = true
+
+            await matchesStore.createMatch(
+                formData.value
+            )
+
+            router.push('/')
+
+        } catch(error) {
+
+            console.error(
+                'handleSubmit:',
+                error
+            )
+
+        } finally {
+
+            loading.value = false
+
+        }
+
+    }
 
 </script>

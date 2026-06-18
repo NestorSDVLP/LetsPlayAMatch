@@ -1,0 +1,20 @@
+export const createEmptyMatch = () => ({
+    id: '',
+    teamTrainerId: '',
+    matchActivityId: '',
+    matchPlace: '',
+    matchPlaceAddress: '',
+    matchStartAt: '',
+    matchEndAt: '',
+    matchMinPlayers: '',
+    matchMaxPlayers: '',
+    matchTypeId: '',
+    matchGenderId: '',
+    matchLevelId: '',
+    matchMinAge: '',
+    matchMaxAge: '',
+    matchStatusId: '',
+    matchPin: '',
+    matchURL: '',
+    createdAt: ''
+})

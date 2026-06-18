@@ -9,7 +9,7 @@
                         <div class="container">
                             <div class="text-center">
                                 <div class="row justify-content-center">                                
-                                    <h1 class="display-4 h1 lh-1 mb-3">¿Tenés ganas de jugar hoy? <br>Acá se arma el equipo</h1>
+                                    <h1 class="display-4 h1 lh-1 mt-5 mb-3">¿Tenés ganas de jugar hoy? <br>Acá se arma el equipo</h1>
                                     <div class="col-lg-7">
                                         <p class="lead opacity-75 m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
                                         
