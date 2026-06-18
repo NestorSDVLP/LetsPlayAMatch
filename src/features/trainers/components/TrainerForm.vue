@@ -2,19 +2,20 @@
 
     <section class="has-padding-top">
         <div class="container">
-            <h1 class="h2 text-center">Perfil del Entrenador</h1>
-            <hr class="mb-4">
+            <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
+                <h1 class="h2 mb-5"><i class="bi bi-pencil-square me-1"></i> Entrenador: Editar</h1>
 
-            <div class="bg-light text-dark box-shadow p-3 p-sm-5">
                 <form novalidate @submit.prevent="handleSubmit">
 
                     <h2 class="h5"><i class="bi bi-person-fill opacity-50 me-1"></i> Datos Personales</h2>
                     <hr class="mb-4">
-                    <div class="row g-3">
-                        <div class="col-6">
+                    <div class="row">
+                        <div class="col-8">
                             <label class="h6">Usuario *</label>
-                            <input type="text" class="form-control" placeholder="Usuario" readonly required v-model="formData.trainerUserName">
+                            <input type="text" class="form-control mb-3" placeholder="Usuario" readonly required v-model="formData.trainerUserName">
                         </div>
+                    </div>
+                    <div class="row g-3">
                         <div class="col-3">
                             <label class="h6">Nombre *</label>
                             <input type="text" class="form-control" placeholder="Nombre" required v-model="formData.trainerFirstName">
@@ -23,7 +24,7 @@
                             <label class="h6">Apellido *</label>
                             <input type="text" class="form-control" placeholder="Apellido" required v-model="formData.trainerLastName">
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <label class="h6">Avatar (URL) *</label>
                             <input type="text" class="form-control" placeholder="Avatar (URL)" required v-model="formData.trainerAvatar">
                         </div>

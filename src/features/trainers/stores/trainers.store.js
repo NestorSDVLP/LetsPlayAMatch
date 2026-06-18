@@ -29,9 +29,6 @@ export const useTrainerStore = defineStore('trainer', {
 
         // Una acción extra que vamos a necesitar pronto para cuando completen los datos
 
-        /*********************updateTrainerProfile(newData) {
-            this.trainer = { ...this.trainer, ...newData }***************************/
-
         async updateTrainerProfile(newData) {
 
             try {

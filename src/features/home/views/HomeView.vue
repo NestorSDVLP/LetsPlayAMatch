@@ -4,17 +4,17 @@
     
         <section>
             <div class="card text-bg-dark border-0">
-                <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: rgba(0,0,0,.65); z-index: 999;">
+                <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 1) 100%); z-index: 999;">
                     <div class="w-100 p-3 p-sm-5">
                         <div class="container">
                             <div class="text-center">
                                 <div class="row justify-content-center">                                
                                     <h1 class="display-4 h1 lh-1 mb-3">¿Tenés ganas de jugar hoy? <br>Acá se arma el equipo</h1>
                                     <div class="col-lg-7">
-                                        <p class="lead opacity-75 m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, confirman todos y vas a jugar</strong></p>
+                                        <p class="lead opacity-75 m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
                                         
                                         <div v-if="!authStore.isAuthenticated">
-                                            <router-link class="btn btn-outline-light rounded-pill ps-4 pe-5 mt-5" to="/login">
+                                            <router-link class="btn btn-light rounded-pill ps-4 pe-5 mt-5" to="/login">
                                                 <i class="bi bi-person-fill opacity-75 me-1"></i> Ingresar como entrenador <i class="bi bi-chevron-right ms-1"></i>
                                             </router-link>
                                         </div>

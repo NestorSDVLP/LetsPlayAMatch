@@ -1,9 +1,9 @@
 export const MATCH_ACTIVITIES = [
-    { id:"volley", label: 'Volley' },
-    { id:"futbol", label: 'Fútbol' },
-    { id:"basket", label: 'Basket' },
-    { id:"handball", label: 'Handball' },
-    { id:"hockey", label: 'Hockey' },
+    { id:"volley", label: 'Volley', icon: '/src/assets/images/activity_icons/vvo.png' },
+    { id:"futbol", label: 'Fútbol', icon: '/src/assets/images/activity_icons/fbl.png' },
+    { id:"basket", label: 'Basket', icon: '/src/assets/images/activity_icons/bkb.png' },
+    { id:"handball", label: 'Handball', icon: '/src/assets/images/activity_icons/hbl.png' },
+    { id:"hockey", label: 'Hockey', icon: '/src/assets/images/activity_icons/hoc.png' },
 ];
 
 export const MATCH_TYPES = [

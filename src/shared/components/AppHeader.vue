@@ -1,9 +1,9 @@
 <template>
 
     <header id="mainHeader" class="bg-transparent position-absolute top-0 w-100">
-        <nav class="my-4">
+        <nav class="my-5">
             <div class="container">
-                <div class="row align-items-center">
+                <div class="row align-items-start">
                     <div class="col-4">
                     <router-link to="/">
                         <img src="@/assets/images/logo.svg" class="logo w-100">
@@ -18,7 +18,9 @@
                             </div>
 
                             <div v-if="authStore.isAuthenticated" class="dropdown">
-                                <a class="dropdown-toggle btn btn-primary rounded-pill px-4" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-fill opacity-50"></i> Hola, <span class="text-capitalize">{{ authStore.user.email.split('@')[0] }}</span> <i class="bi bi-chevron-down ms-1"></i></a>
+                                <a class="dropdown-toggle btn btn-primary rounded-pill px-4" href="#" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-fill opacity-50"></i> Hola, <h6 class="d-inline text-capitalize m-0">{{ authStore.user.email.split('@')[0] }}</h6> <i class="bi bi-chevron-down ms-1"></i>
+                                </a>
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                     <li><h6 class="dropdown-header">Partidos</h6></li>
                                     <li>
@@ -29,7 +31,7 @@
                                     <li><h6 class="dropdown-header">Entrenadores</h6></li>
                                     <li>
                                         <router-link class="dropdown-item py-2" to="/trainers/edit-trainer">
-                                            <i class="bi bi-pencil-square opacity-75 me-1"></i> Editar datos personales
+                                            <i class="bi bi-pencil-square opacity-75 me-1"></i> Editar
                                         </router-link>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>

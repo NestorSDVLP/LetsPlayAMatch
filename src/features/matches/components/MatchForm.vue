@@ -2,17 +2,34 @@
 
     <section class="has-padding-top">
         <div class="container">
-            <h1 class="h1 text-center">Crear Partido</h1>
-            <hr class="mb-4">
-
-            <div class="bg-light text-dark box-shadow p-3 p-sm-5">
+            <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
                 <form novalidate>
                     <input type="hidden" v-model="formData.teamTrainerId">
 
-                    <h2 class="h5"><i class="bi bi-house-fill opacity-50 me-1"></i> Actividad y Dirección</h2>
+                    <h1 class="h1 mb-5"><i class="bi bi-plus-circle me-1"></i> Crear Partido</h1>
+
+                    <h2 class="h4">Actividad</h2>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="h6 d-block">Actividad *</label>
+                            <div class="btn-group-match-activity btn-group w-100 mb-5">
+
+                                <div class="btn-check-wrapper"  v-for="act in MATCH_ACTIVITIES" :key="act.id" :value="act.id">
+                                    <input type="radio" class="btn-check" name="radio-match-activity" :id="`btnradio-${act.id}`" autocomplete="off" v-model="formData.matchActivityId">
+                                    <label class="btn btn-outline-dark py-2" :for="`btnradio-${act.id}`">
+                                        <img :src="act.icon" class="icon mb-2" :alt="act.label">
+                                        <h6 class="m-0">{{ act.label }}</h6>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <h2 class="h5">Sede y Dirección</h2>
                     <hr class="mb-4">
                     <div class="row g-3">
-                        <div class="col-4">
+                        <!--<div class="col-4">
                             <label class="h6">Actividad *</label>
                             <select class="form-select" v-model="formData.matchActivityId">
                                 <option value="" selected disabled>Seleccionar</option>
@@ -20,32 +37,32 @@
                                     {{ act.label }}
                                 </option>
                             </select>
-                        </div>
+                        </div>-->
                         <div class="col-4">
                             <label class="h6">Lugar *</label>
                             <input type="text" class="form-control" placeholder="Lugar" required v-model="formData.matchPlace">
                         </div>
-                        <div class="col-6">
+                        <div class="col-8">
                             <label class="h6">Dirección *</label>
                             <input type="text" class="form-control" placeholder="Dirección" required v-model="formData.matchPlaceAddress">
                         </div>
                     </div>
 
-                    <h2 class="h5 mt-5"><i class="bi bi-calendar3-fill opacity-50 me-1"></i> Fecha y Hora</h2>
+                    <h2 class="h5 mt-5">Fecha y Hora</h2>
                     <hr class="mb-4">
                     <div class="row g-3">
-                        <div class="col-4">
+                        <div class="col-5">
                             <label class="h6">Comienzo *</label>
                             <input type="text" class="form-control" placeholder="Fecha y Hora" v-model="formData.matchStartAt" required>
                             
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <label class="h6">Finalización *</label>
                             <input type="text" class="form-control" placeholder="Fecha y Hora" v-model="formData.matchEndAt" required>
                         </div>
                     </div>
 
-                    <h2 class="h5 mt-5"><i class="bi bi-info-circle-fill opacity-50 me-1"></i> Sobre el Partido</h2>
+                    <h2 class="h5 mt-5">Sobre el Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
                         <div class="col-4">
@@ -93,7 +110,7 @@
                         </div>
                     </div>
 
-                    <h2 class="h5 mt-5"><i class="bi bi-link-45deg opacity-50 me-1"></i> Accesos al Partido</h2>
+                    <h2 class="h5 mt-5">Accesos al Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
                         <div class="col-8">
