@@ -4,8 +4,7 @@
         <div class="container">
             <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
                 <form novalidate @submit.prevent="handleSubmit">
-                    <input type="hidden" v-model="formData.teamTrainerId">
-
+                    
                     <h1 class="h1 mb-5"><i class="bi bi-plus-circle me-1"></i> Crear Partido</h1>
 
                     <h2 class="h4">Actividad</h2>
