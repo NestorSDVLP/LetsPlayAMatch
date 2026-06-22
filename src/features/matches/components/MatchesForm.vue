@@ -5,7 +5,7 @@
             <div class="bg-g8 text-w box-shadow p-3 p-sm-5">
                 <form novalidate @submit.prevent="handleSubmit">
                     
-                    <h1 class="h1 mb-5"><i class="bi bi-plus-circle me-1"></i> Crear Partido</h1>
+                    <h1 class="h1 mb-5">Crear Partido</h1>
 
                     <h2 class="h4">Actividad</h2>
                     <hr class="mb-4">
@@ -43,26 +43,20 @@
                     <div class="row g-3">
                         <div class="col-5">
                             <label class="h6">Comienzo *</label>
-                            <input type="text" class="form-control" placeholder="Fecha y Hora" v-model="formData.matchStartAt" required>
+                            <VueDatePicker v-model="formData.matchStartAt"></VueDatePicker>
+                            <!--<input type="text" class="form-control" placeholder="Fecha y Hora" v-maska="'##/##/#### ##:##'" v-model="formData.matchStartAt" required>-->
                             
                         </div>
                         <div class="col-5">
                             <label class="h6">Finalización *</label>
-                            <input type="text" class="form-control" placeholder="Fecha y Hora" v-model="formData.matchEndAt" required>
+                            <VueDatePicker v-model="formData.matchEndAt"></VueDatePicker>
+                            <!--<input type="text" class="form-control" placeholder="Fecha y Hora" v-maska="'##/##/#### ##:##'" v-model="formData.matchEndAt" required>-->
                         </div>
                     </div>
 
                     <h2 class="h5 mt-5">Sobre el Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
-                        <div class="col-4">
-                            <label class="h6">Cantidad mínima <br>de jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Mínimo" required v-model="formData.matchMinPlayers">
-                        </div>
-                        <div class="col-4">
-                            <label class="h6">Cantidad máxima <br>de jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Máximo" required v-model="formData.matchMaxPlayers">
-                        </div>
                         <div class="col-4">
                             <label class="h6">Tipo *</label>
                             <select class="form-select" required v-model="formData.matchTypeId">
@@ -90,31 +84,41 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-4">
-                            <label class="h6">Edad mínima <br>de los jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Mínimo" required v-model="formData.matchMinAge">
+                        <div class="col-3">
+                            <label class="h6">Cantidad mínima <br>de jugadores *</label>
+                            <input type="number" class="form-control" placeholder="Mínimo" v-maska="'##'" required v-model="formData.matchMinPlayers">
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
+                            <label class="h6">Cantidad máxima <br>de jugadores *</label>
+                            <input type="number" class="form-control" placeholder="Máximo" v-maska="'##'" required v-model="formData.matchMaxPlayers">
+                        </div>
+                        <div class="col-3">
+                            <label class="h6">Edad mínima <br>de los jugadores *</label>
+                            <input type="number" class="form-control" placeholder="Mínimo" v-maska="'##'" required v-model="formData.matchMinAge">
+                        </div>
+                        <div class="col-3">
                             <label class="h6">Edad máxima <br>de los jugadores *</label>
-                            <input type="text" class="form-control" placeholder="Máximo" required v-model="formData.matchMaxAge">
+                            <input type="number" class="form-control" placeholder="Máximo" v-maska="'##'" required v-model="formData.matchMaxAge">
                         </div>
                     </div>
 
                     <h2 class="h5 mt-5">Accesos al Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
-                        <div class="col-8">
+                        <div class="col-12">
                             <label class="h6">URL *</label>
                             <div class="input-group">
-                                <button class="btn btn-secondary" type="button" @click="generatePin">Generar URL</button>
+                                <button class="btn btn-secondary pe-5" type="button" @click="generatePin">Generar URL <i class="bi bi-chevron-right ms-1"></i></button>
                                 <input type="text" class="form-control" placeholder="URL" readonly required v-model="formData.matchURL">
+                                <button class="btn btn-secondary" type="button" @click="generatePin"><i class="bi bi-copy"></i></button>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <label class="h6">Pin de Acceso *</label>
                             <div class="input-group">
-                                <button class="btn btn-secondary" type="button" @click="generatePin">Generar Pin</button>
+                                <button class="btn btn-secondary pe-5" type="button" @click="generatePin">Generar Pin <i class="bi bi-chevron-right ms-1"></i></button>
                                 <input type="text" class="form-control" placeholder="Pin" readonly required v-model="formData.matchPin">
+                                <button class="btn btn-secondary" type="button" @click="generatePin"><i class="bi bi-copy"></i></button>
                             </div>
                         </div>
                     </div>
@@ -153,6 +157,10 @@
     } from '@/features/matches/constants/matches.constants'
 
     import { useRouter } from 'vue-router'
+    import { vMaska } from "maska/vue"
+    import { VueDatePicker } from '@vuepic/vue-datepicker';
+    import '@vuepic/vue-datepicker/dist/main.css'
+
     import { useMatchesStore } from '@/features/matches/stores/matches.store'
     import { createEmptyMatch } from '@/features/matches/models/matches.model'
 

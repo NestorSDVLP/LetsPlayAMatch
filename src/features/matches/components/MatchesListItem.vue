@@ -3,7 +3,7 @@
     <section class="bg-g3">
         <div class="row m-0">
             <div class="col-12 bg-g7 text-w p-3">
-                <h5 class="text-capitalize text-center m-0">{{ match.matchActivityId }}</h5>
+                <h6 class="text-capitalize text-center m-0">{{ match.matchActivityId }}</h6>
             </div>
             <div class="col-6 p-3">
                 <h6 class="small m-0">Fecha y Hora:</h6>

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="bg-g8 text-light box-shadow p-3 p-sm-5">
 
-                <h2>Listado de Partidos</h2>
+                <h4>Listado de Partidos</h4>
                 <hr class="mb-4">
 
                 <ul class="list-group list-group-flush">
