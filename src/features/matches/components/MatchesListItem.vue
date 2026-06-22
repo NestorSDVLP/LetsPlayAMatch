@@ -81,8 +81,9 @@
         </div>
         <div class="p-3">
             <div class="row g-0 m-0 justify-content-end">
-                <div class="col-4 border-start">
+                <div class="col-6 border-start">
                     <div class="btn-group btn-group-sm  w-100">
+                        <button type="button" class="btn btn-outline-dark"><i class="bi bi-pencil-square"></i> Participantes</button>
                         <button type="button" class="btn btn-outline-dark"><i class="bi bi-pencil-square"></i> Editar</button>
                         <button type="button" class="btn btn-outline-dark"><i class="bi bi-trash3"></i> Eliminar</button>
                     </div>
