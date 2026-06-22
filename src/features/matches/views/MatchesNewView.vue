@@ -1,11 +1,13 @@
 <template>
 
-    <MatchForm/>
+    <MatchesForm/>
 
 </template>
 
 <script setup>
 
-    import MatchForm from '@/features/matches/components/MatchesForm.vue'
+    import MatchesForm from '@/features/matches/components/MatchesForm.vue'
+
+    console.log('MATCH NEW VIEW CARGADA')
 
 </script>

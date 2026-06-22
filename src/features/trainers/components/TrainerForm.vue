@@ -97,15 +97,17 @@
 
     /****************************************** */
 
+    const initialValues = {
+        trainerUserName: '',
+        trainerFirstName: '',
+        trainerLastName: '',
+        trainerAvatar: '',
+        ...props.initialData
+    }
+
     const { handleSubmit, errors } = useForm({
         validationSchema,
-        initialValues: {
-            trainerUserName: '',
-            trainerFirstName: '',
-            trainerLastName: '',
-            trainerAvatar: '',
-            ...props.initialData
-        }
+        initialValues
     })
 
     /****************************************** */
