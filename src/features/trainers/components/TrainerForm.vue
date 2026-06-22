@@ -3,43 +3,53 @@
     <section class="has-padding-top">
         <div class="container">
             <div class="bg-g8 text-w box-shadow p-3 p-sm-5">
-                <h1 class="h2 mb-5"><i class="bi bi-pencil-square me-1"></i> Entrenador: Editar</h1>
+                <h1 class="h2 mb-5">Editar Entrenador</h1>
 
-                <form novalidate @submit.prevent="handleSubmit">
+                <form novalidate @submit.prevent="onSubmit">
 
                     <h2 class="h5">Datos Personales</h2>
                     <hr class="mb-4">
                     <div class="row">
                         <div class="col-8">
                             <label class="h6">Usuario *</label>
-                            <input type="text" class="form-control mb-3" placeholder="Usuario" readonly required v-model="formData.trainerUserName">
+                            <input type="text" class="form-control mb-3" :class="{ 'is-invalid': errors.trainerUserName }" placeholder="Usuario" readonly v-model="trainerUserName">
+                            <div class="invalid-feedback d-block mt-1">
+                                {{ errors.trainerUserName }}
+                            </div>
                         </div>
                     </div>
                     <div class="row g-3">
                         <div class="col-3">
                             <label class="h6">Nombre *</label>
-                            <input type="text" class="form-control" placeholder="Nombre" required v-model="formData.trainerFirstName">
+                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.trainerFirstName }" placeholder="Nombre" v-model="trainerFirstName">
+                            <div class="invalid-feedback d-block mt-1">
+                                {{ errors.trainerFirstName }}
+                            </div>
                         </div>
                         <div class="col-3">
                             <label class="h6">Apellido *</label>
-                            <input type="text" class="form-control" placeholder="Apellido" required v-model="formData.trainerLastName">
+                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.trainerLastName }" placeholder="Apellido" v-model="trainerLastName">
+                            <div class="invalid-feedback d-block mt-1">
+                                {{ errors.trainerLastName }}
+                            </div>
                         </div>
                         <div class="col-12">
                             <label class="h6">Avatar (URL) *</label>
-                            <input type="text" class="form-control" placeholder="Avatar (URL)" required v-model="formData.trainerAvatar">
+                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.trainerAvatar }" placeholder="Avatar (URL)" v-model="trainerAvatar">
+                            <div class="invalid-feedback d-block mt-1">
+                                {{ errors.trainerAvatar }}
+                            </div>
                         </div>
                     </div>
 
                     <p class="small opacity-75 my-3">(*) Datos requeridos</p>
 
                     <div class="text-center">
-                        
-                        <!-- Mostrar un spiner mientras se procesa el loging -->
 
                         <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
 
                             <template v-if="loading">
-                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                <span class="spinner-border spinner-border-sm me-2"></span>
                                 Guardando...
                             </template>
 
@@ -63,22 +73,18 @@
     */
 
     import { ref } from 'vue';
-    import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
     import { useRouter } from 'vue-router'
+    import { 
+        useForm,
+        useField 
+        } from 'vee-validate'
+    import Swal from 'sweetalert2'
+    import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+    import { validationSchema } from '@/features/trainers/validations/trainers.schema'
 
     const trainerStore = useTrainerStore()
 
     const router = useRouter()
-
-    // Define el estado inicial
-
-    const initialState = {
-        trainerUserName: '',
-        trainerFirstName: '',
-        trainerLastName: '',
-        trainerAvatar: '',
-        createdAt: '',
-    };
 
     const props = defineProps({
         initialData: {
@@ -87,38 +93,54 @@
         }
     });
 
-    /* 
-    * Mejorar la inicialización para que siempre 
-    * combine ambos, asegurando que si falta algo 
-    * en initialData, el estado tenga un 
-    * valor por defecto:
-    */ 
-
-    const formData = ref({ 
-        ...initialState, 
-        ...props.initialData 
-    });
-
     const loading = ref(false); // Para el spinner del botón
 
     /****************************************** */
 
-    const handleSubmit = async () => {
+    const { handleSubmit, errors } = useForm({
+        validationSchema,
+        initialValues: {
+            trainerUserName: '',
+            trainerFirstName: '',
+            trainerLastName: '',
+            trainerAvatar: '',
+            ...props.initialData
+        }
+    })
+
+    /****************************************** */
+
+    const { value: trainerUserName } = useField('trainerUserName')
+    const { value: trainerFirstName } = useField('trainerFirstName')
+    const { value: trainerLastName } = useField('trainerLastName')
+    const { value: trainerAvatar } = useField('trainerAvatar')
+
+    /****************************************** */
+
+    const onSubmit = handleSubmit(async values => {
 
         try {
 
             loading.value = true
 
-            await trainerStore.updateTrainerProfile(formData.value)
+            await trainerStore.updateTrainerProfile(values)
 
-            await router.push('/matches/new-match')
+            await Swal.fire({
+                icon: 'success',
+                title: 'Perfil actualizado',
+                timer: 2000,
+                showConfirmButton: false
+            })
+
+            router.push('/matches/new-match')
 
         } catch(error) {
 
-            console.error(
-                'handleSubmit: Error al guardar el perfil:',
-                error
-            )
+            await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo guardar el perfil'
+            })
 
         } finally {
 
@@ -126,6 +148,6 @@
 
         }
 
-    }
+    })
 
 </script>
