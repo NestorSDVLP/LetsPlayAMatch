@@ -193,7 +193,7 @@
 
         .btn-check:checked + .btn {
             .icon {
-                filter: invert(1);
+                filter: invert(0);
             } 
         }
 
@@ -203,6 +203,7 @@
 
             .icon {
                 width: 60%;
+                filter: invert(1);
             }
         }
     }

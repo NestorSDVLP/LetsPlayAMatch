@@ -1,0 +1,51 @@
+/*
+*
+* Extends:
+*
+*/
+
+$utilities: () !default;
+
+/*
+*
+* Extends: Merge colors
+*
+*/
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+/*
+*
+* Extends: BackgroundColor
+*
+*/
+
+$utilities: map-merge(
+  (
+    "background-color": (
+      property: background-color,
+      class: bg,
+      responsive: true,
+      important: true,
+      values:
+        map-merge(
+          $theme-colors,
+          (
+            "w": $white,
+            "g1": $gray-100,
+            "g2": $gray-200,
+            "g3": $gray-300,
+            "g4": $gray-400,
+            "g5": $gray-500,
+            "g6": $gray-600,
+            "g7": $gray-700,
+            "g8": $gray-800,
+            "g9": $gray-900,
+            "b": $black,
+            "transparent": transparent,
+          )
+        ),
+    ),
+  ),
+  $utilities
+);

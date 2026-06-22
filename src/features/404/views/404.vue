@@ -12,7 +12,7 @@
 
             <div class="row g-4">
                 <div class="col-sm-6 text-center">
-                    <router-link class="btn btn-outline-dark rounded-pill px-5" to="/">Ir al inicio <i class="bi bi-chevron-right"></i></router-link>
+                    <router-link class="btn btn-outline-dark px-5" to="/">Ir al inicio <i class="bi bi-chevron-right"></i></router-link>
                 </div>
             </div>
         </div>

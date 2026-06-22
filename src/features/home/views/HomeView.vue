@@ -14,7 +14,7 @@
                                         <p class="lead opacity-75 m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
                                         
                                         <!--<div v-if="!authStore.isAuthenticated">
-                                            <router-link class="btn btn-light rounded-pill ps-4 pe-5 mt-5" to="/login">
+                                            <router-link class="btn btn-light ps-4 pe-5 mt-5" to="/login">
                                                 <i class="bi bi-person-fill opacity-75 me-1"></i> Ingresar como entrenador <i class="bi bi-chevron-right ms-1"></i>
                                             </router-link>
                                         </div>-->

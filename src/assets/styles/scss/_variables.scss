@@ -12,6 +12,11 @@ $black: #000000 !default;
 
 $primary: #da0e0d;
 
+$custom-colors: (
+    "gray-500": $gray-500,
+    "w": $white
+);
+
 $enable-negative-margins: true;
 
 $enable-rounded: false;

@@ -2,7 +2,7 @@
 
     <section>
         <div class="container">
-            <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
+            <div class="bg-g8 text-light box-shadow p-3 p-sm-5">
 
                 <h2>Listado de Partidos</h2>
                 <hr class="mb-4">
@@ -12,7 +12,7 @@
                     <li
                         v-for="match in matchesStore.matches"
                         :key="match.id"
-                        class="list-group-item bg-transparentxxx p-0">
+                        class="list-group-item border-0 p-0 mb-3">
 
                         <MatchesListItem :match="match"/>
 

@@ -55,7 +55,12 @@ export const useMatchesStore = defineStore('matches', {
 
             try {
 
-                const newMatch = await createMatch(matchData)
+                const trainerStore = useTrainerStore()
+
+                const newMatch = await createMatch({
+                    ...matchData,
+                    teamTrainerId: trainerStore.trainer.uid
+                })
 
                 this.match = newMatch
 

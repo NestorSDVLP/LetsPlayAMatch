@@ -2,7 +2,7 @@
 
     <section class="has-padding-top">
         <div class="container">
-            <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
+            <div class="bg-g8 text-w box-shadow p-3 p-sm-5">
                 <form novalidate @submit.prevent="handleSubmit">
                     
                     <h1 class="h1 mb-5"><i class="bi bi-plus-circle me-1"></i> Crear Partido</h1>
@@ -16,7 +16,7 @@
 
                                 <div class="btn-check-wrapper"  v-for="act in MATCH_ACTIVITIES" :key="act.id">
                                     <input type="radio" class="btn-check" name="radio-match-activity" :id="`btnradio-${act.id}`" :value="act.id" autocomplete="off" v-model="formData.matchActivityId">
-                                    <label class="btn btn-outline-dark py-3" :for="`btnradio-${act.id}`">
+                                    <label class="btn btn-outline-light py-3" :for="`btnradio-${act.id}`">
                                         <img :src="act.icon" class="icon mb-2" :alt="act.label">
                                         <h6 class="m-0">{{ act.label }}</h6>
                                     </label>
@@ -123,7 +123,7 @@
 
                     <div class="text-center">
                         <!-- Mostrar un spiner mientras se procesa el loging -->
-                        <button class="btn btn-primary rounded-pill px-5 py-2" type="submit" :disabled="loading">
+                        <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
 
                             <template v-if="loading">
                                 <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
@@ -192,7 +192,7 @@
                 formData.value
             )
 
-            router.push('/')
+            router.push('/matches/view-list/')
 
         } catch(error) {
 

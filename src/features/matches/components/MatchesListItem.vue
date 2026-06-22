@@ -1,11 +1,11 @@
 <template>
 
-    <section>
+    <section class="bg-g3">
         <div class="row m-0">
-            <div class="col-12 bg-light p-3 border-bottom">
+            <div class="col-12 bg-g7 text-w p-3">
                 <h5 class="text-capitalize text-center m-0">{{ match.matchActivityId }}</h5>
             </div>
-            <div class="col-6 p-3 border-bottom border-start border-end">
+            <div class="col-6 p-3">
                 <h6 class="small m-0">Fecha y Hora:</h6>
                 <div class="row g-3">
                     <div class="col-6">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 p-3 border-bottom border-end">
+            <div class="col-6 p-3">
                 <h6 class="small m-0">Partido:</h6>
                 <div class="row g-3">
                     <div class="col-4">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 p-3 border-bottom border-start border-end">
+            <div class="col-6 p-3">
                 <div class="row g-3">
                     <div class="col-6">
                         <h6 class="small m-0">Cupos:</h6>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 p-3 border-bottom border-end">
+            <div class="col-6 p-3">
                 <h6 class="small m-0">Sede y Direción:</h6>
                 <div class="row g-3">
                     <div class="col-6">
@@ -75,6 +75,16 @@
                     <div class="col-6">
                         <span class="small opacity-75">Dirección:</span>
                         <h6 class="m-0">{{ match.matchPlaceAddress }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-3">
+            <div class="row g-0 m-0 justify-content-end">
+                <div class="col-4 border-start">
+                    <div class="btn-group btn-group-sm  w-100">
+                        <button type="button" class="btn btn-outline-dark"><i class="bi bi-pencil-square"></i> Editar</button>
+                        <button type="button" class="btn btn-outline-dark"><i class="bi bi-trash3"></i> Eliminar</button>
                     </div>
                 </div>
             </div>

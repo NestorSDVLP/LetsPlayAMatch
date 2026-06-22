@@ -12,14 +12,14 @@
                     <div class="col-4 offset-4 text-end">
                         <div class="d-flex justify-content-end">
                             <div v-if="!authStore.isAuthenticated">
-                                <router-link class="btn btn-primary rounded-pill ps-4 pe-5" to="/login">
+                                <router-link class="btn btn-primary ps-4 pe-5" to="/login">
                                     <i class="bi bi-person-fill opacity-75 me-1"></i> Entrenadores <i class="bi bi-chevron-right ms-1"></i>
                                 </router-link>
                             </div>
 
                             <div v-if="authStore.isAuthenticated" class="dropdown">
-                                <a class="dropdown-toggle btn btn-primary rounded-pill px-4" href="#" data-bs-toggle="dropdown">
-                                    <i class="bi bi-person-fill opacity-50"></i> Hola, <h6 class="d-inline text-capitalize m-0">{{ authStore.user.email.split('@')[0] }}</h6> <i class="bi bi-chevron-down ms-1"></i>
+                                <a class="dropdown-toggle btn btn-primary px-4" href="#" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-fill opacity-75"></i> Hola, <h6 class="d-inline text-capitalize m-0">{{ authStore.user.email.split('@')[0] }}</h6> <i class="bi bi-chevron-down ms-1"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                     <li><h6 class="dropdown-header">Partidos</h6></li>

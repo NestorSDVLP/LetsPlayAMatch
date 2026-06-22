@@ -2,12 +2,12 @@
 
     <section class="has-padding-top">
         <div class="container">
-            <div class="bg-light text-dark rounded box-shadow p-3 p-sm-5">
+            <div class="bg-g8 text-w box-shadow p-3 p-sm-5">
                 <h1 class="h2 mb-5"><i class="bi bi-pencil-square me-1"></i> Entrenador: Editar</h1>
 
                 <form novalidate @submit.prevent="handleSubmit">
 
-                    <h2 class="h5"><i class="bi bi-person-fill opacity-50 me-1"></i> Datos Personales</h2>
+                    <h2 class="h5">Datos Personales</h2>
                     <hr class="mb-4">
                     <div class="row">
                         <div class="col-8">
@@ -36,7 +36,7 @@
                         
                         <!-- Mostrar un spiner mientras se procesa el loging -->
 
-                        <button class="btn btn-primary rounded-pill px-5 py-2" type="submit" :disabled="loading">
+                        <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
 
                             <template v-if="loading">
                                 <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>

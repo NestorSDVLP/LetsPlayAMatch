@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row g-5 align-items-center justify-content-center">
         <div class="col-sm-8 col-lg-8">
-          <div class="bg-light text-dark rounded box-shadow px-4 py-5 p-sm-5 mb-5">
+          <div class="bg-g8 text-w box-shadow px-4 py-5 p-sm-5 mb-5">
             
             <p v-if="errorFirebase" class="alert alert-danger text-center mb-4 small " role="alert">
               <i class="bi bi-exclamation-circle opacity-75 me-1"></i>
@@ -48,7 +48,7 @@
               <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                   <!-- Mostrar un spiner mientras se procesa el loging -->
-                  <button class="btn btn-primary rounded-pill w-100" type="submit" :disabled="loading">
+                  <button class="btn btn-primary w-100" type="submit" :disabled="loading">
 
                     <template v-if="loading">
                       <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
@@ -74,7 +74,7 @@
               <h4 class="h4 mb-1">Ingresá a LetsPlayAMatch&reg; usando tu cuenta de Google&reg;</h4>
               <p class="lh-sm opacity-75 mb-4">Te recordamos que no recopilaremos ninguna información sobre tu cuenta. Este modo de ingreso es para validar tu usuario en Google&reg;</p>
               <button 
-                class="btn btn-primary btn-lg w-100 rounded-pill p-0"
+                class="btn btn-primary btn-lg w-100 p-0"
                 @click="handleGoogleLogin">
                     <h5 class="py-3 m-0"><i class="bi bi-google opacity-50 me-2"></i> Iniciar con Google&reg;</h5>
               </button>
