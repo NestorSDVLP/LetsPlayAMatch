@@ -1,16 +1,55 @@
 import { defineStore } from 'pinia'
+
+import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+
 import {
     createMatch,
-    updateMatch
+    updateMatch,
+    getMatchesByTrainerId
 } from '@/features/matches/services/matches.service'
 
 export const useMatchesStore = defineStore('matches', {
 
     state: () => ({
-        match: null
+        match: null,
+        matches: []
     }),
 
     actions: {
+
+        async fetchTrainerMatches() {
+
+            try {
+
+                const trainerStore = useTrainerStore()
+
+                console.log('trainerStore.trainer')
+                console.log(trainerStore.trainer)
+
+                const trainerId = trainerStore.trainer.uid
+
+                console.log('trainerId')
+                console.log(trainerId)
+
+                this.matches = await getMatchesByTrainerId(
+                    trainerId
+                )
+
+                console.log('matchesStore.matches')
+                console.log(this.matches)
+
+            } catch(error) {
+
+                console.error(
+                    'fetchTrainerMatches:',
+                    error
+                )
+
+                throw error
+
+            }
+
+        },
 
         async createMatch(matchData) {
 

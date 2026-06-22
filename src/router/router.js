@@ -36,9 +36,18 @@ const routes = [
         component: LoginView
     },
     {
+        path: '/matches/view-list',
+        name: 'matches-view-list',
+        component: () => import('@/features/matches/views/MatchesListView.vue'),
+        meta: { 
+            requiresAuth: true,
+            requiresCompletedProfile: true
+        }
+    },
+    {
         path: '/matches/new-match',
         name: 'new-match',
-        component: () => import('@/features/matches/views/MatchNewView.vue'),
+        component: () => import('@/features/matches/views/MatchesNewView.vue'),
         meta: { 
             requiresAuth: true,
             requiresCompletedProfile: true

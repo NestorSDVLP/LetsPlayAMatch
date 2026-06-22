@@ -16,7 +16,7 @@
 
                                 <div class="btn-check-wrapper"  v-for="act in MATCH_ACTIVITIES" :key="act.id">
                                     <input type="radio" class="btn-check" name="radio-match-activity" :id="`btnradio-${act.id}`" :value="act.id" autocomplete="off" v-model="formData.matchActivityId">
-                                    <label class="btn btn-outline-dark py-2" :for="`btnradio-${act.id}`">
+                                    <label class="btn btn-outline-dark py-3" :for="`btnradio-${act.id}`">
                                         <img :src="act.icon" class="icon mb-2" :alt="act.label">
                                         <h6 class="m-0">{{ act.label }}</h6>
                                     </label>
@@ -29,8 +29,8 @@
                     <hr class="mb-4">
                     <div class="row g-3">
                         <div class="col-4">
-                            <label class="h6">Lugar *</label>
-                            <input type="text" class="form-control" placeholder="Lugar" required v-model="formData.matchPlace">
+                            <label class="h6">Sede *</label>
+                            <input type="text" class="form-control" placeholder="Sede" required v-model="formData.matchPlace">
                         </div>
                         <div class="col-8">
                             <label class="h6">Dirección *</label>

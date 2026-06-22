@@ -1,38 +1,48 @@
 import {
     collection,
     doc,
-    setDoc
+    getDocs,
+    query,
+    setDoc,
+    where
 } from 'firebase/firestore'
 
 import { db } from '@/shared/services/firebase'
 
-import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+export const getMatchesByTrainerId = async (trainerId) => {
+
+    console.log('getMatchesByTrainerId:', trainerId)
+
+    const matchesRef = collection(db, 'matches')
+
+    const q = query(
+        matchesRef,
+        where('teamTrainerId', '==', trainerId)
+    )
+
+    const snapshot = await getDocs(q)
+
+    const matches = snapshot.docs.map(doc => doc.data())
+
+    console.log('matches encontrados:', matches)
+
+    return matches
+}
+
+/************************ */
 
 export const createMatch = async (matchData) => {
-
-    const trainerStore = useTrainerStore()
-
-    if (!trainerStore.trainer) {
-        throw new Error('Cannot create match: trainer profile not initialized')
-    }
 
     const matchRef = doc(collection(db, 'matches'))
 
     const newMatch = {
         ...matchData,
-
         id: matchRef.id,
-
-        teamTrainerId: trainerStore.trainer.uid,
-        
         matchStatusId: 'open',
         createdAt: Date.now()
     }
 
-    await setDoc(
-        matchRef,
-        newMatch
-    )
+    await setDoc(matchRef, newMatch)
 
     return newMatch
 }
@@ -52,5 +62,4 @@ export const updateMatch = async (matchId, matchData) => {
         matchData,
         { merge: true }
     )
-
 }

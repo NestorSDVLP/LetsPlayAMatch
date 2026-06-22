@@ -24,6 +24,11 @@
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                     <li><h6 class="dropdown-header">Partidos</h6></li>
                                     <li>
+                                        <router-link class="dropdown-item py-2" to="/matches/view-list">
+                                            <i class="bi bi-table me-1"></i> Ver partidos
+                                        </router-link>
+                                    </li>
+                                    <li>
                                         <router-link class="dropdown-item py-2" to="/matches/new-match">
                                             <i class="bi bi-plus-circle me-1"></i> Crear partido
                                         </router-link>
