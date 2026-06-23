@@ -153,7 +153,7 @@
                                 </ol>
                             </div>
                             <div class="col-6">
-                                <span class="small opacity-75">Lista de espera:</span>
+                                <span class="small opacity-75">Lista de Espera:</span>
                                 <ol>
                                     <li><strong>Renata Vázquez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 7789-0123</a></li>
                                     <li><strong>Facundo Giménez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 8890-1234</a></li>

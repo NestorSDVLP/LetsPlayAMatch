@@ -114,6 +114,7 @@
 */
 .btn {
     position: relative;
+    font-weight: 600;
 
     .bi-chevron-right {
         position: absolute;
@@ -128,6 +129,11 @@
             transform: translate(5px,-50%);
         }   
     }
+}
+
+.form-control,
+.form-select {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px inset;
 }
 
 /*
@@ -209,6 +215,11 @@
     }
 }
 
+/*
+
+    Accordion
+
+*/
 .accordion {
 
   .accordion-button {

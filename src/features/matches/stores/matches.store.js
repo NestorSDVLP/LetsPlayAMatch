@@ -5,6 +5,7 @@ import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 import {
     createMatch,
     updateMatch,
+    getMatchById,
     getMatchesByTrainerId
 } from '@/features/matches/services/matches.service'
 
@@ -16,6 +17,31 @@ export const useMatchesStore = defineStore('matches', {
     }),
 
     actions: {
+
+        async fetchMatchById(id) {
+
+            console.log('fetchMatchById')
+
+            try {
+
+                this.match = await getMatchById(id)
+
+                console.log('match:', this.match)
+
+                return this.match
+
+            } catch(error) {
+
+                console.error(
+                    'fetchMatch:', id,
+                    error
+                )
+
+                throw error
+
+            }
+
+        },
 
         async fetchTrainerMatches() {
 

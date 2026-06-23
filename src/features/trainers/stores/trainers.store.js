@@ -11,6 +11,7 @@ export const useTrainerStore = defineStore('trainer', {
     }),
 
     actions: {
+        
         async initializeTrainer(authUser) {
             try {
             
