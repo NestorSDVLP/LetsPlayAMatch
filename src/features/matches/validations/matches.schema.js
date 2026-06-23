@@ -18,10 +18,18 @@ export const validationSchema = yup.object({
         
     matchStartAt: yup
         .date()
+        .transform((value, originalValue) =>
+            originalValue === '' ? null : new Date(originalValue)
+        )
+        .nullable()
         .required('La Fecha y Hora de inicio es obligatoria'),
         
     matchEndAt: yup
         .date()
+        .transform((value, originalValue) =>
+            originalValue === '' ? null : new Date(originalValue)
+        )
+        .nullable()
         .required('La Fecha y Hora de finalización es obligatoria'),
         
     matchTypeId: yup
@@ -41,24 +49,40 @@ export const validationSchema = yup.object({
         
     matchMinPlayers: yup
         .number()
+        .transform((value, originalValue) =>
+            originalValue === '' ? null : Number(originalValue)
+        )
+        .nullable()
         .required('La Cantidad mínima de jugadores es obligatoria'),
         
     matchMaxPlayers: yup
         .number()
+        .transform((value, originalValue) =>
+            originalValue === '' ? null : Number(originalValue)
+        )
+        .nullable()
         .required('La Cantidad máxima de jugadores es obligatoria'),
         
     matchMinAge: yup
         .number()
+        .transform((value, originalValue) =>
+            originalValue === '' ? null : Number(originalValue)
+        )
+        .nullable()
         .required('La Edad mínima es obligatoria'),
         
     matchMaxAge: yup
         .number()
+        .transform((value, originalValue) =>
+            originalValue === '' ? null : Number(originalValue)
+        )
+        .nullable()
         .required('La Edad máxima es obligatoria'),
         
     matchURL: yup
         .string()
+        .matches(/^match-[a-z0-9-]+$/, 'Formato de URL de coincidencia no válido')
         .trim()
-        .url()
         .required('La URL del partido es obligatoria'),
         
     matchPin: yup

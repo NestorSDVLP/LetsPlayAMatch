@@ -10,11 +10,11 @@
                 <div class="row g-3">
                     <div class="col-6">
                         <span class="small opacity-75">Comienzo:</span>
-                        <h6 class="m-0">{{ match.matchStartAt }} <sup>hs</sup></h6>
+                        <h6 class="m-0">{{ formatDateTime(match.matchStartAt) }} <sup>hs</sup></h6>
                     </div>
                     <div class="col-6">
                         <span class="small opacity-75">Finalización:</span>
-                        <h6 class="m-0">{{ match.matchEndAt }} <sup>hs</sup></h6>
+                        <h6 class="m-0">{{ formatDateTime(match.matchEndAt) }} <sup>hs</sup></h6>
                     </div>
                 </div>
             </div>
@@ -79,6 +79,18 @@
                 </div>
             </div>
         </div>
+        <div class="px-3">
+            <div class="row g-3">
+                <div class="col-8">
+                    <span class="small opacity-75">URL:</span>
+                    <h6 class="m-0">{{ match.matchURL }}</h6>
+                </div>
+                <div class="col-4">
+                    <span class="small opacity-75">Pin:</span>
+                    <h6 class="m-0">{{ match.matchPin }}</h6>
+                </div>
+            </div>
+        </div>
         <div class="p-3">
             <div class="row g-0 m-0 justify-content-end">
                 <div class="col-6 border-start">
@@ -104,5 +116,19 @@
             default: createEmptyMatch
         }
     })
+
+    // Formateo fechas desde Firestore:
+
+    const formatDateTime = (timestamp) => {
+        if (!timestamp) return '-'
+
+        const date = timestamp.toDate()
+
+        return new Intl.DateTimeFormat('es-AR', {
+            dateStyle: 'short',
+            timeStyle: 'short',
+            hour12: false
+        }).format(date)
+    }
 
 </script>

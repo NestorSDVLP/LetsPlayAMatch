@@ -142,9 +142,9 @@
                         <div class="col-12">
                             <label class="h6">URL *</label>
                             <div class="input-group">
-                                <button class="btn btn-secondary pe-5" type="button" @click="generatePin">Generar URL <i class="bi bi-chevron-right ms-1"></i></button>
+                                <button class="btn btn-secondary pe-5" type="button" @click="generateURL">Generar URL <i class="bi bi-chevron-right ms-1"></i></button>
                                 <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchURL }" placeholder="URL" readonly v-model="matchURL">
-                                <button class="btn btn-secondary" type="button" @click="generatePin"><i class="bi bi-copy"></i></button>
+                                <button class="btn btn-secondary" type="button" @click="generateURL"><i class="bi bi-copy"></i></button>
                             </div>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchURL }}
@@ -198,7 +198,8 @@
     } from '@/features/matches/constants/matches.constants'
 
     import { useRouter } from 'vue-router'
-    import VueDatePicker from '@vuepic/vue-datepicker';
+
+    import { VueDatePicker } from '@vuepic/vue-datepicker'
     import '@vuepic/vue-datepicker/dist/main.css'
 
     import { 
@@ -222,6 +223,12 @@
     })
 
     const loading = ref(false); // Para el spinner del botón
+
+    // Genera una URL para el match
+
+    const generateURL = () => {
+        matchURL.value = `match-${crypto.randomUUID()}`
+    }
 
     // Genera un número de 6 dígitos aleatorio
 
@@ -279,7 +286,7 @@
 
             await Swal.fire({
                 icon: 'success',
-                title: 'Perfil actualizado',
+                title: 'El partido fué creado con éxito',
                 timer: 2000,
                 showConfirmButton: false
             })
@@ -293,7 +300,7 @@
             await Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No se pudo guardar el perfil'
+                text: 'No se pudo guardar el partido'
             })
 
         } finally {

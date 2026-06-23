@@ -176,7 +176,7 @@ router.beforeEach(async (to, from) => {
 router.afterEach(() => {
 
     console.log('AFTER EACH')
-    
+
     const uiStore = useUiStore()
     uiStore.setLoading(false)
 
@@ -193,9 +193,19 @@ router.afterEach(() => {
     })
 })
 
-router.onError(() => {
+/*router.onError(() => {
     const uiStore = useUiStore()
     uiStore.setLoading(false)
+})*/
+
+router.onError(error => {
+
+    console.error('ROUTER ERROR')
+    console.error(error)
+
+    const uiStore = useUiStore()
+    uiStore.setLoading(false)
+
 })
 
 /*
