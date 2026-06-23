@@ -208,3 +208,39 @@
         }
     }
 }
+
+.accordion {
+
+  .accordion-button {
+    &.collapsed {
+        background: $gray-900;
+        color: $white;
+
+      &::after {
+        filter: invert(1);
+      }
+    }
+
+    &:not(.collapsed) {
+        color: $white;
+        background: $primary;
+
+      &::after {
+        filter: invert(1) brightness(200%);
+      }
+    }
+
+    &:focus {
+        box-shadow: unset;
+    }
+  }
+
+  .accordion-body {
+    background-color: $gray-700;
+    color: $white;
+
+    .show > & {
+      // ej: animation fade-in
+    }
+  }
+}

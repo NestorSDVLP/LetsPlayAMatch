@@ -4,25 +4,26 @@
         <div class="container">
             <div class="bg-g8 text-light box-shadow p-3 p-sm-5">
 
-                <h4>Listado de Partidos</h4>
-                <hr class="mb-4">
+                <h2 class="h1 mb-5">Listado de Partidos</h2>
 
                 <AppRecordsEmptyState v-if="!matchesStore.matches.length"/>
 
                 <div v-else>
 
-                    <ul class="list-group list-group-flush">
+                    <div class="accordion accordion-flush" id="accordionMatchesList">
 
-                        <li
-                            v-for="match in matchesStore.matches"
-                            :key="match.id"
-                            class="list-group-item border-0 p-0 mb-3">
+                        <div 
+                            class="accordion-item"
+                            v-for="(match, index) in matchesStore.matches"
+                            :key="match.id">
 
-                            <MatchesListItem :match="match"/>
+                                <MatchesListItem 
+                                    :match="match"
+                                    :is-first="index === 0"/>
+                                
+                        </div>
 
-                        </li>
-
-                    </ul>
+                    </div>
 
                 </div>
 
