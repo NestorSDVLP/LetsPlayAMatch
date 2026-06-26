@@ -12,6 +12,30 @@ import { db } from '@/shared/services/firebase'
 
 /************************ */
 
+export const getMatchByURL = async (URL) => {
+
+    console.log('getMatchByURL:', URL)
+
+    const matchRef = doc(db, 'matches', URL)
+
+    const snapshot = await getDoc(matchRef)
+
+    if (!snapshot.exists()) {
+
+        console.log('No existe el partido')
+
+        return null
+    }
+
+    const match = snapshot.data()
+
+    console.log('match:', match)
+
+    return match
+}
+
+/************************ */
+
 export const getMatchById = async (id) => {
 
     console.log('getMatchById:', id)

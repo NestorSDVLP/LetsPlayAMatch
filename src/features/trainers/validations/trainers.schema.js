@@ -7,16 +7,16 @@ export const validationSchema = yup.object({
     trainerFirstName: yup
         .string()
         .trim()
-        .required('El nombre es obligatorio'),
+        .required('El nombre es requerido'),
 
     trainerLastName: yup
         .string()
         .trim()
-        .required('El apellido es obligatorio'),
+        .required('El apellido es requerido'),
 
     trainerAvatar: yup
         .string()
         .trim()
         .url('Debe ser una URL válida')
-        .required('El avatar es obligatorio')
+        .required('El avatar es requerido')
 })
