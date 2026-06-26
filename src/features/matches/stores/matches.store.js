@@ -34,7 +34,7 @@ export const useMatchesStore = defineStore('matches', {
             } catch(error) {
 
                 console.error(
-                    'fetchMatch:', id,
+                    'fetchMatch:',
                     error
                 )
 

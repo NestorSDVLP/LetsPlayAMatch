@@ -1,7 +1,10 @@
 import {
     collection,
     doc,
-    setDoc
+    setDoc,
+    getDocs,
+    query,
+    where
 } from 'firebase/firestore'
 
 import { db } from '@/shared/services/firebase'
@@ -21,4 +24,20 @@ export const createMatchPlayer = async (matchPlayerData) => {
     await setDoc(matchPlayerRef, newMatchPlayer)
 
     return newMatchPlayer
+}
+
+/************************ */
+
+export const getPlayersByMatchId = async (matchId) => {
+
+    const q = query(
+        collection(db, 'matchPlayers'),
+        where('matchPlayerMatchId', '==', matchId)
+    )
+
+    const snapshot = await getDocs(q)
+
+    return snapshot.docs
+        .map(doc => doc.data())
+        .sort((a, b) => a.matchPlayerCreatedAt - b.matchPlayerCreatedAt)
 }

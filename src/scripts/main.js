@@ -68,7 +68,7 @@ const authStore = useAuthStore()
 authStore.initAuth()
 
 /*
-* Registra Vue Router.
+* Registra Vue route.
 */
 
 app.use(router)

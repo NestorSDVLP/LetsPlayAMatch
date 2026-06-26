@@ -127,7 +127,10 @@
                     </div>
 
                     <div class="bg-g7 p-3 p-sm-5 mb-4">
-                        <MatchesBoardRegistrationForm/>
+
+                        <MatchesBoardRegistrationForm 
+                            :match="match"/>
+
                     </div>
 
                     <div class="bg-g7 p-3 p-sm-5">
@@ -135,46 +138,25 @@
                         <hr class="mb-3">
                         <div class="row g-3">
                             <div class="col-6">
-                                <h6 class="d-block mb-2">Confirmados <span class="badge text-bg-dark">21</span></h6>
+                                <h6 class="d-block mb-2">
+                                    Confirmados 
+                                    <span class="badge text-bg-dark">{{ confirmedPlayers.length }}</span>
+                                </h6>
                                 <ol class="mb-0">
-                                    <li>Mateo González</li>
-                                    <li>Valentina Rodríguez</li>
-                                    <li>Santiago Fernández</li>
-                                    <li>Martina López</li>
-                                    <li>Benjamín Martínez</li>
-                                    <li>Sofía Pérez</li>
-                                    <li>Tomás Gómez</li>
-                                    <li>Isabella Díaz</li>
-                                    <li>Joaquín Romero</li>
-                                    <li>Catalina Álvarez</li>
-                                    <li>Lucas Torres</li>
-                                    <li>Emilia Ruiz</li>
-                                    <li>Bautista Flores</li>
-                                    <li>Delfina Acosta</li>
-                                    <li>Felipe Benítez</li>
-                                    <li>Julieta Silva</li>
-                                    <li>Ignacio Castro</li>
-                                    <li>Lucía Molina</li>
-                                    <li>Matías Ortiz</li>
-                                    <li>Morena Suárez</li>
-                                    <li>Agustín Morales</li>
+                                    <li v-for="player in confirmedPlayers" :key="player.id">
+                                        {{ player.matchPlayerName }}
+                                    </li>
                                 </ol>
                             </div>
                             <div class="col-6">
-                                <h6 class="d-block mb-2">Lista de Espera <span class="badge text-bg-dark">12</span></h6>
+                                <h6 class="d-block mb-2">
+                                    Lista de Espera 
+                                    <span class="badge text-bg-dark">{{ waitingPlayers.length }}</span>
+                                </h6>
                                 <ol class="mb-0">
-                                    <li>Renata Vázquez</li>
-                                    <li>Facundo Giménez</li>
-                                    <li>Clara Herrera</li>
-                                    <li>Nicolás Medina</li>
-                                    <li>Pilar Cabrera</li>
-                                    <li>Franco Rivas</li>
-                                    <li>Abril Pereyra</li>
-                                    <li>Bruno Navarro</li>
-                                    <li>Victoria Domínguez</li>
-                                    <li>Thiago Peralta</li>
-                                    <li>Alma Sosa</li>
-                                    <li>Lautaro Ibarra</li>
+                                    <li v-for="player in waitingPlayers" :key="player.id">
+                                        {{ player.matchPlayerName }}
+                                    </li>
                                 </ol>
                             </div>
                         </div>
@@ -195,13 +177,32 @@
 
 <script setup>
 
+    import { computed } from 'vue'
+
+    import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
+
     import MatchesBoardRegistrationForm from '@/features/matches/components/MatchesBoardRegistrationForm.vue'
 
-    defineProps({
+    const props = defineProps({
         match: {
-            type: Object
+            type: Object,
+            required: true
         }
     })
+
+    /************************************* */
+
+    const playersStore = useMatchesPlayersStore()
+
+    /************************************* */
+
+    const confirmedPlayers = computed(() =>
+        playersStore.confirmed(props.match.matchMaxPlayers)
+    )
+
+    const waitingPlayers = computed(() =>
+        playersStore.waiting(props.match.matchMaxPlayers)
+    )
 
     // Formateo fechas desde Firestore:
 

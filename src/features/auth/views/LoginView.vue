@@ -93,7 +93,7 @@
   import { ref, computed } from 'vue'
   import { useAuthStore } from '@/features/auth/stores/auth.store'
   import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
-  import { useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
 
   /*
   *
@@ -102,7 +102,7 @@
   */
 
   const authStore = useAuthStore() // Instancia del store global de Pinia
-  const router = useRouter()       // Instancia del enrutador de Vue Router
+  const route = useRoute()       // Instancia del enrutador de Vue Router
   const trainerStore = useTrainerStore()
 
   /*
@@ -192,9 +192,9 @@
           console.log('TRAINER OK:', trainerStore.trainer)
           
           if (trainerStore.trainer.profileCompleted) {
-              router.push('/')
+              route.push('/')
           } else {
-              router.push('/trainers/edit-trainer')
+              route.push('/trainers/edit-trainer')
           }
           
       } catch (error) {
@@ -231,7 +231,7 @@
       try {
           await authStore.loginUserWithGoogle()
           // Redirigir al usuario al home tras el éxito
-          router.push({ name: 'home' }) 
+          route.push({ name: 'home' }) 
       } catch (error) {
           // Aquí puedes mostrar un mensaje de error visual al usuario
           alert("Hubo un problema iniciando con Google: " + error.message)

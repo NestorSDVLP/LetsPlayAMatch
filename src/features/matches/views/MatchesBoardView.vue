@@ -2,8 +2,7 @@
 
     <section class="has-padding-top">
 
-        <MatchesBoard 
-            :match="matchesStore.currentMatch"/>
+        <MatchesBoard :match="matchesStore.match" />
 
     </section>
 
@@ -11,9 +10,13 @@
 
 <script setup>
 
+    import { onMounted } from 'vue'
+
     import { useRoute } from 'vue-router'
 
     import { useMatchesStore } from '@/features/matches/stores/matches.store'
+
+    import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
 
     import MatchesBoard from '@/features/matches/components/MatchesBoard.vue'
 
@@ -21,6 +24,14 @@
 
     const matchesStore = useMatchesStore()
 
-    await matchesStore.loadMatchByUrl(route.params.matchURL)
+    const playersStore = useMatchesPlayersStore()
+
+    onMounted(async () => {
+
+        await matchesStore.fetchMatchByURL(route.params.matchURL)
+
+        await playersStore.fetchPlayers(matchesStore.match.id)
+
+    })
 
 </script>

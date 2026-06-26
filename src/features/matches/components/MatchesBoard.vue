@@ -5,8 +5,8 @@
     <MatchesBoardPinForm/>
 
     <MatchesBoardInfo
-        v-if="matchesStore.match"
-        :match="matchesStore.match"/>
+        v-if="match"
+        :match="match"/>
 
     </section>
 
@@ -14,22 +14,18 @@
 
 <script setup>
 
-    import { onMounted } from 'vue'
-    import { useRouter } from 'vue-router'
-    import { useMatchesStore } from '@/features/matches/stores/matches.store'
+    const props = defineProps({
+        match: {
+            type: Object,
+            required: true
+        },
+        initialData: {
+            type: Object,
+            default: () => ({})
+        }
+    })
+
     import MatchesBoardPinForm from '@/features/matches/components/MatchesBoardPinForm.vue'
     import MatchesBoardInfo from '@/features/matches/components/MatchesBoardInfo.vue'
-
-    const matchesStore = useMatchesStore()
-
-    const route = useRoute()
-
-    onMounted(async () => {
-
-        console.log('MatchesBoardView mounted')
-
-        await matchesStore.fetchMatchById(route.params.id)
-
-    })
 
 </script>

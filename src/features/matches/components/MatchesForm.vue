@@ -197,7 +197,7 @@
         MATCH_LEVELS 
     } from '@/features/matches/constants/matches.constants'
 
-    import { useRouter } from 'vue-router'
+    import { useRoute } from 'vue-router'
 
     import { VueDatePicker } from '@vuepic/vue-datepicker'
     import '@vuepic/vue-datepicker/dist/main.css'
@@ -240,7 +240,7 @@
 
     const matchesStore = useMatchesStore()
 
-    const router = useRouter()
+    const route = useRoute()
     
     /****************************************** */
 
@@ -291,7 +291,7 @@
                 showConfirmButton: false
             })
 
-            router.push('/matches/view-list/')
+            route.push('/matches/view-list/')
 
         } catch(error) {
 

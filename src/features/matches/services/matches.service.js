@@ -16,18 +16,21 @@ export const getMatchByURL = async (URL) => {
 
     console.log('getMatchByURL:', URL)
 
-    const matchRef = doc(db, 'matches', URL)
+    const matchRef = query(
+        collection(db,"matches"),
+        where("matchURL","==",URL)
+        )
 
-    const snapshot = await getDoc(matchRef)
+    const snapshot = await getDocs(matchRef)
 
-    if (!snapshot.exists()) {
+    if (snapshot.empty) {
 
         console.log('No existe el partido')
 
         return null
     }
 
-    const match = snapshot.data()
+    const match = snapshot.docs[0].data()
 
     console.log('match:', match)
 

@@ -6,23 +6,28 @@
             <p class="opacity-75 mb-4">Completa el siguiente formulario con tu datos.</p>
         </div>
         <form  novalidate @submit.prevent="onSubmit">
-            <div class="input-group">
-                <div class="form-floating">
-                    <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlayerName }" placeholder="Nombre" v-model="matchPlayerName">
-                    <label>Nombre</label>
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlayerName }" placeholder="Nombre" v-model="matchPlayerName">
+                        <label>Nombre</label>
+                    </div>
+                    <div class="invalid-feedback d-block mt-1">
+                        {{ errors.matchPlayerName }}
+                    </div>
                 </div>
-                <div class="invalid-feedback d-block mt-1">
-                    {{ errors.matchPlayerName }}
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
+                        <label>Teléfono</label>
+                    </div>
+                    <div class="invalid-feedback d-block mt-1">
+                        {{ errors.matchPlayerPhone }}
+                    </div>
                 </div>
-                <div class="form-floating">
-                    <input type="tel" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
-                    <label>Teléfono</label>
-                </div>
-                <div class="invalid-feedback d-block mt-1">
-                    {{ errors.matchPlayerPhone }}
-                </div>
-                
-                <button class="btn btn-primary px-4" type="submit" :disabled="loading">
+            </div>
+            <div class="text-end mt-3">
+                <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
 
                     <template v-if="loading">
                         <span class="spinner-border spinner-border-sm me-2"></span>
@@ -43,7 +48,6 @@
 <script setup>
 
     import { ref } from 'vue'
-    import { useRouter } from 'vue-router'
 
     import { 
         useForm,
@@ -78,7 +82,7 @@
         ...props.initialData
     }
 
-    const { handleSubmit, errors } = useForm({
+    const { handleSubmit, errors, resetForm } = useForm({
         validationSchema,
         initialValues
     })
@@ -87,10 +91,6 @@
 
     const { value: matchPlayerName } = useField('matchPlayerName')
     const { value: matchPlayerPhone } = useField('matchPlayerPhone')
-
-    /****************************************** */
-
-    const router = useRouter()
 
     /****************************************** */
 
@@ -108,6 +108,10 @@
                 matchPlayerMatchId: props.match.id
             })
 
+            await matchesPlayersStore.fetchPlayers(props.match.id)
+
+            resetForm()
+
             await Swal.fire({
                 icon: 'success',
                 title: 'Fuiste inscripto/a al partido con éxito',
@@ -115,7 +119,6 @@
                 showConfirmButton: false
             })
 
-            router.push(`/matches/view-board/${props.match.id}`)
 
         } catch(error) {
 

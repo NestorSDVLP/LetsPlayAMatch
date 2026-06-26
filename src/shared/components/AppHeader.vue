@@ -24,7 +24,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                     <li><h6 class="dropdown-header">Partidos</h6></li>
                                     <li>
-                                        <router-link class="dropdown-item py-2" to="/matches/view-board">
+                                        <router-link class="dropdown-item py-2" to="/matches/view-board/match-b7838653-e8f5-437f-96af-c4bd4701b535">
                                             <i class="bi bi-clipboard-check me-1"></i> Tablero del Partido
                                         </router-link>
                                     </li>
@@ -66,11 +66,11 @@
     */
 
     import { computed } from 'vue'
-    import { useRouter } from 'vue-router'
+    import { useRoute } from 'vue-router'
     import { useAuthStore } from '@/features/auth/stores/auth.store'
     import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 
-    const router = useRouter()
+    const route = useRoute()
 
     const trainerStore = useTrainerStore()
 
@@ -86,7 +86,7 @@
 
             trainerStore.clearTrainer()
 
-            await router.push('/login')
+            await route.push('/login')
 
         } catch (error) {
 

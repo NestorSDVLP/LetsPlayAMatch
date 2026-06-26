@@ -1,5 +1,5 @@
 /*
-* Configuración principal de Vue Router.
+* Configuración principal de Vue route.
 */
 
 import { createRouter, createWebHistory } from 'vue-router'
@@ -81,7 +81,7 @@ const routes = [
 * Las URLs se muestran sin hash (#).
 */
 
-const router = createRouter({
+const route = createRouter({
     history: createWebHistory(),
     routes,
     scrollBehavior(to, from, savedPosition) {
@@ -112,7 +112,7 @@ import { useAuthStore } from '@/features/auth/stores/auth.store'
 
 import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 
-router.beforeEach(async (to, from) => {
+route.beforeEach(async (to, from) => {
 
     console.log('ANTES DEL GUARD')
 
@@ -151,7 +151,7 @@ router.beforeEach(async (to, from) => {
     return true
 })
 
-/*router.beforeEach(async (to, from) => {
+/*route.beforeEach(async (to, from) => {
     const uiStore = useUiStore()
     uiStore.setLoading(true)
     
@@ -178,7 +178,7 @@ router.beforeEach(async (to, from) => {
     return true;
 })*/
 
-router.afterEach(() => {
+route.afterEach(() => {
 
     console.log('AFTER EACH')
 
@@ -198,12 +198,12 @@ router.afterEach(() => {
     })
 })
 
-/*router.onError(() => {
+/*route.onError(() => {
     const uiStore = useUiStore()
     uiStore.setLoading(false)
 })*/
 
-router.onError(error => {
+route.onError(error => {
 
     console.error('ROUTER ERROR')
     console.error(error)
@@ -218,4 +218,4 @@ router.onError(error => {
 * en la aplicación principal.
 */
 
-export default router
+export default route

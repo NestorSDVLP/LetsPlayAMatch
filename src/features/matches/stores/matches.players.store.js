@@ -1,8 +1,29 @@
 import { defineStore } from 'pinia'
 
-import { createMatchPlayer } from '@/features/matches/services/matches.players.service'
+import { 
+    createMatchPlayer,
+    getPlayersByMatchId 
+} from '@/features/matches/services/matches.players.service'
 
 export const useMatchesPlayersStore = defineStore('matches-players', {
+
+    state: () => ({
+        players: []
+    }),
+
+    /************************************* */
+    
+    getters: {
+
+        confirmed: (state) => (limit) => {
+            return state.players.slice(0, limit)
+        },
+
+        waiting: (state) => (limit) => {
+            return state.players.slice(limit)
+        }
+
+    },
 
     actions: {
 
@@ -13,8 +34,6 @@ export const useMatchesPlayersStore = defineStore('matches-players', {
                 const newMatchPlayer = await createMatchPlayer({
                     ...MatchesPlayersData
                 })
-
-                this.newMatchPlayer = newMatchPlayer
 
                 return newMatchPlayer
 
@@ -28,7 +47,11 @@ export const useMatchesPlayersStore = defineStore('matches-players', {
                 throw error
 
             }
-        }
+        },
+
+        async fetchPlayers(matchId) {
+            this.players = await getPlayersByMatchId(matchId)
+        },
 
     }
 

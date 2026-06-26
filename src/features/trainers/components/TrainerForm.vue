@@ -73,7 +73,7 @@
     */
 
     import { ref } from 'vue';
-    import { useRouter } from 'vue-router'
+    import { useRoute } from 'vue-router'
     import { 
         useForm,
         useField 
@@ -84,7 +84,7 @@
 
     const trainerStore = useTrainerStore()
 
-    const router = useRouter()
+    const route = useRoute()
 
     const props = defineProps({
         initialData: {
@@ -134,7 +134,7 @@
                 showConfirmButton: false
             })
 
-            router.push('/matches/new-match')
+            route.push('/matches/new-match')
 
         } catch(error) {
 
