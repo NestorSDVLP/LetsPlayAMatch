@@ -58,7 +58,7 @@
 
     import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
     import { createEmptyMatchPlayer } from '@/features/matches/models/matches.players.model'
-    import { validationSchema } from '@/features/matches/validations/matches.players.schema'
+    import { matchesPlayersSchema } from '@/features/matches/schemas/matches.players.schema'
 
     const props = defineProps({
         match: {
@@ -83,7 +83,7 @@
     }
 
     const { handleSubmit, errors, resetForm } = useForm({
-        validationSchema,
+        matchesPlayersSchema,
         initialValues
     })
 

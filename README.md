@@ -96,7 +96,7 @@ features/
         schemas/
         services/
         stores/
-        validations/
+        schemas/
         views/
 
     trainers/

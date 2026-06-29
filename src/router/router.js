@@ -10,7 +10,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 */
 
 import HomeView from '@/features/home/views/HomeView.vue'
-
 import LoginView from '@/features/auth/views/LoginView.vue'
 import NotFoundView from '@/features/404/views/404.vue'
 
@@ -81,15 +80,17 @@ const routes = [
 * Las URLs se muestran sin hash (#).
 */
 
-const route = createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes,
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
-            return savedPosition // Si toca "atrás", mantiene la posición previa
-        } else {
-            return { top: 0, behavior: 'smooth' } // Si es navegación nueva, scrollea al tope
-            // Si querés que sea fluido podés usar: return { top: 0, behavior: 'smooth' }
+            return savedPosition
+        }
+
+        return {
+            top: 0,
+            behavior: 'smooth'
         }
     }
 })
@@ -112,7 +113,7 @@ import { useAuthStore } from '@/features/auth/stores/auth.store'
 
 import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 
-route.beforeEach(async (to, from) => {
+router.beforeEach(async (to, from) => {
 
     console.log('ANTES DEL GUARD')
 
@@ -151,34 +152,7 @@ route.beforeEach(async (to, from) => {
     return true
 })
 
-/*route.beforeEach(async (to, from) => {
-    const uiStore = useUiStore()
-    uiStore.setLoading(true)
-    
-    // Simula una demora de 250ms para poder ver el diseño del spinner *****************************
-    // await new Promise(resolve => setTimeout(resolve, 250)) // Opcional
-
-    const authStore = useAuthStore();
-    const trainerStore = useTrainerStore()
-
-    console.log('isAuthenticated:', authStore.isAuthenticated)
-    console.log('user:', authStore.user)
-
-    // Si la ruta requiere autenticación y NO estamos autenticados, retornamos la ruta de login
-    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-        return { name: 'login' }; // Vue Router hace la redirección al retornar este objeto        
-    }
-
-    if (authStore.isAuthenticated && !trainerStore.trainer) {
-        await trainerStore.initializeTrainer(authStore.user)
-        console.log(trainerStore.trainer)
-    }
-    
-    // Si todo está bien, retornamos true para permitir la navegación
-    return true;
-})*/
-
-route.afterEach(() => {
+router.afterEach(() => {
 
     console.log('AFTER EACH')
 
@@ -198,12 +172,7 @@ route.afterEach(() => {
     })
 })
 
-/*route.onError(() => {
-    const uiStore = useUiStore()
-    uiStore.setLoading(false)
-})*/
-
-route.onError(error => {
+router.onError(error => {
 
     console.error('ROUTER ERROR')
     console.error(error)
@@ -218,4 +187,4 @@ route.onError(error => {
 * en la aplicación principal.
 */
 
-export default route
+export default router

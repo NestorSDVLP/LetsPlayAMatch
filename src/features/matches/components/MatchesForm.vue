@@ -211,7 +211,7 @@
     import { useMatchesStore } from '@/features/matches/stores/matches.store'
     import { createEmptyMatch } from '@/features/matches/models/matches.model'
 
-    import { validationSchema } from '@/features/matches/validations/matches.schema'
+    import { matchesSchema } from '@/features/matches/schemas/matches.schema'
 
     import { ref } from 'vue';
 
@@ -250,7 +250,7 @@
     }
 
     const { handleSubmit, errors } = useForm({
-        validationSchema,
+        matchesSchema,
         initialValues
     })
 
@@ -291,7 +291,7 @@
                 showConfirmButton: false
             })
 
-            route.push('/matches/view-list/')
+            router.push('/matches/view-list/')
 
         } catch(error) {
 

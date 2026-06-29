@@ -80,7 +80,7 @@
         } from 'vee-validate'
     import Swal from 'sweetalert2'
     import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
-    import { validationSchema } from '@/features/trainers/validations/trainers.schema'
+    import { trainersSchema } from '@/features/trainers/schemas/trainers.schema'
 
     const trainerStore = useTrainerStore()
 
@@ -106,7 +106,7 @@
     }
 
     const { handleSubmit, errors } = useForm({
-        validationSchema,
+        trainersSchema,
         initialValues
     })
 
@@ -134,7 +134,7 @@
                 showConfirmButton: false
             })
 
-            route.push('/matches/new-match')
+            router.push('/matches/new-match')
 
         } catch(error) {
 

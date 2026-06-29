@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const validationSchema = yup.object({
+export const trainersSchema = yup.object({
     trainerUserName: yup
         .string(),
 

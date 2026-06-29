@@ -66,11 +66,11 @@
     */
 
     import { computed } from 'vue'
-    import { useRoute } from 'vue-router'
+    import { useRouter } from 'vue-router'
     import { useAuthStore } from '@/features/auth/stores/auth.store'
     import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 
-    const route = useRoute()
+    const router = useRouter()
 
     const trainerStore = useTrainerStore()
 
@@ -86,7 +86,7 @@
 
             trainerStore.clearTrainer()
 
-            await route.push('/login')
+            await router.push('/login')
 
         } catch (error) {
 
