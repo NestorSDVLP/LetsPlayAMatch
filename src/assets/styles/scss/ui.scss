@@ -22,8 +22,8 @@
     z-index: 9999;
     nav {
         .logo {
-            max-width: 140px;
-            filter: invert(1);
+            max-width: 200px;
+            //filter: invert(1);
         }
     }
 }
@@ -109,7 +109,7 @@
 
 /*
 
-    Buttons Global
+    Form
 
 */
 .btn {
@@ -134,6 +134,18 @@
 .form-control,
 .form-select {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px inset;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 /*
@@ -224,7 +236,7 @@
 
   .accordion-button {
     &.collapsed {
-        background: $gray-900;
+        background: $gray-700;
         color: $white;
 
       &::after {
@@ -234,7 +246,7 @@
 
     &:not(.collapsed) {
         color: $white;
-        background: $primary;
+        background: $black;
 
       &::after {
         filter: invert(1) brightness(200%);
@@ -250,8 +262,88 @@
     background-color: $gray-700;
     color: $white;
 
-    .show > & {
+    /*.show > & {
       // ej: animation fade-in
-    }
+    }*/
   }
+}
+
+/*
+
+    SweetALert:
+
+*/
+.swal2-container {
+
+    .swal2-popup {
+        padding: 2rem 1.75rem;
+        width: 80%;
+        max-width: 400px;
+        background: $white;
+        color: $gray-900;
+        border-radius: 0;
+        font-family: 'Inter', system-ui, sans-serif;
+        box-shadow: rgba(0, 0, 0, 0.8) 0px 6px 20px;
+
+        .swal2-title {
+            padding: 0;
+            margin: unset;
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: inherit;
+            letter-spacing: unset;
+        }
+
+        .swal2-html-container {
+            margin: unset;
+            padding: unset;
+            font-size: 1rem;
+            line-height: 1.25;
+            color: inherit;
+            opacity: .75;
+        }
+
+        .swal2-icon {
+            margin: 0 auto 0;
+            transform: scale(.8);
+        }
+
+        .swal2-actions {
+            margin: 1.25rem 0 0;
+            padding: 0;
+            gap: .75rem;
+            width: 100%;
+
+            .swal2-styled {
+                margin: 0;
+                padding: .6em 1.4em;
+                font-size: 1rem;
+                font-weight: 700;
+                border-radius: 0;
+                box-shadow: none;
+                transition: filter .15s;
+
+                &.swal2-confirm {
+                    background: $primary;
+                    color: #fff;
+                    &:hover { 
+                        filter: brightness(1.1); 
+                    }
+                }
+                &.swal2-cancel {
+                    background: #334155;
+                    color: #e2e8f0;
+                    &:hover { filter: brightness(1.15); }
+                }
+            }
+        }
+
+        .swal2-footer {
+            margin: 1.5rem -1.75rem -2rem;
+            padding: 1rem 1.75rem;
+            border-top: 1px solid rgba(255,255,255,.08);
+            font-size: .85rem;
+        }
+    }
 }

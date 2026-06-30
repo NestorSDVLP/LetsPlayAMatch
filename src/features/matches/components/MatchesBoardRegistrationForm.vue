@@ -1,46 +1,48 @@
 <template>
 
     <section>
-        <div class="text-center">
-            <h3 class="h3 mb-2">Inscribite para participar</h3>
-            <p class="opacity-75 mb-4">Completa el siguiente formulario con tu datos.</p>
-        </div>
-        <form  novalidate @submit.prevent="onSubmit">
-            <div class="row g-3">
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlayerName }" placeholder="Nombre" v-model="matchPlayerName">
-                        <label>Nombre</label>
+        <div class="bg-g7 p-3 p-sm-5 mb-4">
+            <div class="text-center">
+                <h3 class="h3 mb-2">Inscribite para participar</h3>
+                <p class="opacity-75 mb-4">Completa el siguiente formulario con tu datos.</p>
+            </div>
+            <form  novalidate @submit.prevent="onSubmit">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlayerName }" placeholder="Nombre" v-model="matchPlayerName">
+                            <label>Nombre</label>
+                        </div>
+                        <div class="invalid-feedback d-block mt-1">
+                            {{ errors.matchPlayerName }}
+                        </div>
                     </div>
-                    <div class="invalid-feedback d-block mt-1">
-                        {{ errors.matchPlayerName }}
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
+                            <label>Teléfono</label>
+                        </div>
+                        <div class="invalid-feedback d-block mt-1">
+                            {{ errors.matchPlayerPhone }}
+                        </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
-                        <label>Teléfono</label>
-                    </div>
-                    <div class="invalid-feedback d-block mt-1">
-                        {{ errors.matchPlayerPhone }}
-                    </div>
+                <div class="text-end mt-3">
+                    <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
+
+                        <template v-if="loading">
+                            <span class="spinner-border spinner-border-sm me-2"></span>
+                            Inscribiendo...
+                        </template>
+
+                        <template v-else>
+                            <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Inscribirme
+                        </template>
+                        
+                    </button>
                 </div>
-            </div>
-            <div class="text-end mt-3">
-                <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
-
-                    <template v-if="loading">
-                        <span class="spinner-border spinner-border-sm me-2"></span>
-                        Inscribiendo...
-                    </template>
-
-                    <template v-else>
-                        <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Inscribirme
-                    </template>
-                    
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>        
     </section>
 
 </template>
@@ -83,7 +85,7 @@
     }
 
     const { handleSubmit, errors, resetForm } = useForm({
-        matchesPlayersSchema,
+        validationSchema: matchesPlayersSchema,
         initialValues
     })
 
@@ -103,10 +105,10 @@
             console.log('ENTRO AL SUBMIT')
             console.log(values)
 
-            await matchesPlayersStore.createRegistration({
-                ...values,
-                matchPlayerMatchId: props.match.id
-            })
+            await matchesPlayersStore.createRegistration(
+                props.match.id,
+                values
+            )
 
             await matchesPlayersStore.fetchPlayers(props.match.id)
 
@@ -114,7 +116,7 @@
 
             await Swal.fire({
                 icon: 'success',
-                title: 'Fuiste inscripto/a al partido con éxito',
+                title: 'Estás inscripto/a al partido',
                 timer: 2000,
                 showConfirmButton: false
             })

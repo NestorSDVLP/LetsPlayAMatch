@@ -27,26 +27,22 @@ export const useMatchesPlayersStore = defineStore('matches-players', {
 
     actions: {
 
-        async createRegistration(MatchesPlayersData) {
+        async createRegistration(matchId, matchPlayerData) {
 
             try {
 
-                const newMatchPlayer = await createMatchPlayer({
-                    ...MatchesPlayersData
+                return await createMatchPlayer({
+                    ...matchPlayerData,
+                    matchPlayerMatchId: matchId
                 })
 
-                return newMatchPlayer
+            } catch (error) {
 
-            } catch(error) {
-
-                console.error(
-                    'createRegistration:',
-                    error
-                )
-
+                console.error('createRegistration:', error)
                 throw error
 
             }
+
         },
 
         async fetchPlayers(matchId) {

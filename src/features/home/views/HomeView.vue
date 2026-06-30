@@ -4,7 +4,7 @@
     
         <section>
             <div class="card text-bg-dark border-0">
-                <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 1) 100%); z-index: 999;">
+                <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.25) 10%, rgba(0, 0, 0, 1) 100%); z-index: 999;">
                     <div class="w-100 p-3 p-sm-5">
                         <div class="container">
                             <div class="text-center">

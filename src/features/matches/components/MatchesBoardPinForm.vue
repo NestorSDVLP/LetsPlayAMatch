@@ -1,24 +1,40 @@
 <template>
 
-    <section class="py-5">
+    <section>
         <div class="container">
-            <div class="text-center bg-g8 text-light box-shadow p-3 p-sm-5">
-                
-                <h1 class="display-1" style="transform: rotate(45deg);">
-                    <i class="bi bi-key-fill opacity-50"></i>
-                </h1>
-                <h2 class="h2 mb-2">Ingresá el PIN</h2>
-                <p class="opacity-75 mb-4">Este código de 6 dígitos numéricos <br>fue asignado por tu entrenador/a</p>
+            <div class="bg-g7 p-3 p-sm-5 mb-3">
+                <div class="row g-3 align-items-end">
+                    <div class="col-5">
+                        <div class="display-1 m-0">
+                            <i class="bi bi-box-arrow-in-right opacity-50"></i>
+                        </div>
+                        <h2 class="h2 mb-2">Ingresá el Pin</h2>
+                        <p class="opacity-75 mb-0">Este código de 6 dígitos numéricos <br>fue asignado por tu entrenador/a</p>
+                    </div>
+                    <div class="col-7">
+                        <form novalidate @submit="validatePin">
+                            <div class="input-group input-group-lg">
+                                <div class="form-floating">
+                                    <input
+                                        v-model="matchPlayerPin"
+                                        type="number"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': errors.matchPlayerPin }"
+                                        placeholder="Pin de inscripción"/> 
+                                    <label>Pin de inscripción</label>
+                                </div>
+                                                                   
 
-                <div class="row justify-content-center">
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-lg mb-4" placeholder="PIN" aria-label="Recipient’s username" aria-describedby="button-addon2">
+                                <button class="btn btn-primary px-4" type="submit">
+                                        <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Ingresar
+                                </button>
+                            </div>
+                            <div class="invalid-feedback d-block mt-1">
+                                {{ errors.matchPlayerPin }}
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <button class="btn btn-primary btn-lg px-4" type="button">
-                    <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Ingresar
-                </button>
             </div>
         </div>
     </section>
@@ -26,5 +42,69 @@
 </template>
 
 <script setup>
+
+    import { 
+        useForm,
+        useField 
+        } from 'vee-validate'
+
+    import Swal from 'sweetalert2'
+
+    import { matchesPlayersPinSchema } from '@/features/matches/schemas/matches.players.pin.schema'
+
+    const props = defineProps({
+        match: {
+            type: Object,
+            required: true
+        }
+    })
+
+    /*********************************** */
+
+    const emit = defineEmits(['validated'])
+
+    /*********************************** */
+
+    const { errors, handleSubmit } = useForm({
+        validationSchema: matchesPlayersPinSchema
+    })
+
+    /*********************************** */
+
+    console.log('PinForm mounted')
+
+    const validatePin = handleSubmit(async values => {
+
+        console.log('validatePin: Entro')
+
+        if (!props.match.matchPin) {
+            emit('validated')
+            return
+        }
+
+        if (values.matchPlayerPin == props.match.matchPin) {
+            emit('validated')
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Pin correcto',
+                text: 'Podés inscribirte con ese Pin',
+                timer: 2500,
+                showConfirmButton: false
+            })
+
+        } else {
+            await Swal.fire({
+                icon: 'error',
+                title: 'Pin incorrecto',
+                text: 'No podés inscribirte con ese Pin'
+            })
+        }
+
+    })
+
+    /*********************************** */
+
+    const { value: matchPlayerPin } = useField('matchPlayerPin')
 
 </script>

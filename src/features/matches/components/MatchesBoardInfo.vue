@@ -126,12 +126,10 @@
                         </div>
                     </div>
 
-                    <div class="bg-g7 p-3 p-sm-5 mb-4">
+                    <MatchesBoardRegistrationForm 
+                        v-if="pinValidated"
+                        :match="match"/>
 
-                        <MatchesBoardRegistrationForm 
-                            :match="match"/>
-
-                    </div>
 
                     <div class="bg-g7 p-3 p-sm-5">
                         <h4 class="mb-3">Participantes:</h4>
@@ -187,6 +185,10 @@
         match: {
             type: Object,
             required: true
+        },
+        pinValidated: {
+            type: Boolean,
+            default: false
         }
     })
 
