@@ -180,12 +180,13 @@
 
                 <div class="text-end">
                     <div class="btn-group btn-group-lg">
-                        <button type="button" class="btn btn-dark" title="Editar">
+
+                        <router-link  class="btn btn-dark" title="Editar" :to="{ name: 'edit-match', params: { id: match.id } }">
                             <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button type="button" class="btn btn-dark" title="Eliminar">
+                        </router-link>
+                        <!--<button type="button" class="btn btn-dark" title="Eliminar">
                             <i class="bi bi-trash3"></i>
-                        </button>
+                        </button>-->
                     </div>
                 </div>
             </div>

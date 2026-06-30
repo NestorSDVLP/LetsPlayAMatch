@@ -6,7 +6,9 @@
 
                 <form novalidate @submit.prevent="onSubmit">
                     
-                    <h1 class="h1 mb-5">Crear Partido</h1>
+                    <h1 class="h1 mb-5">
+                        {{ isEdit ? 'Editar Partido' : 'Crear Partido' }}
+                    </h1>
 
                     <h2 class="h4">Actividad</h2>
                     <hr class="mb-4">
@@ -142,7 +144,15 @@
                         <div class="col-12">
                             <label class="h6">URL *</label>
                             <div class="input-group">
-                                <button class="btn btn-secondary pe-5" type="button" @click="generateURL">Generar URL <i class="bi bi-chevron-right ms-1"></i></button>
+
+                                <button 
+                                    class="btn btn-secondary pe-5" 
+                                    type="button" 
+                                    @click="generateURL">
+                                        {{ isEdit ? 'Regenerar URL' : 'Generar URL' }}
+                                        <i class="bi bi-chevron-right ms-1"></i>
+                                </button>
+
                                 <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchURL }" placeholder="URL" readonly v-model="matchURL">
                                 <button class="btn btn-secondary" type="button" @click="generateURL"><i class="bi bi-copy"></i></button>
                             </div>
@@ -153,7 +163,15 @@
                         <div class="col-6">
                             <label class="h6">Pin de Acceso *</label>
                             <div class="input-group">
-                                <button class="btn btn-secondary pe-5" type="button" @click="generatePin">Generar Pin <i class="bi bi-chevron-right ms-1"></i></button>
+
+                                <button 
+                                    class="btn btn-secondary pe-5" 
+                                    type="button" 
+                                    @click="generatePin">
+                                        {{ isEdit ? 'Regenerar Pin' : 'Generar Pin' }}
+                                        <i class="bi bi-chevron-right ms-1"></i>
+                                </button>
+
                                 <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPin }" placeholder="Pin" readonly v-model="matchPin">
                                 <button class="btn btn-secondary" type="button" @click="generatePin"><i class="bi bi-copy"></i></button>
                             </div>
@@ -170,11 +188,12 @@
 
                             <template v-if="loading">
                                 <span class="spinner-border spinner-border-sm me-2"></span>
-                                Creando...
+                                {{ isEdit ? 'Guardando...' : 'Creando...' }}
                             </template>
 
                             <template v-else>
-                                <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Crear Partido
+                                <i class="bi bi-check-circle-fill opacity-75 me-1"></i>
+                                {{ isEdit ? 'Guardar cambios' : 'Crear Partido' }}
                             </template>
 
                         </button>
@@ -190,6 +209,8 @@
 
     console.log('MATCH FORM CARGADO')
 
+    import { computed } from 'vue'
+
     import { 
         MATCH_ACTIVITIES, 
         MATCH_TYPES,
@@ -197,7 +218,7 @@
         MATCH_LEVELS 
     } from '@/features/matches/constants/matches.constants'
 
-    import { useRoute } from 'vue-router'
+    import { useRouter } from 'vue-router'
 
     import { VueDatePicker } from '@vuepic/vue-datepicker'
     import '@vuepic/vue-datepicker/dist/main.css'
@@ -240,7 +261,7 @@
 
     const matchesStore = useMatchesStore()
 
-    const route = useRoute()
+    const router = useRouter()
     
     /****************************************** */
 
@@ -248,6 +269,12 @@
         ...createEmptyMatch(),
         ...props.initialData
     }
+
+    /****************************************** */
+
+    const isEdit = computed(() => !!props.initialData.id)
+
+    /****************************************** */
 
     const { handleSubmit, errors } = useForm({
         matchesSchema,
@@ -282,14 +309,33 @@
             console.log('ENTRO AL SUBMIT')
             console.log(values)
 
-            await matchesStore.createMatch(values)
+            /****************************************** */
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'El partido fué creado con éxito',
-                timer: 2000,
-                showConfirmButton: false
-            })
+            if (isEdit.value) {
+
+                await matchesStore.updateMatch(
+                    props.initialData.id,
+                    values
+                )
+
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'El partido fué editado con éxito',
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+
+            } else {
+
+                await matchesStore.createMatch(values)
+
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'El partido fué creado con éxito',
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+            }
 
             router.push('/matches/view-list/')
 

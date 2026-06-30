@@ -58,6 +58,15 @@ const routes = [
         }
     },
     {
+        path: '/matches/edit-match/:id',
+        name: 'edit-match',
+        component: () => import('@/features/matches/views/MatchesEditView.vue'),
+        meta: { 
+            requiresAuth: true,
+            requiresCompletedProfile: true
+        }
+    },
+    {
         path: '/trainers/edit-trainer',
         name: 'edit-trainer',
         component: () => import('@/features/trainers/views/TrainerEditView.vue'),
