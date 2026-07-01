@@ -23,7 +23,7 @@
 
 <script setup>
 
-    import { computed } from 'vue'
+    import { computed, onMounted } from 'vue'
 
     import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
 
@@ -57,6 +57,18 @@
     const playersStore = useMatchesPlayersStore()
 
     /************************************* */
+
+    onMounted(async () => {
+
+        console.log("RegistrationList mounted:", props.matchId)
+
+        if (!playersStore.playersByMatch[props.matchId]) {
+            await playersStore.fetchPlayers(props.matchId)
+        }
+
+        console.log(playersStore.playersByMatch)
+
+    })
 
     const matchesPlayersList = computed(() => {
 
