@@ -28,6 +28,7 @@
         </h2>
         <div :id="'collapse-' + match.id " class="accordion-collapse collapse" :class="{ show: isFirst }" data-bs-parent="#accordionMatchesList">
             <div class="accordion-body">
+
                 <div class="row g-3">
                     <div class="col-6">
                         <h6 class="small mb-1">Partido:</h6>
@@ -189,6 +190,7 @@
                         </button>-->
                     </div>
                 </div>
+                
             </div>
         </div>
 

@@ -136,26 +136,22 @@
                         <hr class="mb-3">
                         <div class="row g-3">
                             <div class="col-6">
-                                <h6 class="d-block mb-2">
-                                    Confirmados 
-                                    <span class="badge text-bg-dark">{{ confirmedPlayers.length }}</span>
-                                </h6>
-                                <ol class="mb-0">
-                                    <li v-for="player in confirmedPlayers" :key="player.id">
-                                        {{ player.matchPlayerName }}
-                                    </li>
-                                </ol>
+                                
+                                <MatchesPlayersRegistrationList
+                                    listType='confirmed'
+                                    title='Confirmados'
+                                    :playersLimit=match.matchMaxPlayers
+                                    mode='player'/>
+
                             </div>
                             <div class="col-6">
-                                <h6 class="d-block mb-2">
-                                    Lista de Espera 
-                                    <span class="badge text-bg-dark">{{ waitingPlayers.length }}</span>
-                                </h6>
-                                <ol class="mb-0">
-                                    <li v-for="player in waitingPlayers" :key="player.id">
-                                        {{ player.matchPlayerName }}
-                                    </li>
-                                </ol>
+
+                                <MatchesPlayersRegistrationList
+                                    listType='waiting'
+                                    title='En Espera'
+                                    :playersLimit=match.matchMaxPlayers
+                                    mode='player'/>
+
                             </div>
                         </div>
                     </div>
@@ -175,11 +171,9 @@
 
 <script setup>
 
-    import { computed } from 'vue'
-
-    import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
-
     import MatchesBoardRegistrationForm from '@/features/matches/components/MatchesBoardRegistrationForm.vue'
+
+    import MatchesPlayersRegistrationList from '@/features/matches/components/MatchesPlayersRegistrationList.vue'
 
     const props = defineProps({
         match: {
@@ -200,20 +194,6 @@
         getMatchGender,
         getMatchLevel
     } from "@/features/matches/utils/matches.ui.utils";
-
-    /************************************* */
-
-    const playersStore = useMatchesPlayersStore()
-
-    /************************************* */
-
-    const confirmedPlayers = computed(() =>
-        playersStore.confirmed(props.match.matchMaxPlayers)
-    )
-
-    const waitingPlayers = computed(() =>
-        playersStore.waiting(props.match.matchMaxPlayers)
-    )
 
     // Formateo fechas desde Firestore:
 
