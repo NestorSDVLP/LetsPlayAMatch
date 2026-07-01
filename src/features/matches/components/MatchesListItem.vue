@@ -7,7 +7,7 @@
                 <div class="w-100">
                     <div class="row align-items-center m-0">
                         <div class="col-4">
-                            <h3 class="text-capitalize m-0">{{ match.matchActivityId }}</h3>
+                            <h3 class="m-0">{{ getMatchActivity(match.matchActivityId)?.label }}</h3>
                         </div>
                         <div class="col-8">
                             <h6 class="small m-0">Fecha y Hora:</h6>
@@ -34,15 +34,15 @@
                         <div class="row g-3">
                             <div class="col-4">
                                 <span class="small opacity-75">Tipo:</span>
-                                <h6 class="text-capitalize m-0">{{ match.matchTypeId }}</h6>
+                                <h6 class="m-0">{{ getMatchType(match.matchTypeId)?.label }}</h6>
                             </div>
                             <div class="col-4">
                                 <span class="small opacity-75">Género:</span>
-                                <h6 class="text-capitalize m-0">{{ match.matchGenderId }}</h6>
+                                <h6 class="m-0">{{ getMatchGender(match.matchGenderId)?.label }}</h6>
                             </div>
                             <div class="col-4">
                                 <span class="small opacity-75">Nivel:</span>
-                                <h6 class="text-capitalize m-0">{{ match.matchLevelId }}</h6>
+                                <h6 class="m-0">{{ getMatchLevel(match.matchLevelId)?.label }}</h6>
                             </div>
                         </div>
                     </div>
@@ -210,6 +210,15 @@
             default: false
         }
     })
+
+    /************************************* */
+
+    import {
+        getMatchActivity,
+        getMatchType,
+        getMatchGender,
+        getMatchLevel
+    } from "@/features/matches/utils/matches.ui.utils";
 
     // Formateo fechas desde Firestore:
 

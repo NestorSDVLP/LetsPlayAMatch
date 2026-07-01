@@ -9,8 +9,8 @@
                     <div class="mb-4">
                         <div class="row g-3 align-items-end">
                             <div class="col-4 text-center">
-                                <img :src="'/src/assets/images/activity_icons/vvo.png'" class="w-50 opacity-50 mb-3" style="filter: invert(1);">
-                                <h2 class="h3 text-capitalize m-0">{{ match.matchActivityId }}</h2>
+                                <img :src="getMatchActivity(match.matchActivityId)?.icon" class="w-50 opacity-50 mb-3" style="filter: invert(1);">
+                                <h2 class="h3 m-0">{{ getMatchActivity(match.matchActivityId)?.label }}</h2>
                             </div>
                             <div class="col-8">
                                 <div class="d-flex mb-4">
@@ -69,15 +69,15 @@
                                                 <div class="row g-3">
                                                     <div class="col-4">
                                                         <span class="small opacity-75">Tipo:</span>
-                                                        <h6 class="text-capitalize m-0">{{ match.matchTypeId }}</h6>
+                                                        <h6 class="m-0">{{ getMatchType(match.matchTypeId)?.label }}</h6>
                                                     </div>
                                                     <div class="col-4">
                                                         <span class="small opacity-75">Género:</span>
-                                                        <h6 class="text-capitalize m-0">{{ match.matchGenderId }}</h6>
+                                                        <h6 class="m-0">{{ getMatchGender(match.matchGenderId)?.label }}</h6>
                                                     </div>
                                                     <div class="col-4">
                                                         <span class="small opacity-75">Nivel:</span>
-                                                        <h6 class="text-capitalize m-0">{{ match.matchLevelId }}</h6>
+                                                        <h6 class="m-0">{{ getMatchLevel(match.matchLevelId)?.label }}</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,6 +191,15 @@
             default: false
         }
     })
+
+    /************************************* */
+
+    import {
+        getMatchActivity,
+        getMatchType,
+        getMatchGender,
+        getMatchLevel
+    } from "@/features/matches/utils/matches.ui.utils";
 
     /************************************* */
 
