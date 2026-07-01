@@ -8,20 +8,30 @@ import {
 export const useMatchesPlayersStore = defineStore('matches-players', {
 
     state: () => ({
-        players: []
+        playersByMatch: {}
     }),
 
     /************************************* */
     
     getters: {
 
-        confirmed: (state) => (limit) => {
-            return state.players.slice(0, limit)
+        /************************************* */
+
+        confirmed: (state) => (matchId, limit) => {
+
+            const players = state.playersByMatch[matchId] ?? []
+
+            return players.slice(0, limit)
         },
 
-        waiting: (state) => (limit) => {
-            return state.players.slice(limit)
-        }
+        /************************************* */
+
+        waiting: (state) => (matchId, limit) => {
+
+            const players = state.playersByMatch[matchId] ?? []
+
+            return players.slice(limit)
+        },
 
     },
 
@@ -46,7 +56,7 @@ export const useMatchesPlayersStore = defineStore('matches-players', {
         },
 
         async fetchPlayers(matchId) {
-            this.players = await getPlayersByMatchId(matchId)
+            this.playersByMatch[matchId] = await getPlayersByMatchId(matchId)
         },
 
     }

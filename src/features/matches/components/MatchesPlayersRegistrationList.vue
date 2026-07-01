@@ -2,11 +2,12 @@
 
     <section>
 
-        <h6 class="d-block mb-2">
+        <h6 class="d-block mb-0">
             {{ props.title }}
             <span class="badge text-bg-dark">{{ matchesPlayersList.length }}</span>
         </h6>
-        <ol class="mb-0">
+        <hr class="mb-1">
+        <ol class="ps-3 mb-0">
 
             <MatchesPlayersRegistrationListItem
                 v-for="player in matchesPlayersList"
@@ -37,6 +38,10 @@
             type: String,
             required: true,
         },
+        matchId: {
+            type: String,
+            required: true
+        },
         playersLimit: {
             type: Number,
             required: true,
@@ -57,11 +62,17 @@
 
         if (props.listType === "confirmed") {
 
-            return playersStore.confirmed(props.playersLimit)
+            return playersStore.confirmed(
+                props.matchId,
+                props.playersLimit
+            )
 
         }
 
-        return playersStore.waiting(props.playersLimit)
+        return playersStore.waiting(
+            props.matchId,
+            props.playersLimit
+        )
     })
     
 </script>

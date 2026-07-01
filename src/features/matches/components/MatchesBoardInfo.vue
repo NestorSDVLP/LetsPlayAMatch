@@ -132,14 +132,14 @@
 
 
                     <div class="bg-g7 p-3 p-sm-5">
-                        <h4 class="mb-3">Participantes:</h4>
-                        <hr class="mb-3">
-                        <div class="row g-3">
+                        <h4 class="mb-4">Participantes:</h4>
+                        <div class="row g-4">
                             <div class="col-6">
                                 
                                 <MatchesPlayersRegistrationList
                                     listType='confirmed'
                                     title='Confirmados'
+                                    :matchId="match.id"
                                     :playersLimit=match.matchMaxPlayers
                                     mode='player'/>
 
@@ -149,6 +149,7 @@
                                 <MatchesPlayersRegistrationList
                                     listType='waiting'
                                     title='En Espera'
+                                    :matchId="match.id"
                                     :playersLimit=match.matchMaxPlayers
                                     mode='player'/>
 

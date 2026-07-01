@@ -125,50 +125,27 @@
                 
                 <div :id="'collapseParticipants-' + match.id " class="collapse">
                     <div class="pt-3">
-                        <h6 class="small mb-1">Participantes:</h6>
-                        <div class="row g-3">
+                        <h5 class="mb-4">Participantes:</h5>
+                        <div class="row g-4">
                             <div class="col-6">
-                                <span class="small opacity-75">Confirmados:</span>
-                                <ol>
-                                    <li><strong>Mateo González:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 2345-6789</a></li>
-                                    <li><strong>Valentina Rodríguez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 3456-7890</a></li>
-                                    <li><strong>Santiago Fernández:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 4567-8901</a></li>
-                                    <li><strong>Martina López:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 5678-9012</a></li>
-                                    <li><strong>Benjamín Martínez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 6789-0123</a></li>
-                                    <li><strong>Sofía Pérez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 7890-1234</a></li>
-                                    <li><strong>Tomás Gómez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 8901-2345</a></li>
-                                    <li><strong>Isabella Díaz:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 9012-3456</a></li>
-                                    <li><strong>Joaquín Romero:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 2123-4567</a></li>
-                                    <li><strong>Catalina Álvarez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 3234-5678</a></li>
-                                    <li><strong>Lucas Torres:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 4345-6789</a></li>
-                                    <li><strong>Emilia Ruiz:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 5456-7890</a></li>
-                                    <li><strong>Bautista Flores:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 6567-8901</a></li>
-                                    <li><strong>Delfina Acosta:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 7678-9012</a></li>
-                                    <li><strong>Felipe Benítez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 8789-0123</a></li>
-                                    <li><strong>Julieta Silva:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 9890-1234</a></li>
-                                    <li><strong>Ignacio Castro:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 2234-5678</a></li>
-                                    <li><strong>Lucía Molina:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 3345-6789</a></li>
-                                    <li><strong>Matías Ortiz:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 4456-7890</a></li>
-                                    <li><strong>Morena Suárez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 5567-8901</a></li>
-                                    <li><strong>Agustín Morales:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 6678-9012</a></li>
-                                </ol>
+                                
+                                <MatchesPlayersRegistrationList
+                                    listType='confirmed'
+                                    title='Confirmados'
+                                    :matchId="match.id"
+                                    :playersLimit=match.matchMaxPlayers
+                                    mode='trainer'/>
+
                             </div>
                             <div class="col-6">
-                                <span class="small opacity-75">Lista de Espera:</span>
-                                <ol>
-                                    <li><strong>Renata Vázquez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 7789-0123</a></li>
-                                    <li><strong>Facundo Giménez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 8890-1234</a></li>
-                                    <li><strong>Clara Herrera:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 9901-2345</a></li>
-                                    <li><strong>Nicolás Medina:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 2012-3456</a></li>
-                                    <li><strong>Pilar Cabrera:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 3123-4567</a></li>
-                                    <li><strong>Franco Rivas:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 4234-5678</a></li>
-                                    <li><strong>Abril Pereyra:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 5345-6789</a></li>
-                                    <li><strong>Bruno Navarro:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 6456-7890</a></li>
-                                    <li><strong>Victoria Domínguez:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 7567-8901</a></li>
-                                    <li><strong>Thiago Peralta:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 8678-9012</a></li>
-                                    <li><strong>Alma Sosa:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 9789-0123</a></li>
-                                    <li><strong>Lautaro Ibarra:</strong> <a href="#" class="text-light text-decoration-none opacity-75">+54 9 11 2098-7654</a></li>
-                                </ol>
+
+                                <MatchesPlayersRegistrationList
+                                    listType='waiting'
+                                    title='En Espera'
+                                    :matchId="match.id"
+                                    :playersLimit=match.matchMaxPlayers
+                                    mode='trainer'/>
+
                             </div>
                         </div>
                     </div>
@@ -201,6 +178,8 @@
 <script setup>
 
     import { createEmptyMatch } from '@/features/matches/models/matches.model'
+
+    import MatchesPlayersRegistrationList from '@/features/matches/components/MatchesPlayersRegistrationList.vue'
 
     defineProps({
         match: {
