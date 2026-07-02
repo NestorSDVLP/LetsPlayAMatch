@@ -2,15 +2,15 @@
 
     <section>
         <div class="container">
-            <div class="bg-g8 text-light box-shadow p-3 p-sm-5">
+            <div class="bg-g8 text-w box-shadow px-4 py-5 p-sm-5">
 
-                <h2 class="h1 mb-5">Listado de Partidos</h2>
+                <h2 class="fs-10 fs-sm-12 mb-4">Listado de Partidos</h2>
 
                 <AppRecordsEmptyState v-if="!matchesStore.matches.length"/>
 
                 <div v-else>
 
-                    <div class="accordion accordion-flush" id="accordionMatchesList">
+                    <div class="accordion" id="accordionMatchesList">
 
                         <div 
                             class="accordion-item"

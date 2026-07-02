@@ -2,11 +2,10 @@
 
     <section>
 
-        <h6 class="d-block mb-0">
+        <h6 class="d-block mb-2">
             {{ props.title }}
             <span class="badge text-bg-dark">{{ matchesPlayersList.length }}</span>
         </h6>
-        <hr class="mb-1">
         <ol class="ps-3 mb-0">
 
             <MatchesPlayersRegistrationListItem

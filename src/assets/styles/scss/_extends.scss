@@ -49,3 +49,113 @@ $utilities: map-merge(
   ),
   $utilities
 );
+
+/*
+*
+* Extends: Viewportheight
+*
+*/
+
+$utilities: map-merge(
+  (
+    "height": (
+      property: height,
+      class: vh,
+      responsive: true,
+      important: true,
+      values: (
+        "5" : 5vh,
+        "10" : 10vh,
+        "12" : 12vh,
+        "15" : 15vh,
+        "20" : 20vh,
+        "25" : 25vh,
+        "30" : 30vh,
+        "35" : 35vh,
+        "40" : 40vh,
+        "43" : 43vh,
+        "45" : 45vh,
+        "50" : 50vh,
+        "55" : 55vh,
+        "60" : 60vh,
+        "65" : 65vh,
+        "70" : 70vh,
+        "75" : 75vh,
+        "80" : 80vh,
+        "83" : 83vh,
+        "85" : 85vh,
+        "90" : 90vh,
+        "100" : 100vh,
+        "auto" : auto,
+      ),
+    ),
+  ),
+  $utilities
+);
+
+/*
+*
+* Extends: FontSizet
+*
+*/
+
+$utilities: map-merge(
+  (
+    "font-size": (
+      property: font-size,
+      class: fs,
+      responsive: true,
+      important: true,
+      rfs: false,
+      values: (
+        "44" : 214.14px,
+        "43" : 200.69px,
+        "42" : 188.09px,
+        "41" : 176.28px,
+        "40" : 165.21px,
+        "39" : 154.84px,
+        "38" : 145.11px,
+        "37" : 136.00px,
+        "36" : 127.46px,
+        "35" : 119.46px,
+        "34" : 111.96px,
+        "33" : 104.93px,
+        "32" : 98.34px,
+        "31" : 92.16px,
+        "30" : 86.38px,
+        "29" : 80.95px,
+        "28" : 75.87px,
+        "27" : 71.11px,
+        "26" : 66.64px,
+        "25" : 62.46px,
+        "24" : 58.53px,
+        "23" : 54.86px,
+        "22" : 51.41px,
+        "21" : 48.19px,
+        "20" : 45.16px,
+        "19" : 42.32px,
+        "18" : 39.67px,
+        "17" : 37.18px,
+        "16" : 34.84px,
+        "15" : 32.65px,
+        "14" : 30.60px,
+        "13" : 28.68px,
+        "12" : 26.88px,
+        "11" : 25.19px,
+        "10" : 23.61px,
+        "9" : 22.13px,
+        "8" : 20.74px,
+        "7" : 19.44px,
+        "6" : 18.22px,
+        "5" : 17.07px,
+        "4" : 16.00px,
+        "3" : 15.00px,
+        "2" : 14.05px,
+        "1" : 13.17px,
+        "0" : 11px,
+        "xs" : 10px,
+      ),
+    ),
+  ),
+  $utilities
+);

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <p class="small opacity-75 mb-0">Este es un proyecto web de simulación con fines educativos. No se recolectan, almacenan ni comparten datos personales. Tu privacidad está protegida y toda la información es ficticia.</p>
+                    <p class="small opacity-50 mb-0">Este es un proyecto web de simulación con fines educativos. No se recolectan, almacenan ni comparten datos personales. Tu privacidad está protegida y toda la información es ficticia.</p>
                 </div>
             </div>      
         </div>

@@ -2,20 +2,20 @@
 
     <section class="has-padding-top">
         <div class="container">
-            <div class="bg-g8 text-w box-shadow p-3 p-sm-5">
+            <div class="bg-g8 text-w box-shadow px-4 py-5 p-sm-5">
 
                 <form novalidate @submit.prevent="onSubmit">
                     
-                    <h1 class="h1 mb-5">
+                    <h1 class="h1 mb-4">
                         {{ isEdit ? 'Editar Partido' : 'Crear Partido' }}
                     </h1>
 
-                    <h2 class="h4">Actividad</h2>
+                    <h2 class="fs-6 fs-sm-10">Actividad del Partido</h2>
                     <hr class="mb-4">
                     <div class="row">
                         <div class="col-12">
-                            <label class="h6 d-block">Actividad *</label>
-                            <div class="mb-5">
+                            <h6 class="fs-3 fs-sm-4 d-block">Actividad *</h6>
+                            <div class="mb-4 mb-sm-5">
                                 <div class="btn-group-match-activity btn-group w-100">
                                     <div class="btn-check-wrapper"  v-for="act in MATCH_ACTIVITIES" :key="act.id">
                                         <input type="radio" class="btn-check" name="radio-match-activity" :id="`btnradio-${act.id}`" :value="act.id" autocomplete="off" v-model="matchActivityId">
@@ -31,18 +31,18 @@
                             </div>
                         </div>
                     </div>
-                    <h2 class="h5">Sede y Dirección</h2>
+                    <h2 class="fs-6 fs-sm-10">Sede y Dirección</h2>
                     <hr class="mb-4">
                     <div class="row g-3">
-                        <div class="col-4">
-                            <label class="h6">Sede *</label>
+                        <div class="col-lg-4">
+                            <h6 class="fs-3 fs-sm-4">Sede *</h6>
                             <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlace }" placeholder="Sede" v-model="matchPlace">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchPlace }}
                             </div>
                         </div>
-                        <div class="col-8">
-                            <label class="h6">Dirección *</label>
+                        <div class="col-lg-8">
+                            <h6 class="fs-3 fs-sm-4">Dirección *</h6>
                             <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlaceAddress }" placeholder="Dirección" v-model="matchPlaceAddress">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchPlaceAddress }}
@@ -50,18 +50,18 @@
                         </div>
                     </div>
 
-                    <h2 class="h5 mt-5">Fecha y Hora</h2>
-                    <hr class="mb-4">
+                    <h2 class="fs-6 fs-sm-10 mt-4">Fecha y Hora</h2>
+                    <hr class="mb-3">
                     <div class="row g-3">
-                        <div class="col-5">
-                            <label class="h6">Comienzo *</label>
+                        <div class="col-lg-5">
+                            <h6 class="fs-3 fs-sm-4">Comienzo *</h6>
                             <VueDatePicker :class="{ 'is-invalid': errors.matchStartAt }" v-model="matchStartAt"></VueDatePicker>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchStartAt }}
                             </div>                            
                         </div>
-                        <div class="col-5">
-                            <label class="h6">Finalización *</label>
+                        <div class="col-lg-5">
+                            <h6 class="fs-3 fs-sm-4">Finalización *</h6>
                             <VueDatePicker :class="{ 'is-invalid': errors.matchEndAt }" v-model="matchEndAt"></VueDatePicker>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchEndAt }}
@@ -69,11 +69,11 @@
                         </div>
                     </div>
 
-                    <h2 class="h5 mt-5">Sobre el Partido</h2>
+                    <h2 class="fs-6 fs-sm-10 mt-4">Sobre el Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
-                        <div class="col-4">
-                            <label class="h6">Tipo *</label>
+                        <div class="col-lg-4">
+                            <h6 class="fs-3 fs-sm-4">Tipo *</h6>
                             <select class="form-select" v-model="matchTypeId">
                                 <option value="" selected disabled>Seleccionar</option>
                                 <option v-for="type in MATCH_TYPES" :key="type.id" :value="type.id">
@@ -84,8 +84,8 @@
                                 {{ errors.matchTypeId }}
                             </div>
                         </div>
-                        <div class="col-4">
-                            <label class="h6">Genero/s *</label>
+                        <div class="col-lg-4">
+                            <h6 class="fs-3 fs-sm-4">Genero/s *</h6>
                             <select class="form-select" v-model="matchGenderId">
                                 <option value="" selected disabled>Seleccionar</option>
                                 <option v-for="gender in MATCH_GENDERS" :key="gender.id" :value="gender.id">
@@ -96,8 +96,8 @@
                                 {{ errors.matchGenderId }}
                             </div>
                         </div>
-                        <div class="col-4">
-                            <label class="h6">Nivel *</label>
+                        <div class="col-lg-4">
+                            <h6 class="fs-3 fs-sm-4">Nivel *</h6>
                             <select class="form-select" v-model="matchLevelId">
                                 <option value="" selected disabled>Seleccionar</option>
                                 <option v-for="level in MATCH_LEVELS" :key="level.id" :value="level.id">
@@ -108,29 +108,29 @@
                                 {{ errors.matchLevelId }}
                             </div>
                         </div>
-                        <div class="col-3">
-                            <label class="h6">Cantidad mínima <br>de jugadores *</label>
+                        <div class="col-lg-3">
+                            <h6 class="fs-3 fs-sm-4">Cantidad mínima <br class="d-none d-sm-block">de jugadores *</h6>
                             <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchMinPlayers }" placeholder="Mínimo" v-model="matchMinPlayers">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchMinPlayers }}
                             </div>
                         </div>
-                        <div class="col-3">
-                            <label class="h6">Cantidad máxima <br>de jugadores *</label>
+                        <div class="col-lg-3">
+                            <h6 class="fs-3 fs-sm-4">Cantidad máxima <br class="d-none d-sm-block">de jugadores *</h6>
                             <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchMaxPlayers }" placeholder="Máximo" v-model="matchMaxPlayers">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchMaxPlayers }}
                             </div>
                         </div>
-                        <div class="col-3">
-                            <label class="h6">Edad mínima <br>de los jugadores *</label>
+                        <div class="col-lg-3">
+                            <h6 class="fs-3 fs-sm-4">Edad mínima <br class="d-none d-sm-block">de los jugadores *</h6>
                             <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchMinAge }" placeholder="Mínimo" v-model="matchMinAge">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchMinAge }}
                             </div>
                         </div>
-                        <div class="col-3">
-                            <label class="h6">Edad máxima <br>de los jugadores *</label>
+                        <div class="col-lg-3">
+                            <h6 class="fs-3 fs-sm-4">Edad máxima <br class="d-none d-sm-block">de los jugadores *</h6>
                             <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchMaxAge }" placeholder="Máximo" v-model="matchMaxAge">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchMaxAge }}
@@ -138,18 +138,18 @@
                         </div>
                     </div>
 
-                    <h2 class="h5 mt-5">Accesos al Partido</h2>
+                    <h2 class="fs-6 fs-sm-10 mt-5">Accesos al Partido</h2>
                     <hr class="mb-4">
                     <div class="row g-3 align-items-end">
                         <div class="col-12">
-                            <label class="h6">URL *</label>
+                            <h6 class="fs-3 fs-sm-4">URL *</h6>
                             <div class="input-group">
 
                                 <button 
                                     class="btn btn-secondary pe-5" 
                                     type="button" 
                                     @click="generateURL">
-                                        {{ isEdit ? 'Regenerar URL' : 'Generar URL' }}
+                                        {{ isEdit ? 'Regenerar' : 'Generar' }}
                                         <i class="bi bi-chevron-right ms-1"></i>
                                 </button>
 
@@ -160,15 +160,15 @@
                                 {{ errors.matchURL }}
                             </div>
                         </div>
-                        <div class="col-6">
-                            <label class="h6">Pin de Acceso *</label>
+                        <div class="col-lg-6">
+                            <h6 class="fs-3 fs-sm-4">Pin de Acceso *</h6>
                             <div class="input-group">
 
                                 <button 
                                     class="btn btn-secondary pe-5" 
                                     type="button" 
                                     @click="generatePin">
-                                        {{ isEdit ? 'Regenerar Pin' : 'Generar Pin' }}
+                                        {{ isEdit ? 'Regenerar' : 'Generar' }}
                                         <i class="bi bi-chevron-right ms-1"></i>
                                 </button>
 

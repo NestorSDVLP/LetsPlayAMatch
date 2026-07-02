@@ -2,7 +2,7 @@
 
     <section class="has-padding-top">
         <div class="container">
-            <div class="bg-g8 text-w box-shadow p-3 p-sm-5">
+            <div class="bg-g8 text-w box-shadow px-4 py-5 p-sm-5">
                 <h1 class="h2 mb-5">Editar Entrenador</h1>
 
                 <form novalidate @submit.prevent="onSubmit">
@@ -10,7 +10,7 @@
                     <h2 class="h5">Datos Personales</h2>
                     <hr class="mb-4">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-sm-8">
                             <label class="h6">Usuario *</label>
                             <input type="text" class="form-control mb-3" :class="{ 'is-invalid': errors.trainerUserName }" placeholder="Usuario" readonly v-model="trainerUserName">
                             <div class="invalid-feedback d-block mt-1">
@@ -19,14 +19,14 @@
                         </div>
                     </div>
                     <div class="row g-3">
-                        <div class="col-3">
+                        <div class="col-sm-6 col-lg-3">
                             <label class="h6">Nombre *</label>
                             <input type="text" class="form-control" :class="{ 'is-invalid': errors.trainerFirstName }" placeholder="Nombre" v-model="trainerFirstName">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.trainerFirstName }}
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-sm-6 col-lg-3">
                             <label class="h6">Apellido *</label>
                             <input type="text" class="form-control" :class="{ 'is-invalid': errors.trainerLastName }" placeholder="Apellido" v-model="trainerLastName">
                             <div class="invalid-feedback d-block mt-1">

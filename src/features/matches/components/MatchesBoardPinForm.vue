@@ -2,18 +2,18 @@
 
     <section>
         <div class="container">
-            <div class="bg-g7 p-3 p-sm-5 mb-3">
+            <div class="bg-g8 text-w box-shadow px-4 py-5 p-sm-5 mb-3">
                 <div class="row g-3 align-items-end">
-                    <div class="col-5">
-                        <div class="display-1 m-0">
-                            <i class="bi bi-box-arrow-in-right opacity-50"></i>
+                    <div class="col-sm-5 text-center text-sm-start">
+                        <div class=" m-0">
+                            <i class="bi bi-box-arrow-in-right opacity-50 fs-28"></i>
                         </div>
                         <h2 class="h2 mb-2">Ingresá el Pin</h2>
-                        <p class="opacity-75 mb-0">Este código de 6 dígitos numéricos <br>fue asignado por tu entrenador/a</p>
+                        <p class="opacity-75 mb-3mb-sm-0">Este código de 6 dígitos numéricos <br>fue asignado por tu entrenador/a</p>
                     </div>
-                    <div class="col-7">
+                    <div class="col-sm-7">
                         <form novalidate @submit="validatePin">
-                            <div class="input-group input-group-lg">
+                            <div class="input-group">
                                 <div class="form-floating">
                                     <input
                                         v-model="matchPlayerPin"

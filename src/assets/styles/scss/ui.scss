@@ -35,7 +35,15 @@
 */
 .main-wrapper {
     .has-padding-top {
-        padding-top: 293px;
+        padding-top: 200px;
+
+        @media (min-width: 768px) {
+            padding-top: 240px;
+        }
+
+        @media (min-width: 1200px) {
+            padding-top: 293px;
+        }
     }
 }
 
@@ -131,10 +139,10 @@
     }
 }
 
-.form-control,
+/*.form-control,
 .form-select {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px inset;
-}
+}*/
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -206,8 +214,9 @@ input[type=number] {
 
 */
 .btn-group-match-activity {
+    flex-wrap: wrap;
     .btn-check-wrapper {
-        width: 20%;
+        width: 33%;
 
         .btn-check:checked + .btn {
             .icon {
@@ -225,6 +234,28 @@ input[type=number] {
             }
         }
     }
+
+    @media (min-width: 1200px)  {
+        .btn-check-wrapper {
+            width: 20%;
+
+            .btn-check:checked + .btn {
+                .icon {
+                    filter: invert(0);
+                } 
+            }
+
+            .btn {
+                width: 100%;
+                border-radius: 0;
+
+                .icon {
+                    width: 60%;
+                    filter: invert(1);
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -235,8 +266,9 @@ input[type=number] {
 .accordion {
 
   .accordion-button {
+
     &.collapsed {
-        background: $gray-700;
+        background: $gray-800;
         color: $white;
 
       &::after {
@@ -246,7 +278,7 @@ input[type=number] {
 
     &:not(.collapsed) {
         color: $white;
-        background: $black;
+        background: $gray-900;
 
       &::after {
         filter: invert(1) brightness(200%);

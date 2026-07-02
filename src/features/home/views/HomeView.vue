@@ -1,45 +1,46 @@
 <template>
 
     <section>
-    
-        <section>
-            <div class="card text-bg-dark border-0">
-                <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.25) 10%, rgba(0, 0, 0, 1) 100%); z-index: 999;">
-                    <div class="w-100 p-3 p-sm-5">
-                        <div class="container">
-                            <div class="text-center">
-                                <div class="row justify-content-center">                                
-                                    <h1 class="display-4 h1 lh-1 mt-5 mb-3">¿Tenés ganas de jugar hoy? <br>Acá se arma el equipo</h1>
-                                    <div class="col-lg-7">
-                                        <p class="lead opacity-75 m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
-                                        
-                                        <!--<div v-if="!authStore.isAuthenticated">
-                                            <router-link class="btn btn-light ps-4 pe-5 mt-5" to="/login">
-                                                <i class="bi bi-person-fill opacity-75 me-1"></i> Ingresar como entrenador <i class="bi bi-chevron-right ms-1"></i>
-                                            </router-link>
-                                        </div>-->
-
-                                    </div>
+        <div class="card text-bg-dark border-0">
+            <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, .9) 100%); z-index: 999;">
+                <div class="w-100 p-2 p-sm-5">
+                    <div class="container">
+                        <div class="text-center">
+                            <div class="row justify-content-center">                                
+                                <h1 class="display-4 h1 lh-1 mt-5 mb-3">¿Tenés ganas de jugar hoy? <br class="d-none d-sm-block">Acá se arma el equipo</h1>
+                                <div class="col-lg-7">
+                                    <p class="m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-img">
-                
-                    <swiper v-bind="swiperOpts">
-                        <swiper-slide v-for="heroImage in heroImages" :key="heroImage.id">
-
-                            <img :src="heroImage.url" class="w-100 vh-100 img-cover">
-                            
-                        </swiper-slide>
-                    </swiper>
-                
-                </div>
             </div>
-        </section>
 
+            <div class="card-img d-none d-lg-block">
+            
+                <swiper v-bind="swiperOpts">
+                    <swiper-slide v-for="heroImageDesktop in heroImagesDesktop" :key="heroImageDesktop.id">
+
+                        <img :src="heroImageDesktop.url" class="w-100 vh-100 img-cover">
+                        
+                    </swiper-slide>
+                </swiper>
+            
+            </div>
+
+            <div class="card-img d-block d-lg-none">
+            
+                <swiper v-bind="swiperOpts">
+                    <swiper-slide v-for="heroImageMobile in heroImagesMobile" :key="heroImageMobile.id">
+
+                        <img :src="heroImageMobile.url" class="w-100 vh-100 img-cover">
+                        
+                    </swiper-slide>
+                </swiper>
+            
+            </div>
+        </div>
     </section>
 
 </template>
@@ -51,18 +52,32 @@
 
     const authStore = useAuthStore()
 
-    import volley from '@/assets/images/hero/volley.webp';
-    import soccer from '@/assets/images/hero/soccer.webp';
-    import basket from '@/assets/images/hero/basket.webp';
-    import handball from '@/assets/images/hero/handball.webp';
-    import hockey from '@/assets/images/hero/hockey.webp';
+    import volley_desktop from '@/assets/images/hero/desktop/volley.webp';
+    import soccer_desktop from '@/assets/images/hero/desktop/soccer.webp';
+    import basket_desktop from '@/assets/images/hero/desktop/basket.webp';
+    import handball_desktop from '@/assets/images/hero/desktop/handball.webp';
+    import hockey_desktop from '@/assets/images/hero/desktop/hockey.webp';
 
-    const heroImages = ref([
-        { id: 1, url: volley }, 
-        { id: 2, url: soccer }, 
-        { id: 3, url: basket }, 
-        { id: 4, url: handball }, 
-        { id: 5, url: hockey }
+    import volley_mobile from '@/assets/images/hero/mobile/volley.webp';
+    import soccer_mobile from '@/assets/images/hero/mobile/soccer.webp';
+    import basket_mobile from '@/assets/images/hero/mobile/basket.webp';
+    import handball_mobile from '@/assets/images/hero/mobile/handball.webp';
+    import hockey_mobile from '@/assets/images/hero/mobile/hockey.webp';
+
+    const heroImagesDesktop = ref([
+        { id: 1, url: volley_desktop }, 
+        { id: 2, url: soccer_desktop }, 
+        { id: 3, url: basket_desktop }, 
+        { id: 4, url: handball_desktop }, 
+        { id: 5, url: hockey_desktop }
+    ])
+
+    const heroImagesMobile = ref([
+        { id: 1, url: volley_mobile }, 
+        { id: 2, url: soccer_mobile }, 
+        { id: 3, url: basket_mobile }, 
+        { id: 4, url: handball_mobile }, 
+        { id: 5, url: hockey_mobile }
     ])
 
     /*

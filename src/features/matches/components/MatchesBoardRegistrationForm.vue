@@ -1,48 +1,46 @@
 <template>
 
     <section>
-        <div class="bg-g7 p-3 p-sm-5 mb-4">
-            <div class="text-center">
-                <h3 class="h3 mb-2">Inscribite para participar</h3>
-                <p class="opacity-75 mb-4">Completa el siguiente formulario con tu datos.</p>
+        <div class="text-center">
+            <h3 class="h3 mb-2">Inscribite para participar</h3>
+            <p class="opacity-75 lh-2 mb-4">Completa el siguiente formulario con tu datos.</p>
+        </div>
+        <form  novalidate @submit.prevent="onSubmit" class="mb-5 mb-sm-3">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlayerName }" placeholder="Nombre" v-model="matchPlayerName">
+                        <label>Nombre</label>
+                    </div>
+                    <div class="invalid-feedback d-block mt-1">
+                        {{ errors.matchPlayerName }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
+                        <label>Teléfono</label>
+                    </div>
+                    <div class="invalid-feedback d-block mt-1">
+                        {{ errors.matchPlayerPhone }}
+                    </div>
+                </div>
             </div>
-            <form  novalidate @submit.prevent="onSubmit">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPlayerName }" placeholder="Nombre" v-model="matchPlayerName">
-                            <label>Nombre</label>
-                        </div>
-                        <div class="invalid-feedback d-block mt-1">
-                            {{ errors.matchPlayerName }}
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
-                            <label>Teléfono</label>
-                        </div>
-                        <div class="invalid-feedback d-block mt-1">
-                            {{ errors.matchPlayerPhone }}
-                        </div>
-                    </div>
-                </div>
-                <div class="text-end mt-3">
-                    <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
+            <div class="text-center text-sm-end mt-3">
+                <button class="btn btn-primary px-5 py-2" type="submit" :disabled="loading">
 
-                        <template v-if="loading">
-                            <span class="spinner-border spinner-border-sm me-2"></span>
-                            Inscribiendo...
-                        </template>
+                    <template v-if="loading">
+                        <span class="spinner-border spinner-border-sm me-2"></span>
+                        Inscribiendo...
+                    </template>
 
-                        <template v-else>
-                            <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Inscribirme
-                        </template>
-                        
-                    </button>
-                </div>
-            </form>
-        </div>        
+                    <template v-else>
+                        <i class="bi bi-check-circle-fill opacity-75 me-1"></i> Inscribirme
+                    </template>
+                    
+                </button>
+            </div>
+        </form>       
     </section>
 
 </template>

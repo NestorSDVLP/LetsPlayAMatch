@@ -1,6 +1,6 @@
 <template>
 
-  <section class="has-padding-top mt-3">
+  <section class="has-padding-top mt-sm-3">
     <div class="container">
       <div class="row g-5 align-items-center justify-content-center">
         <div class="col-sm-8 col-lg-8">
