@@ -41,3 +41,19 @@ export const getPlayersByMatchId = async (matchId) => {
         .map(doc => doc.data())
         .sort((a, b) => a.matchPlayerCreatedAt - b.matchPlayerCreatedAt)
 }
+
+/************************ */
+
+export const playerAlreadyRegistered = async (matchId, phone) => {
+
+    const q = query(
+        collection(db, 'matchPlayers'),
+        where('matchPlayerMatchId', '==', matchId),
+        where('matchPlayerPhone', '==', phone)
+    )
+
+    const snapshot = await getDocs(q)
+
+    return !snapshot.empty
+
+}

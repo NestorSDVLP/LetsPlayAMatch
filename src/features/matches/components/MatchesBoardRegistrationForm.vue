@@ -122,6 +122,17 @@
 
         } catch(error) {
 
+            if (error.message === 'PLAYER_ALREADY_REGISTERED') {
+
+                await Swal.fire({
+                    icon: 'warning',
+                    title: 'Ya estás inscripto',
+                    text: 'Ese número de teléfono ya se encuentra registrado para este partido.'
+                })
+
+                return
+            }
+
             console.error(error)
 
             await Swal.fire({
