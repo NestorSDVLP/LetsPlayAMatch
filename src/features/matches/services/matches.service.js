@@ -5,7 +5,8 @@ import {
     getDocs,
     query,
     setDoc,
-    where
+    where,
+    deleteDoc
 } from 'firebase/firestore'
 
 import { db } from '@/shared/services/firebase'
@@ -116,4 +117,18 @@ export const updateMatch = async (matchId, matchData) => {
         matchData,
         { merge: true }
     )
+}
+
+/************************ */
+
+export const deleteMatch = async (matchId) => {
+
+    const matchRef = doc(
+        db,
+        'matches',
+        matchId
+    )
+
+    await deleteDoc(matchRef)
+
 }

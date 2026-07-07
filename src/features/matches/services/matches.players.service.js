@@ -72,3 +72,24 @@ export const deleteMatchPlayer = async (matchPlayerId) => {
     await deleteDoc(matchPlayerRef)
 
 }
+
+/************************ */
+
+export const deleteMatchPlayersByMatchId = async (matchId) => {
+
+    const q = query(
+        collection(db, 'matchPlayers'),
+        where('matchPlayerMatchId', '==', matchId)
+    )
+
+    const snapshot = await getDocs(q)
+
+
+    const deletePromises = snapshot.docs.map(doc => 
+        deleteDoc(doc.ref)
+    )
+
+
+    await Promise.all(deletePromises)
+
+}

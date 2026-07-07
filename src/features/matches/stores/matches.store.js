@@ -7,7 +7,8 @@ import {
     updateMatch,
     getMatchById,
     getMatchByURL,
-    getMatchesByTrainerId
+    getMatchesByTrainerId,
+    deleteMatch
 } from '@/features/matches/services/matches.service'
 
 export const useMatchesStore = defineStore('matches', {
@@ -163,6 +164,29 @@ export const useMatchesStore = defineStore('matches', {
 
         clearMatch() {
             this.match = null
+        },
+
+        async removeMatch(matchId) {
+
+            try {
+
+                await deleteMatch(matchId)
+
+                this.matches = this.matches.filter(
+                    match => match.id !== matchId
+                )
+
+            } catch(error) {
+
+                console.error(
+                    'removeMatch:',
+                    error
+                )
+
+                throw error
+
+            }
+
         }
 
     }

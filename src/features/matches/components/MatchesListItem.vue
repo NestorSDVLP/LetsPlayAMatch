@@ -154,9 +154,15 @@
                         <router-link  class="btn btn-dark" title="Editar" :to="{ name: 'edit-match', params: { id: match.id } }">
                             <i class="bi bi-pencil-square"></i>
                         </router-link>
-                        <!--<button type="button" class="btn btn-dark" title="Eliminar">
+
+                        <button 
+                            type="button" 
+                            class="btn btn-dark"
+                            title="Eliminar"
+                            @click="removeMatch">
                             <i class="bi bi-trash3"></i>
-                        </button>-->
+                        </button>
+
                     </div>
                 </div>
                 
@@ -169,11 +175,18 @@
 
 <script setup>
 
+import Swal from 'sweetalert2'
+
+    import { useMatchesStore } from '@/features/matches/stores/matches.store'
+    import { deleteMatchPlayersByMatchId } from '@/features/matches/services/matches.players.service'
+
     import { createEmptyMatch } from '@/features/matches/models/matches.model'
 
     import MatchesPlayersRegistrationList from '@/features/matches/components/MatchesPlayersRegistrationList.vue'
 
-    defineProps({
+    const matchesStore = useMatchesStore()
+
+    const props = defineProps({
         match: {
             type: Object,
             default: createEmptyMatch
@@ -205,6 +218,85 @@
             timeStyle: 'short',
             hour12: false
         }).format(date)
+    }
+
+    /****************************************** */
+
+    const removeMatch = async () => {
+
+
+        const firstConfirm = await Swal.fire({
+
+            icon: 'warning',
+            title: 'Eliminar partido',
+
+            text: 'Estás eliminando este partido completo. ¿Querés continuar?',
+
+            showCancelButton: true,
+            confirmButtonText: 'Sí, continuar',
+            cancelButtonText: 'Cancelar'
+
+        })
+
+
+        if (!firstConfirm.isConfirmed) return
+
+
+
+        const secondConfirm = await Swal.fire({
+
+            icon: 'error',
+            title: 'Acción irreversible',
+
+            text: 'Se eliminará el partido y todas sus inscripciones definitivamente.',
+
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar partido',
+            cancelButtonText: 'Cancelar'
+
+        })
+
+
+        if (!secondConfirm.isConfirmed) return
+
+
+
+        try {
+
+            await deleteMatchPlayersByMatchId(
+                props.match.id
+            )
+
+
+            await matchesStore.removeMatch(
+                props.match.id
+            )
+
+
+            await Swal.fire({
+
+                icon: 'success',
+                title: 'Partido eliminado',
+                timer: 1500,
+                showConfirmButton: false
+
+            })
+
+
+        } catch(error) {
+
+            console.error(error)
+
+            Swal.fire({
+
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo eliminar el partido'
+
+            })
+
+        }
+
     }
 
 </script>
