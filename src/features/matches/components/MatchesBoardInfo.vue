@@ -155,7 +155,9 @@
                     </div>
 
                     <div class="text-center">
-                        <p class="small opacity-75 mb-0 mt-3">Última actualización: 23/06/2026 17:54 <sup>hs</sup></p>
+                        <p class="small opacity-75 mb-0 mt-3">
+                            Última actualización: {{ formatDateTime(match.updatedAt) }} <sup>hs</sup>
+                        </p>
                     </div>
 
                 </div>
@@ -196,15 +198,19 @@
     // Formateo fechas desde Firestore:
 
     const formatDateTime = (timestamp) => {
+
         if (!timestamp) return '-'
 
-        const date = timestamp.toDate()
+        const date = timestamp.toDate
+            ? timestamp.toDate()
+            : new Date(timestamp)
 
         return new Intl.DateTimeFormat('es-AR', {
             dateStyle: 'short',
             timeStyle: 'short',
             hour12: false
         }).format(date)
+
     }
 
 </script>

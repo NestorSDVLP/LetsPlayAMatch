@@ -16,5 +16,6 @@ export const createEmptyMatch = () => ({
     matchStatusId: '',
     matchPin: '',
     matchURL: '',
-    createdAt: ''
+    createdAt: '',
+    updatedAt: ''
 })
