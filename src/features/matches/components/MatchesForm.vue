@@ -267,7 +267,15 @@
 
     const initialValues = {
         ...createEmptyMatch(),
-        ...props.initialData
+        ...props.initialData,
+
+        matchStartAt: props.initialData.matchStartAt?.toDate?.() ??
+            props.initialData.matchStartAt ??
+            '',
+
+        matchEndAt: props.initialData.matchEndAt?.toDate?.() ??
+            props.initialData.matchEndAt ??
+            '',
     }
 
     /****************************************** */
