@@ -12,7 +12,9 @@
                 v-for="player in matchesPlayersList"
                 :key="player.id"
                 :player="player"
-                :mode="mode"/>
+                :matchId="props.matchId"
+                :mode="mode"
+            />
 
         </ol>
 

@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 import { 
     createMatchPlayer,
     getPlayersByMatchId,
-    playerAlreadyRegistered
+    playerAlreadyRegistered,
+    deleteMatchPlayer
 } from '@/features/matches/services/matches.players.service'
 
 export const useMatchesPlayersStore = defineStore('matches-players', {
@@ -38,24 +39,6 @@ export const useMatchesPlayersStore = defineStore('matches-players', {
 
     actions: {
 
-        /*async createRegistration(matchId, matchPlayerData) {
-
-            try {
-
-                return await createMatchPlayer({
-                    ...matchPlayerData,
-                    matchPlayerMatchId: matchId
-                })
-
-            } catch (error) {
-
-                console.error('createRegistration:', error)
-                throw error
-
-            }
-
-        },*/
-
         async createRegistration(matchId, matchPlayerData) {
 
             const exists = await playerAlreadyRegistered(
@@ -76,6 +59,14 @@ export const useMatchesPlayersStore = defineStore('matches-players', {
 
         async fetchPlayers(matchId) {
             this.playersByMatch[matchId] = await getPlayersByMatchId(matchId)
+        },
+
+        async removeRegistration(matchPlayerId, matchId) {
+
+            await deleteMatchPlayer(matchPlayerId)
+
+            await this.fetchPlayers(matchId)
+
         },
 
     }

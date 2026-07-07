@@ -4,7 +4,8 @@ import {
     setDoc,
     getDocs,
     query,
-    where
+    where,
+    deleteDoc
 } from 'firebase/firestore'
 
 import { db } from '@/shared/services/firebase'
@@ -55,5 +56,19 @@ export const playerAlreadyRegistered = async (matchId, phone) => {
     const snapshot = await getDocs(q)
 
     return !snapshot.empty
+
+}
+
+/************************ */
+
+export const deleteMatchPlayer = async (matchPlayerId) => {
+
+    const matchPlayerRef = doc(
+        db,
+        'matchPlayers',
+        matchPlayerId
+    )
+
+    await deleteDoc(matchPlayerRef)
 
 }

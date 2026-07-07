@@ -10,9 +10,13 @@
                 <i class="bi bi-copy"></i>
             </button>
 
-            <button class="btn btn-outline-light" type="button">
-                <i class="bi bi-x-lg"></i>
+            <button 
+                class="btn btn-outline-light" 
+                type="button"
+                @click="removePlayer">
+                    <i class="bi bi-x-lg"></i>
             </button>
+
         </div>
     </li>
 
@@ -20,9 +24,19 @@
 
 <script setup>
 
+    import Swal from 'sweetalert2'
+
+    import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
+
+    const matchesPlayersStore = useMatchesPlayersStore()
+
     const props = defineProps({
         player: {
             type: Object,
+            required: true
+        },
+        matchId: {
+            type: String,
             required: true
         },
         mode: {
@@ -30,5 +44,53 @@
             default: "player"
         }
     })
+
+    /************************************* */
+
+    const removePlayer = async () => {
+
+
+        const confirmOne = await Swal.fire({
+
+            icon: 'warning',
+            title: 'Desvincular jugador',
+            text: `¿Querés desvincular a ${props.player.matchPlayerName} de este partido?`,
+
+            showCancelButton: true,
+            confirmButtonText: 'Continuar',
+            cancelButtonText: 'Cancelar'
+
+        })
+
+
+        if (!confirmOne.isConfirmed) return
+
+
+
+        const confirmTwo = await Swal.fire({
+
+            icon: 'error',
+            title: 'Acción irreversible',
+
+            text: 'Esta inscripción será eliminada definitivamente. ¿Estás seguro?',
+
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar inscripción',
+            cancelButtonText: 'Cancelar'
+
+        })
+
+
+        if (!confirmTwo.isConfirmed) return
+
+
+
+        await matchesPlayersStore.removeRegistration(
+            props.player.id,
+            props.matchId
+        )
+
+
+    }
 
 </script>
