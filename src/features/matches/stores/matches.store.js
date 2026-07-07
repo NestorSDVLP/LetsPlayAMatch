@@ -8,14 +8,16 @@ import {
     getMatchById,
     getMatchByURL,
     getMatchesByTrainerId,
-    deleteMatch
+    deleteMatch,
+    subscribeMatch
 } from '@/features/matches/services/matches.service'
 
 export const useMatchesStore = defineStore('matches', {
 
     state: () => ({
         match: null,
-        matches: []
+        matches: [],
+        unsubscribeMatch: null
     }),
 
     actions: {
@@ -187,7 +189,36 @@ export const useMatchesStore = defineStore('matches', {
 
             }
 
-        }
+        },
+
+        subscribeToMatch(matchId) {
+
+            if (this.unsubscribeMatch) {
+                this.unsubscribeMatch()
+            }
+
+            this.unsubscribeMatch = subscribeMatch(
+                matchId,
+                (match) => {
+
+                    this.match = match
+
+                }
+            )
+
+        },
+
+        unsubscribeFromMatch() {
+
+            if (this.unsubscribeMatch) {
+
+                this.unsubscribeMatch()
+
+                this.unsubscribeMatch = null
+
+            }
+
+        },
 
     }
 

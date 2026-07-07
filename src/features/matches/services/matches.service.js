@@ -6,7 +6,8 @@ import {
     query,
     setDoc,
     where,
-    deleteDoc
+    deleteDoc,
+    onSnapshot
 } from 'firebase/firestore'
 
 import { db } from '@/shared/services/firebase'
@@ -130,5 +131,24 @@ export const deleteMatch = async (matchId) => {
     )
 
     await deleteDoc(matchRef)
+
+}
+
+/************************ */
+
+export const subscribeMatch = (matchId, callback) => {
+
+    const matchRef = doc(db, 'matches', matchId)
+
+    return onSnapshot(matchRef, (snapshot) => {
+
+        if (!snapshot.exists()) {
+            callback(null)
+            return
+        }
+
+        callback(snapshot.data())
+
+    })
 
 }

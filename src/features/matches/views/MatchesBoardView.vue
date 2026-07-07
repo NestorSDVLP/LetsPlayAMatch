@@ -10,7 +10,10 @@
 
 <script setup>
 
-    import { onMounted } from 'vue'
+    import {
+        onMounted,
+        onUnmounted
+    } from 'vue'
 
     import { useRoute } from 'vue-router'
 
@@ -26,11 +29,29 @@
 
     const playersStore = useMatchesPlayersStore()
 
+    /********************************** */
+
     onMounted(async () => {
 
-        await matchesStore.fetchMatchByURL(route.params.matchURL)
+        await matchesStore.fetchMatchByURL(
+            route.params.matchURL
+        )
 
-        await playersStore.fetchPlayers(matchesStore.match.id)
+        await playersStore.fetchPlayers(
+            matchesStore.match.id
+        )
+
+        matchesStore.subscribeToMatch(
+            matchesStore.match.id
+        )
+
+    })
+
+    /********************************** */
+
+    onUnmounted(() => {
+
+        matchesStore.unsubscribeFromMatch()
 
     })
 
