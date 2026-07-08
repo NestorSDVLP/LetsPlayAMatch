@@ -44,8 +44,6 @@
 
     onMounted(async () => {
 
-        console.log('MatchesList mounted')
-
         await matchesStore.fetchTrainerMatches()
 
     })

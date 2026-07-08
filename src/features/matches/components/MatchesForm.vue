@@ -292,7 +292,7 @@
     /****************************************** */
 
     const { handleSubmit, errors } = useForm({
-        matchesSchema,
+        validationSchema: matchesSchema,
         initialValues
     })
 
@@ -317,11 +317,13 @@
 
     const onSubmit = handleSubmit(async values => {
 
+        console.log('ENTRÓ AL SUBMIT 1')
+
         try {
 
             loading.value = true
 
-            console.log('ENTRO AL SUBMIT')
+            console.log('ENTRO AL SUBMIT 2')
             console.log(values)
 
             /****************************************** */

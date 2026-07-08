@@ -91,16 +91,20 @@ export const createMatch = async (matchData) => {
 
     const matchRef = doc(collection(db, 'matches'))
 
+    const now = Date.now()
+
     const newMatch = {
         ...matchData,
         id: matchRef.id,
         matchStatusId: 'open',
-        createdAt: Date.now()
+        createdAt: now,
+        updatedAt: now
     }
 
     await setDoc(matchRef, newMatch)
 
     return newMatch
+
 }
 
 /************************ */

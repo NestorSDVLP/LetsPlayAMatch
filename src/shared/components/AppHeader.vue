@@ -28,8 +28,8 @@
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                     <li><h6 class="dropdown-header">Partidos</h6></li>
                                     <li>
-                                        <router-link class="dropdown-item py-2" to="/matches/view-board/match-b7838653-e8f5-437f-96af-c4bd4701b535">
-                                            <i class="bi bi-clipboard-check me-1"></i> Tablero del Partido
+                                        <router-link class="dropdown-item py-2" to="/matches/new-match">
+                                            <i class="bi bi-plus-circle me-1"></i> Crear Partido
                                         </router-link>
                                     </li>
                                     <li>
@@ -37,11 +37,24 @@
                                             <i class="bi bi-list-ul me-1"></i> Listado de Partidos
                                         </router-link>
                                     </li>
-                                    <li>
-                                        <router-link class="dropdown-item py-2" to="/matches/new-match">
-                                            <i class="bi bi-plus-circle me-1"></i> Crear Partido
+
+                                    <li><h6 class="dropdown-header">Tableros de Partidos</h6></li>
+                                    <li v-for="(match, index) in matchesStore.matches" :key="match.id">
+                                        <router-link class="dropdown-item py-2" :to="`/matches/view-board/${ match.matchURL }`">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-2">
+                                                    <i class="bi bi-people-fill opacity-50"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="lh-sm m-0">
+                                                        {{ formatDateTime(match.matchStartAt) }} <sup>hs</sup><br>
+                                                        <small class="opacity-75">{{ match.matchPlace }}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </router-link>
                                     </li>
+
                                     <li><h6 class="dropdown-header">Entrenadores</h6></li>
                                     <li>
                                         <router-link class="dropdown-item py-2" to="/trainers/edit-trainer">
@@ -69,10 +82,13 @@
     * Utilidades reactivas utilizadas por el layout.
     */
 
-    import { computed } from 'vue'
+    import { computed, watch } from 'vue'
     import { useRouter } from 'vue-router'
     import { useAuthStore } from '@/features/auth/stores/auth.store'
     import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+    import { useMatchesStore } from '@/features/matches/stores/matches.store'
+
+    import { formatDateTime } from "@/shared/utils/ui.utils";
 
     const router = useRouter()
 
@@ -102,5 +118,23 @@
         }
 
     }
+
+    /***************************************** */
+
+    const matchesStore = useMatchesStore()
+
+    watch(
+        () => trainerStore.trainer?.uid,
+        async (uid) => {
+
+            if (!uid) return
+
+            await matchesStore.fetchTrainerMatches()
+
+        },
+        {
+            immediate: true
+        }
+    )
 
 </script>

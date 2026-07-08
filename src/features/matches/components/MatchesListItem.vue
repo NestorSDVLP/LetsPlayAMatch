@@ -182,19 +182,9 @@ import Swal from 'sweetalert2'
         getMatchLevel
     } from "@/features/matches/utils/matches.ui.utils";
 
-    // Formateo fechas desde Firestore:
+    /************************************* */
 
-    const formatDateTime = (timestamp) => {
-        if (!timestamp) return '-'
-
-        const date = timestamp.toDate()
-
-        return new Intl.DateTimeFormat('es-AR', {
-            dateStyle: 'short',
-            timeStyle: 'short',
-            hour12: false
-        }).format(date)
-    }
+    import { formatDateTime } from "@/shared/utils/ui.utils";
 
     /****************************************** */
 

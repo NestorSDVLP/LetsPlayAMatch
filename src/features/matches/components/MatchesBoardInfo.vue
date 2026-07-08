@@ -63,60 +63,50 @@
                             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionMatchBoardInfo">
                                 <div class="accordion-body">
                                     <div class="row g-3 align-items-center">
-                                        <div class="col-sm-6 col-lg-8">
-                                            <div class="mb-4">
-                                                <h6 class="small mb-1">Partido:</h6>
-                                                <div class="row g-3">
-                                                    <div class="col-6 col-lg-4">
-                                                        <span class="small opacity-75">Tipo:</span>
-                                                        <h6 class="m-0">{{ getMatchType(match.matchTypeId)?.label }}</h6>
-                                                    </div>
-                                                    <div class="col-6 col-lg-4">
-                                                        <span class="small opacity-75">Género:</span>
-                                                        <h6 class="m-0">{{ getMatchGender(match.matchGenderId)?.label }}</h6>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <span class="small opacity-75">Nivel:</span>
-                                                        <h6 class="m-0">{{ getMatchLevel(match.matchLevelId)?.label }}</h6>
-                                                    </div>
+                                        <div class="col-lg-7">
+                                            <h6 class="small mb-1">Partido:</h6>
+                                            <div class="row g-3">
+                                                <div class="col-6 col-sm-4">
+                                                    <span class="small opacity-75">Tipo:</span>
+                                                    <h6 class="m-0">{{ getMatchType(match.matchTypeId)?.label }}</h6>
+                                                </div>
+                                                <div class="col-6 col-sm-4">
+                                                    <span class="small opacity-75">Género:</span>
+                                                    <h6 class="m-0">{{ getMatchGender(match.matchGenderId)?.label }}</h6>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <span class="small opacity-75">Nivel:</span>
+                                                    <h6 class="m-0">{{ getMatchLevel(match.matchLevelId)?.label }}</h6>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-lg-5">
                                             <div class="row g-3">
-                                                <div class="col-6">
+                                                <div class="col-sm-6">
                                                     <h6 class="small mb-1">Cupos:</h6>
                                                     <div class="row g-3">
                                                         <div class="col-6">
-                                                            <span class="small opacity-75">Mínimo:</span>
+                                                            <span class="small opacity-75">Mín:</span>
                                                             <h6 class="m-0">{{ match.matchMinPlayers }}</h6>
                                                         </div>
                                                         <div class="col-6">
-                                                            <span class="small opacity-75">Máximo:</span>
+                                                            <span class="small opacity-75">Máx:</span>
                                                             <h6 class="m-0">{{ match.matchMaxPlayers }}</h6>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-sm-6">
                                                     <h6 class="small mb-1">Edad:</h6>
                                                     <div class="row g-3">
                                                         <div class="col-6">
-                                                            <span class="small opacity-75">Mínima:</span>
+                                                            <span class="small opacity-75">Mín:</span>
                                                             <h6 class="m-0">{{ match.matchMinAge }}</h6>
                                                         </div>
                                                         <div class="col-6">
-                                                            <span class="small opacity-75">Máxima:</span>
+                                                            <span class="small opacity-75">Máx:</span>
                                                             <h6 class="m-0">{{ match.matchMaxAge }}</h6>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-lg-4">
-                                            <div class="card bg-transparent text-light border-0">
-                                                <div class="card-body text-center">
-                                                    <h6 class="small opacity-75 mb-1">Pronóstico para la fecha</h6>
-                                                    <i class="bi bi-cloud-sun-fill fs-28 opacity-50"></i>
-                                                    <p class="small lh-sm mt-1 mb-2">Parcialmente nublado</p>
-                                                    <h6 class="lh-sm m-0">11ºC <sup>mín</sup> / 21ºC <sup>máx</sup></h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,7 +146,8 @@
 
                     <div class="text-center">
                         <p class="small opacity-75 mb-0 mt-3">
-                            Última actualización: {{ formatDateTime(match.updatedAt) }} <sup>hs</sup>
+                            Última actualización:
+                            {{ formatDateTime(match.updatedAt ?? match.createdAt) }} <sup>hs</sup>
                         </p>
                     </div>
 
@@ -170,6 +161,8 @@
 </template>
 
 <script setup>
+
+    import { formatDateTime } from "@/shared/utils/ui.utils";
 
     import MatchesBoardRegistrationForm from '@/features/matches/components/MatchesBoardRegistrationForm.vue'
 
@@ -194,23 +187,5 @@
         getMatchGender,
         getMatchLevel
     } from "@/features/matches/utils/matches.ui.utils";
-
-    // Formateo fechas desde Firestore:
-
-    const formatDateTime = (timestamp) => {
-
-        if (!timestamp) return '-'
-
-        const date = timestamp.toDate
-            ? timestamp.toDate()
-            : new Date(timestamp)
-
-        return new Intl.DateTimeFormat('es-AR', {
-            dateStyle: 'short',
-            timeStyle: 'short',
-            hour12: false
-        }).format(date)
-
-    }
 
 </script>

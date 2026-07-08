@@ -10,6 +10,8 @@ import {
     loginWithGoogle as loginWithGoogleService // Importamos el servicio nuevo
 } from '@/features/auth/services/auth.service'
 
+import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
+
 export const useAuthStore = defineStore('auth', () => {
 
     /*
@@ -33,10 +35,27 @@ export const useAuthStore = defineStore('auth', () => {
     * Inicializa el listener de Firebase Auth.
     */
     const initAuth = () => {
-        onAuthStateChanged(auth, (firebaseUser) => {
+
+        const trainerStore = useTrainerStore()
+
+        onAuthStateChanged(auth, async (firebaseUser) => {
+
             user.value = firebaseUser
+
+            if (firebaseUser) {
+
+                await trainerStore.initializeTrainer(firebaseUser)
+
+            } else {
+
+                trainerStore.clearTrainer()
+
+            }
+
             loadingAuth.value = false
+
         })
+
     }
 
     const loginUser = async (email, password) => {
