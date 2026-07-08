@@ -26,10 +26,11 @@
                 </div>
             </button>
         </h2>
+        
         <div :id="'collapse-' + match.id " class="accordion-collapse collapse" :class="{ show: isFirst }" data-bs-parent="#accordionMatchesList">
             <div class="accordion-body">
 
-                <div class="row g-3">
+                <div class="row g-3 align-items-end">
                     <div class="col-lg-6">
                         <h6 class="small mb-1">Partido:</h6>
                         <div class="row g-2">
@@ -60,17 +61,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <div class="row g-2">
                             <div class="col-sm-6">
                                 <h6 class="small mb-1">Cupos:</h6>
                                 <div class="row g-3">
                                     <div class="col-6">
-                                        <p class="small opacity-75 mb-1">Mínimo:</p>
+                                        <p class="small opacity-75 mb-1">Mín:</p>
                                         <h6 class="fs-2 fs-sm-4 m-0">{{ match.matchMinPlayers }}</h6>
                                     </div>
                                     <div class="col-6">
-                                        <p class="small opacity-75 mb-1">Máximo:</p>
+                                        <p class="small opacity-75 mb-1">Máx:</p>
                                         <h6 class="fs-2 fs-sm-4 m-0">{{ match.matchMaxPlayers }}</h6>
                                     </div>
                                 </div>
@@ -79,46 +80,38 @@
                                 <h6 class="small mb-1">Edad:</h6>
                                 <div class="row g-3">
                                     <div class="col-6">
-                                        <p class="small opacity-75 mb-1">Mínima:</p>
+                                        <p class="small opacity-75 mb-1">Mín:</p>
                                         <h6 class="fs-2 fs-sm-4 m-0">{{ match.matchMinAge }}</h6>
                                     </div>
                                     <div class="col-6">
-                                        <p class="small opacity-75 mb-1">Máxima:</p>
+                                        <p class="small opacity-75 mb-1">Máx:</p>
                                         <h6 class="fs-2 fs-sm-4 m-0">{{ match.matchMaxAge }}</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7">
-                        <h6 class="small mb-1">Accesos:</h6>
-                        <div class="row g-2">
-                            <div class="col-sm-8">
-                                <p class="small opacity-75 mb-1">URL:</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <h6 class="clamp-1 m-0">{{ match.matchURL }}</h6>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <button class="btn btn-outline-light border-0 py-0" type="button">
-                                            <i class="bi bi-copy opacity-75"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <p class="small opacity-75 mb-1">Pin:</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <h6 class="fs-2 fs-sm-4 m-0">{{ match.matchPin }}</h6>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <button class="btn btn-outline-light border-0 py-0" type="button">
-                                            <i class="bi bi-copy opacity-75"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-lg-4">
+                        <h6 class="small mb-2">Accesos:</h6>
+                        <button class="btn btn-outline-light w-100" type="button" @click="copyMatchURLPin(match.matchURL, match.matchPin)">
+                            <i class="bi bi-copy opacity-75 me-1"></i> Copiar Invitación
+                        </button>
+                    </div>
+                    <div class="col-lg-4 text-end">
+                        <div class="btn-group w-100">
+
+                            <router-link  class="btn btn-outline-light" title="Editar" :to="{ name: 'edit-match', params: { id: match.id } }">
+                                <i class="bi bi-pencil-square opacity-75 me-1"></i> Editar
+                            </router-link>
+
+                            <button 
+                                type="button" 
+                                class="btn btn-outline-light"
+                                title="Eliminar"
+                                @click="removeMatch">
+                                <i class="bi bi-trash3 opacity-75 me-1"></i> Eliminar
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -146,26 +139,7 @@
                             mode='trainer'/>
 
                     </div>
-                </div>
-
-                <div class="text-end">
-                    <div class="btn-group btn-group-lg">
-
-                        <router-link  class="btn btn-dark" title="Editar" :to="{ name: 'edit-match', params: { id: match.id } }">
-                            <i class="bi bi-pencil-square"></i>
-                        </router-link>
-
-                        <button 
-                            type="button" 
-                            class="btn btn-dark"
-                            title="Eliminar"
-                            @click="removeMatch">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-
-                    </div>
-                </div>
-                
+                </div>                
             </div>
         </div>
 
@@ -183,6 +157,8 @@ import Swal from 'sweetalert2'
     import { createEmptyMatch } from '@/features/matches/models/matches.model'
 
     import MatchesPlayersRegistrationList from '@/features/matches/components/MatchesPlayersRegistrationList.vue'
+
+    import { copyMatchURLPin } from '@/features/matches/utils/matches.ui.utils'
 
     const matchesStore = useMatchesStore()
 

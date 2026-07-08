@@ -140,7 +140,7 @@
 
                     <h2 class="fs-6 fs-sm-10 mt-5">Accesos al Partido</h2>
                     <hr class="mb-4">
-                    <div class="row g-3 align-items-end">
+                    <div class="row g-3 align-items-top">
                         <div class="col-12">
                             <h6 class="fs-3 fs-sm-4">URL *</h6>
                             <div class="input-group">
@@ -154,7 +154,7 @@
                                 </button>
 
                                 <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchURL }" placeholder="URL" readonly v-model="matchURL">
-                                <button class="btn btn-secondary" type="button" @click="generateURL"><i class="bi bi-copy"></i></button>
+                                <button class="btn btn-secondary" type="button" @click="copyMatchURL(matchURL)"><i class="bi bi-copy"></i></button>
                             </div>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchURL }}
@@ -173,11 +173,15 @@
                                 </button>
 
                                 <input type="text" class="form-control" :class="{ 'is-invalid': errors.matchPin }" placeholder="Pin" readonly v-model="matchPin">
-                                <button class="btn btn-secondary" type="button" @click="generatePin"><i class="bi bi-copy"></i></button>
+                                <button class="btn btn-secondary" type="button" @click="copyMatchPin(matchPin)"><i class="bi bi-copy"></i></button>
                             </div>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchPin }}
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h6 class="fs-3 fs-sm-4">Invitación</h6>
+                            <button class="btn btn-secondary" type="button" @click="copyMatchURLPin(matchURL, matchPin)"><i class="bi bi-copy"></i> Copiar Invitación</button>
                         </div>
                     </div>
 
@@ -207,8 +211,6 @@
 
 <script setup>
 
-    console.log('MATCH FORM CARGADO')
-
     import { computed } from 'vue'
 
     import { 
@@ -233,6 +235,11 @@
     import { createEmptyMatch } from '@/features/matches/models/matches.model'
 
     import { matchesSchema } from '@/features/matches/schemas/matches.schema'
+
+    import { 
+        copyMatchURL, 
+        copyMatchPin, 
+        copyMatchURLPin } from '@/features/matches/utils/matches.ui.utils'
 
     import { ref } from 'vue';
 
