@@ -91,13 +91,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-sm-6 col-lg-4">
                         <h6 class="small mb-2">Accesos:</h6>
                         <button class="btn btn-outline-light w-100" type="button" @click="copyMatchURLPin(match.matchURL, match.matchPin)">
                             <i class="bi bi-copy opacity-75 me-1"></i> Copiar Invitación
                         </button>
                     </div>
-                    <div class="col-lg-4 text-end">
+                    <div class="col-sm-6 col-lg-4">
                         <div class="btn-group w-100">
 
                             <router-link  class="btn btn-outline-light" title="Editar" :to="{ name: 'edit-match', params: { id: match.id } }">

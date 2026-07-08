@@ -6,7 +6,10 @@
         <div v-if="props.mode === 'trainer'" class="input-group input-group-sm mt-2 w-100">
             <input type="text" class="form-control" placeholder="Teléfono" :value="player.matchPlayerPhone" readonly>
             
-            <button class="btn btn-outline-light" type="button">
+            <button 
+                class="btn btn-outline-light" 
+                type="button"
+                @click="copyPlayerPhone(player.matchPlayerPhone)">
                 <i class="bi bi-copy"></i>
             </button>
 
@@ -49,7 +52,6 @@
 
     const removePlayer = async () => {
 
-
         const confirmOne = await Swal.fire({
 
             icon: 'warning',
@@ -62,10 +64,7 @@
 
         })
 
-
         if (!confirmOne.isConfirmed) return
-
-
 
         const confirmTwo = await Swal.fire({
 
@@ -80,16 +79,26 @@
 
         })
 
-
         if (!confirmTwo.isConfirmed) return
-
-
 
         await matchesPlayersStore.removeRegistration(
             props.player.id,
             props.matchId
         )
+    }
 
+    /************************************* */
+
+    const copyPlayerPhone = async (playerPhone) => {
+
+        await navigator.clipboard.writeText(playerPhone)
+
+        await Swal.fire({
+            icon: 'success',
+            title: 'Teléfono copiado',
+            timer: 1200,
+            showConfirmButton: false
+        })
 
     }
 

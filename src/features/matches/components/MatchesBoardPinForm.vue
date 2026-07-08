@@ -9,7 +9,7 @@
                             <i class="bi bi-box-arrow-in-right opacity-50 fs-28"></i>
                         </div>
                         <h2 class="h2 mb-2">Ingresá el Pin</h2>
-                        <p class="opacity-75 mb-3mb-sm-0">Este código de 6 dígitos numéricos <br>fue asignado por tu entrenador/a</p>
+                        <p class="opacity-75 mb-3mb-sm-0">Este código de 6 dígitos numéricos <br class="d-none d-sm-block">fue asignado por tu entrenador/a</p>
                     </div>
                     <div class="col-sm-7">
                         <form novalidate @submit="validatePin">
@@ -20,8 +20,8 @@
                                         type="number"
                                         class="form-control"
                                         :class="{ 'is-invalid': errors.matchPlayerPin }"
-                                        placeholder="Pin de inscripción"/> 
-                                    <label>Pin de inscripción</label>
+                                        placeholder="Pin"/> 
+                                    <label>Pin</label>
                                 </div>
                                                                    
 

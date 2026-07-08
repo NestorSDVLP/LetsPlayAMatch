@@ -146,7 +146,7 @@
 
                     <div class="text-center">
                         <p class="small opacity-75 mb-0 mt-3">
-                            Última actualización:
+                            Actualización:
                             {{ formatDateTime(match.updatedAt ?? match.createdAt) }} <sup>hs</sup>
                         </p>
                     </div>
