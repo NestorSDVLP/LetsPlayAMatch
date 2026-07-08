@@ -71,11 +71,7 @@
 
     /*********************************** */
 
-    console.log('PinForm mounted')
-
     const validatePin = handleSubmit(async values => {
-
-        console.log('validatePin: Entro')
 
         if (!props.match.matchPin) {
             emit('validated')

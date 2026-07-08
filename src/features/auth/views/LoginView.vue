@@ -90,9 +90,6 @@
 
   import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 
-  console.log('***** LOGINVIEW NUEVO *****')
-  console.log(import.meta.url)
-
   /************************************************ */
 
   const router = useRouter()
@@ -123,8 +120,6 @@
 
   const handleLogin = handleSubmit(async (values) => {
 
-    console.log('VERSIÓN NUEVA DEL HANDLE LOGIN')
-
     loading.value = true
     errorFirebase.value = ''
 
@@ -135,24 +130,13 @@
             values.password
         )
 
-        console.log('LOGIN OK:', result.user)
-
         await trainerStore.initializeTrainer(result.user)
-
-        console.log('TRAINER OK:', trainerStore.trainer)
-
-        console.log('router:', router)
-        console.log('typeof router.push:', typeof router.push)
-
-        console.log('ANTES DEL PUSH')
 
         if (trainerStore.trainer.profileCompleted) {
             await router.push('/')
         } else {
             await router.push('/trainers/edit-trainer')
         }
-
-        console.log('DESPUÉS DEL PUSH')
 
     } catch (error) {
 

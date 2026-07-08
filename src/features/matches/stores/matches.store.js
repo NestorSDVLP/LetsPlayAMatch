@@ -24,13 +24,9 @@ export const useMatchesStore = defineStore('matches', {
 
         async fetchMatchByURL(URL) {
 
-            console.log('fetchMatchByURL')
-
             try {
 
                 this.match = await getMatchByURL(URL)
-
-                console.log('match:', this.match)
 
                 return this.match
 
@@ -49,13 +45,9 @@ export const useMatchesStore = defineStore('matches', {
 
         async fetchMatchById(id) {
 
-            console.log('fetchMatchById')
-
             try {
 
                 this.match = await getMatchById(id)
-
-                console.log('match:', this.match)
 
                 return this.match
 
@@ -78,20 +70,11 @@ export const useMatchesStore = defineStore('matches', {
 
                 const trainerStore = useTrainerStore()
 
-                console.log('trainerStore.trainer')
-                console.log(trainerStore.trainer)
-
                 const trainerId = trainerStore.trainer.uid
-
-                console.log('trainerId')
-                console.log(trainerId)
 
                 this.matches = await getMatchesByTrainerId(
                     trainerId
                 )
-
-                console.log('matchesStore.matches')
-                console.log(this.matches)
 
             } catch(error) {
 

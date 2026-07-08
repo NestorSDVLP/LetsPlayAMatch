@@ -61,13 +61,9 @@
 
     onMounted(async () => {
 
-        console.log("RegistrationList mounted:", props.matchId)
-
         if (!playersStore.playersByMatch[props.matchId]) {
             await playersStore.fetchPlayers(props.matchId)
         }
-
-        console.log(playersStore.playersByMatch)
 
     })
 

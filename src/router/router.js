@@ -124,18 +124,13 @@ import { useTrainerStore } from '@/features/trainers/stores/trainers.store'
 
 router.beforeEach(async (to, from) => {
 
-    console.log('ANTES DEL GUARD')
-
     const uiStore = useUiStore()
     uiStore.setLoading(true)
 
     const authStore = useAuthStore()
     const trainerStore = useTrainerStore()
 
-    console.log('isAuthenticated:', authStore.isAuthenticated)
-
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-        console.log('REDIRIGE LOGIN')
         return { name: 'login' }
     }
 
@@ -143,11 +138,7 @@ router.beforeEach(async (to, from) => {
 
         if (authStore.isAuthenticated && !trainerStore.trainer) {
 
-            console.log('ANTES initializeTrainer')
-
             await trainerStore.initializeTrainer(authStore.user)
-
-            console.log('DESPUES initializeTrainer')
         }
 
     } catch (error) {
@@ -156,14 +147,10 @@ router.beforeEach(async (to, from) => {
 
     }
 
-    console.log('SALE DEL GUARD')
-
     return true
 })
 
 router.afterEach(() => {
-
-    console.log('AFTER EACH')
 
     const uiStore = useUiStore()
     uiStore.setLoading(false)

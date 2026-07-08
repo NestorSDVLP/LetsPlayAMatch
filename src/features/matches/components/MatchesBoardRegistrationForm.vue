@@ -100,9 +100,6 @@
 
             loading.value = true
 
-            console.log('ENTRO AL SUBMIT')
-            console.log(values)
-
             await matchesPlayersStore.createRegistration(
                 props.match.id,
                 values
