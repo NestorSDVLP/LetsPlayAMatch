@@ -130,8 +130,14 @@ router.beforeEach(async (to, from) => {
     const authStore = useAuthStore()
     const trainerStore = useTrainerStore()
 
-    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-        return { name: 'login' }
+    if (to.meta.requiresAuth) {
+
+        await authStore.waitForAuth()
+
+        if (!authStore.isAuthenticated) {
+            return { name: 'login' }
+        }
+
     }
 
     try {

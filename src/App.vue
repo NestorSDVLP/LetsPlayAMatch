@@ -29,7 +29,6 @@
 
 <script setup>
 
-  import { onMounted } from 'vue'
   import { useAuthStore } from '@/features/auth/stores/auth.store'
   import AppHeader from '@/shared/components/AppHeader.vue'
   import AppFooter from '@/shared/components/AppFooter.vue'
@@ -37,11 +36,8 @@
 
   const authStore = useAuthStore()
 
-  /*
-  * Apenas arranca la app, encendemos el listener de Firebase
-  */
-  onMounted(() => {
-      authStore.initAuth()
-  })
+  /************************** */
+  
+  authStore.initAuth()
 
 </script>

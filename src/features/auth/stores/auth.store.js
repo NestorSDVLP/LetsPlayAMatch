@@ -31,6 +31,8 @@ export const useAuthStore = defineStore('auth', () => {
     */
     const loadingAuth = ref(true)
 
+    const authReady = ref(false)
+
     /*
     * Inicializa el listener de Firebase Auth.
     */
@@ -53,6 +55,7 @@ export const useAuthStore = defineStore('auth', () => {
             }
 
             loadingAuth.value = false
+            authReady.value = true
 
         })
 
@@ -76,6 +79,28 @@ export const useAuthStore = defineStore('auth', () => {
         return await logoutService()
     }
 
+    /***************************** */
+
+    const waitForAuth = () => {
+
+        return new Promise(resolve => {
+
+            if (authReady.value) {
+                resolve()
+                return
+            }
+
+            const unsubscribe = onAuthStateChanged(auth, () => {
+
+                unsubscribe()
+                resolve()
+
+            })
+
+        })
+
+    }
+
     /*
     * API pública.
     */
@@ -85,7 +110,9 @@ export const useAuthStore = defineStore('auth', () => {
         loadingAuth,
         initAuth,
         loginUser,
-        loginUserWithGoogle, // Exportamos la nueva acción
+        loginUserWithGoogle,
+        authReady,
+        waitForAuth,
         logoutUser
     }
 })
