@@ -4,6 +4,7 @@
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { vMaska } from "maska/vue"
 
 /*
 * Hoja de estilos principal de la aplicación.
@@ -72,6 +73,12 @@ authStore.initAuth()
 */
 
 app.use(router)
+
+/*
+* Registro Maska
+*/
+
+app.directive('maska', vMaska)
 
 /*
 * Monta la aplicación sobre el elemento #app.

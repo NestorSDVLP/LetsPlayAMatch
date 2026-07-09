@@ -105,15 +105,16 @@
   /************************************************ */
 
   const { handleSubmit, errors } = useForm({
-
-      validationSchema
-
+    validationSchema,
+    initialValues: {
+      email: 'trainer@letsplayamatch.com',
+      password: '123456'
+    }
   })
   
   /************************************************ */
 
   const { value: email } = useField('email')
-
   const { value: password } = useField('password')
 
   /************************************************ */
@@ -140,7 +141,7 @@
 
     } catch (error) {
 
-        console.error('ERROR COMPLETO')
+        console.error('Login')
         console.error(error)
         console.error(error.stack)
 

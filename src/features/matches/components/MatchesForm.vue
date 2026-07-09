@@ -55,17 +55,33 @@
                     <div class="row g-3">
                         <div class="col-lg-5">
                             <h6 class="fs-3 fs-sm-4">Comienzo *</h6>
-                            <VueDatePicker :class="{ 'is-invalid': errors.matchStartAt }" v-model="matchStartAt"></VueDatePicker>
+                            <input 
+                            type="text"
+                            class="form-control"
+                            :class="{ 'is-invalid': errors.matchStartAt }"  
+                            v-maska 
+                            data-maska="##/##/#### ##:##" 
+                            placeholder="dd/mm/aaaa hh:mm" 
+                            v-model="matchStartAt"
+                            @blur="validateDates"/>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchStartAt }}
                             </div>                            
                         </div>
                         <div class="col-lg-5">
                             <h6 class="fs-3 fs-sm-4">Finalización *</h6>
-                            <VueDatePicker :class="{ 'is-invalid': errors.matchEndAt }" v-model="matchEndAt"></VueDatePicker>
+                            <input 
+                            type="text"
+                            class="form-control"
+                            :class="{ 'is-invalid': errors.matchEndAt }"  
+                            v-maska 
+                            data-maska="##/##/#### ##:##" 
+                            placeholder="dd/mm/aaaa hh:mm" 
+                            v-model="matchEndAt"
+                            @blur="validateDates"/>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchEndAt }}
-                            </div>
+                            </div> 
                         </div>
                     </div>
 
@@ -222,9 +238,6 @@
 
     import { useRouter } from 'vue-router'
 
-    import { VueDatePicker } from '@vuepic/vue-datepicker'
-    import '@vuepic/vue-datepicker/dist/main.css'
-
     import { 
         useForm,
         useField 
@@ -240,6 +253,11 @@
         copyMatchURL, 
         copyMatchPin, 
         copyMatchURLPin } from '@/features/matches/utils/matches.ui.utils'
+
+    import {
+        parseDateTime,
+        isValidDateTime,
+        isValidDateRange } from '@/features/matches/utils/matches.date.utils'
 
     import { ref } from 'vue';
 
@@ -323,6 +341,11 @@
 
             /****************************************** */
 
+            values.matchStartAt = parseDateTime(matchStartAt.value)
+            values.matchEndAt = parseDateTime(matchEndAt.value)
+
+            /****************************************** */
+
             if (isEdit.value) {
 
                 await matchesStore.updateMatch(
@@ -368,5 +391,40 @@
         }
 
     })
+
+    /****************************************** */
+
+    function validateDates() {
+
+        if (
+            matchStartAt.value &&
+            !isValidDateTime(matchStartAt.value)
+        ) {
+            console.log("Fecha de inicio inválida")
+            return
+        }
+
+        if (
+            matchEndAt.value &&
+            !isValidDateTime(matchEndAt.value)
+        ) {
+            console.log("Fecha de fin inválida")
+            return
+        }
+
+        if (
+            matchStartAt.value &&
+            matchEndAt.value
+        ) {
+            if (!isValidDateRange(
+                matchStartAt.value,
+                matchEndAt.value
+            )) {
+
+                console.log("El rango no es válido")
+            }
+        }
+
+    }
 
 </script>

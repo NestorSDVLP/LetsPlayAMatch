@@ -1,5 +1,7 @@
 import * as yup from 'yup'
 
+import { parseDateTime } from '@/features/matches/utils/matches.date.utils'
+
 export const matchesSchema = yup.object({
     matchActivityId: yup
         .string()
@@ -19,17 +21,19 @@ export const matchesSchema = yup.object({
     matchStartAt: yup
         .date()
         .transform((value, originalValue) =>
-            originalValue === '' ? null : new Date(originalValue)
+            originalValue === '' ? null : parseDateTime(originalValue)
         )
         .nullable()
+        .typeError('La Fecha y Hora de inicio es inválida')
         .required('La Fecha y Hora de inicio es requerida'),
         
     matchEndAt: yup
         .date()
         .transform((value, originalValue) =>
-            originalValue === '' ? null : new Date(originalValue)
+            originalValue === '' ? null : parseDateTime(originalValue)
         )
         .nullable()
+        .typeError('La Fecha y Hora de finalización es inválida')
         .required('La Fecha y Hora de finalización es requerida'),
         
     matchTypeId: yup
