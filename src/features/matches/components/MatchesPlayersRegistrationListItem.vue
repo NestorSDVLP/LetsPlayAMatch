@@ -1,25 +1,35 @@
 <template>
 
     <li class="fs-2 fs-sm-4 text-light px-0 py-2">
-        <h6 class="fs-2 fs-sm-4 m-0">{{ player.matchPlayerName  }}</h6>
-        
-        <div v-if="props.mode === 'trainer'" class="input-group input-group-sm mt-2 w-100">
-            <input type="text" class="form-control" placeholder="Teléfono" :value="player.matchPlayerPhone" readonly>
-            
-            <button 
-                class="btn btn-outline-light" 
-                type="button"
-                @click="copyPlayerPhone(player.matchPlayerPhone)">
-                <i class="bi bi-copy"></i>
-            </button>
+        <div class="row align-items-center">
+            <div class="col-9">
+                <h6 class="fs-2 fs-sm-4 m-0">{{ player.matchPlayerName  }}</h6>
+            </div>
+            <div v-if="props.mode === 'trainer'" class="col-3">
+                <div class="btn-group btn-group-sm w-100">
 
-            <button 
-                class="btn btn-outline-light" 
-                type="button"
-                @click="removePlayer">
-                    <i class="bi bi-x-lg"></i>
-            </button>
+                    <button 
+                        class="btn btn-outline-light" 
+                        type="button"
+                        data-bs-toggle="modal"
+                        :data-bs-target="`#matchPlayerRegistrationListItemModal-${player.id}`"
+                        title="Ver información del jugador">
+                        <i class="bi bi-person-fill"></i>
+                    </button>
 
+                    <button 
+                        class="btn btn-outline-light" 
+                        type="button"
+                        @click="removePlayer"
+                        title="Anular incripción">
+                            <i class="bi bi-x-lg"></i>
+                    </button>
+
+                </div>
+
+                <MatchesPlayersRegistrationListItemPlayerInfoModal :player="player"/>
+
+            </div>
         </div>
     </li>
 
@@ -30,6 +40,8 @@
     import Swal from 'sweetalert2'
 
     import { useMatchesPlayersStore } from '@/features/matches/stores/matches.players.store'
+
+    import MatchesPlayersRegistrationListItemPlayerInfoModal from '@/features/matches/components/MatchesPlayersRegistrationListItemPlayerInfoModal.vue'
 
     const matchesPlayersStore = useMatchesPlayersStore()
 
@@ -85,21 +97,6 @@
             props.player.id,
             props.matchId
         )
-    }
-
-    /************************************* */
-
-    const copyPlayerPhone = async (playerPhone) => {
-
-        await navigator.clipboard.writeText(playerPhone)
-
-        await Swal.fire({
-            icon: 'success',
-            title: 'Teléfono copiado',
-            timer: 1200,
-            showConfirmButton: false
-        })
-
     }
 
 </script>
