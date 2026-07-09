@@ -20,6 +20,8 @@
                                         type="number"
                                         class="form-control"
                                         :class="{ 'is-invalid': errors.matchPlayerPin }"
+                                        v-maska 
+                                        data-maska="######" 
                                         placeholder="Pin"/> 
                                     <label>Pin</label>
                                 </div>

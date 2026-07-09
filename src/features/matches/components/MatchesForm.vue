@@ -54,31 +54,37 @@
                     <hr class="mb-3">
                     <div class="row g-3">
                         <div class="col-lg-5">
-                            <h6 class="fs-3 fs-sm-4">Comienzo *</h6>
-                            <input 
-                            type="text"
-                            class="form-control"
-                            :class="{ 'is-invalid': errors.matchStartAt }"  
-                            v-maska 
-                            data-maska="##/##/#### ##:##" 
-                            placeholder="dd/mm/aaaa hh:mm" 
-                            v-model="matchStartAt"
-                            @blur="validateDates"/>
+                            <h6 class="fs-3 fs-sm-4">Comienzo, sólo números *</h6>
+                            <div class="input-group">
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': errors.matchStartAt }"  
+                                    v-maska 
+                                    data-maska="##/##/#### ##:##" 
+                                    placeholder="dd/mm/aaaa hh:mm" 
+                                    v-model="matchStartAt"
+                                    @blur="validateDates"/>
+                                <span class="input-group-text" id="basic-addon1">hs.</span>
+                            </div>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchStartAt }}
                             </div>                            
                         </div>
                         <div class="col-lg-5">
-                            <h6 class="fs-3 fs-sm-4">Finalización *</h6>
-                            <input 
-                            type="text"
-                            class="form-control"
-                            :class="{ 'is-invalid': errors.matchEndAt }"  
-                            v-maska 
-                            data-maska="##/##/#### ##:##" 
-                            placeholder="dd/mm/aaaa hh:mm" 
-                            v-model="matchEndAt"
-                            @blur="validateDates"/>
+                            <h6 class="fs-3 fs-sm-4">Finalización, sólo números *</h6>
+                            <div class="input-group">
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': errors.matchEndAt }"  
+                                    v-maska 
+                                    data-maska="##/##/#### ##:##" 
+                                    placeholder="dd/mm/aaaa hh:mm" 
+                                    v-model="matchEndAt"
+                                    @blur="validateDates"/>
+                                <span class="input-group-text" id="basic-addon1">hs.</span>
+                            </div>
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.matchEndAt }}
                             </div> 
@@ -337,6 +343,24 @@
 
         try {
 
+            /****************************************** */
+
+            if (!isValidDateRange(
+                matchStartAt.value,
+                matchEndAt.value
+            )) {
+
+                await Swal.fire({
+                    icon: 'warning',
+                    title: 'El rango de fechas no es válido',
+                    text: 'La fecha y hora de finalización debe ser posterior al comienzo del partido.'
+                })
+
+                return
+            }
+
+            /****************************************** */
+
             loading.value = true
 
             /****************************************** */
@@ -401,6 +425,13 @@
             !isValidDateTime(matchStartAt.value)
         ) {
             console.log("Fecha de inicio inválida")
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Fecha de inicio inválida'
+            })
+
             return
         }
 
@@ -409,6 +440,13 @@
             !isValidDateTime(matchEndAt.value)
         ) {
             console.log("Fecha de fin inválida")
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Fecha de fin inválida'
+            })
+
             return
         }
 
@@ -421,7 +459,14 @@
                 matchEndAt.value
             )) {
 
-                console.log("El rango no es válido")
+                console.log("El rango de fechas no es válido")
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El rango de fechas no es válido'
+                })
+
             }
         }
 

@@ -18,8 +18,15 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-floating">
-                        <input type="number" class="form-control" :class="{ 'is-invalid': errors.matchPlayerPhone }" placeholder="Teléfono" v-model="matchPlayerPhone">
-                        <label>Teléfono</label>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            :class="{ 'is-invalid': errors.matchPlayerPhone }"
+                            v-model="matchPlayerPhone"
+                            v-maska 
+                            data-maska="11########" 
+                            placeholder="Teléfono">
+                        <label>Teléfono, sólo números</label>
                     </div>
                     <div class="invalid-feedback d-block mt-1">
                         {{ errors.matchPlayerPhone }}
