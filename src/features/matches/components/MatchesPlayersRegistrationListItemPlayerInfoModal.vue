@@ -5,14 +5,14 @@
         class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body bg-g8 text-light p-5">
-                    <div class="text-end mb-2">
-                        <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">
+                <div class="modal-body bg-g8 text-light box-shadow px-5 pt-4 pb-5">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">
                             <i class="bi bi-x-lg"></i>
                         </button>
                     </div>
-                    <h5 class="opacity-75 mb-2">{{ player.matchPlayerName }}</h5>
-                    <div class="row align-items-center">
+                    <p class="fs-10 opacity-75 mb-1">{{ player.matchPlayerName }}</p>
+                    <div class="row g-0 align-items-center">
                         <div class="col-8">
                             <h1 class="m-0">{{ player.matchPlayerPhone }}</h1>
                         </div>

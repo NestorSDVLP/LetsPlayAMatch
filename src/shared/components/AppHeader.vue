@@ -22,7 +22,7 @@
                             <div v-if="authStore.isAuthenticated" class="dropdown">
                                 <a class="dropdown-toggle btn btn-primary px-sm-4" href="#" data-bs-toggle="dropdown">
                                     <i class="bi bi-person-fill"></i> 
-                                    <span class="d-none d-sm-inline">Hola, <h6 class="d-inline text-capitalize m-0">{{ authStore.user.email.split('@')[0] }}</h6></span>
+                                    <span class="d-none d-sm-inline-block ms-2">Hola, <h6 class="d-inline text-capitalize m-0">{{ authStore.user.email.split('@')[0] }}</h6></span>
                                     <i class="bi bi-chevron-down ms-1"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">

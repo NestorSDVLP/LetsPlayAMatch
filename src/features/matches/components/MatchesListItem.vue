@@ -7,7 +7,8 @@
                 <div class="w-100">
                     <div class="row align-items-center m-0">
                         <div class="col-lg-4">
-                            <h3 class="fs-6 fs-sm-10 mt-0 mb-2 mb-lg-0">{{ getMatchActivity(match.matchActivityId)?.label }}</h3>
+                            <h3 class="fs-6 fs-sm-10 mt-0 mb-2 mb-lg-1">{{ getMatchActivity(match.matchActivityId)?.label }}</h3>
+                            <h6 class="fs-2 fs-sm-4 opacity-50 m-0"><i class="bi bi-geo-alt-fill me-1"></i> {{ match.matchPlace }}</h6>
                         </div>
                         <div class="col-lg-8">
                             <h6 class="small d-none d-sm-block mb-1">Fecha y Hora:</h6>
