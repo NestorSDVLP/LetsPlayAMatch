@@ -1,0 +1,71 @@
+// ============================================================================
+// Let's Play Match (LPAM)
+// Firestore Security Rules
+// ============================================================================
+//
+// Security Model
+//
+// SuperAdmin
+//   - Creates Trainers
+//
+// Trainer
+//   - Authenticated with Firebase Auth
+//   - Creates and manages Matches
+//   - Validates MatchPlayer registrations
+//
+// Guest (Potential MatchPlayer)
+//   - Anonymous
+//   - Reads public Match information
+//   - Can register to a Match (MVP)
+//   - Is never a persistent user
+//
+// ============================================================================
+
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Matches
+    |--------------------------------------------------------------------------
+    */
+
+    match /matches/{matchId} {
+
+      // Public Board
+      allow read: if true;
+
+      // Trainer only
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null;
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Match Players
+    |--------------------------------------------------------------------------
+    */
+
+    match /matchPlayers/{matchPlayerId} {
+
+      // Public Board
+      allow read: if true;
+
+      // MVP:
+      // Guest registration (to be refined later)
+      allow create: if true;
+
+      // Trainer only
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null;
+
+    }
+
+  }
+
+}
