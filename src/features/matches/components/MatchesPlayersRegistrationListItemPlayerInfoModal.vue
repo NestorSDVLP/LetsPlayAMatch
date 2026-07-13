@@ -25,18 +25,22 @@
                                     title="Copiar teléfono">
                                     <i class="bi bi-copy"></i>
                                 </button>
-                                <button 
-                                    class="btn btn-outline-light" 
-                                    type="button"
+
+                                <a
+                                    class="btn btn-outline-light"
+                                    :href="whatsappUrl(player.matchPlayerPhone)"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     title="Enviar mensaje vía WhatsApp">
-                                        <i class="bi bi-whatsapp"></i>
-                                </button>
-                                <button 
-                                    class="btn btn-outline-light" 
-                                    type="button"
+                                    <i class="bi bi-whatsapp"></i>
+                                </a>
+
+                                <a
+                                    class="btn btn-outline-light"
+                                    :href="phoneUrl(player.matchPlayerPhone)"
                                     title="Llamar">
-                                        <i class="bi bi-telephone-fill"></i>
-                                </button>
+                                    <i class="bi bi-telephone-fill"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -48,6 +52,9 @@
 </template>
 
 <script setup>
+
+
+    import { normalizeWhatsappPhone } from '@/features/matches/utils/matches.phone.utils'
 
     import Swal from 'sweetalert2'
 
@@ -62,6 +69,9 @@
 
     const copyPlayerPhone = async (playerPhone) => {
 
+        if (!playerPhone)
+            return
+
         await navigator.clipboard.writeText(playerPhone)
 
         await Swal.fire({
@@ -70,6 +80,26 @@
             timer: 1200,
             showConfirmButton: false
         })
+
+    }
+
+    /************************************* */
+
+    function phoneUrl(phone) {
+
+        return `tel:${phone.replace(/\D/g, '')}`
+
+    }
+
+    /************************************* */
+
+
+    function whatsappUrl(phone) {
+
+        if (!phone)
+            return '#'
+
+        return `https://wa.me/${normalizeWhatsappPhone(phone)}`
 
     }
 
