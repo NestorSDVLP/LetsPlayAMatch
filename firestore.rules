@@ -28,6 +28,26 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     /*
+    |---------------------------------------------------------------------------
+    | Trainers
+    |--------------------------------------------------------------------------
+    */
+
+    match /trainers/{trainerId} {
+
+      // Trainer profile
+      allow read: if request.auth != null;
+
+      // SuperAdmin / Trainer creation (ajustaremos más adelante)
+      allow create: if request.auth != null;
+
+      allow update: if request.auth != null;
+
+      allow delete: if request.auth != null;
+
+    }
+
+    /*
     |--------------------------------------------------------------------------
     | Matches
     |--------------------------------------------------------------------------

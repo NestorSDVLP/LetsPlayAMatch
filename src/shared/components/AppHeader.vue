@@ -39,6 +39,11 @@
                                     </li>
 
                                     <li><h6 class="dropdown-header">Tableros de Partidos</h6></li>
+
+                                    <li v-if="!matchesStore.matches.length">
+                                        <p class="dropdown-item opacity-75 m-0">No existen partidos</p>
+                                    </li>
+
                                     <li v-for="(match, index) in matchesStore.matches" :key="match.id">
                                         <router-link class="dropdown-item py-2" :to="`/matches/view-board/${ match.matchURL }`">
                                             <div class="d-flex">

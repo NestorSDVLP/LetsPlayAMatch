@@ -73,7 +73,7 @@
     */
 
     import { ref } from 'vue';
-    import { useRoute } from 'vue-router'
+    import { useRouter } from 'vue-router'
     import { 
         useForm,
         useField 
@@ -84,7 +84,7 @@
 
     const trainerStore = useTrainerStore()
 
-    const route = useRoute()
+    const router = useRouter()
 
     const props = defineProps({
         initialData: {
@@ -137,6 +137,8 @@
             router.push('/matches/new-match')
 
         } catch(error) {
+
+            console.error('ERROR UPDATE TRAINER:', error)
 
             await Swal.fire({
                 icon: 'error',

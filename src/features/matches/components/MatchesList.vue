@@ -4,14 +4,16 @@
         <div class="container">
             <div class="bg-g8 text-w box-shadow px-4 py-5 p-sm-5">
 
-                <div class="row">
-                    <div class="col-8">
-                        <h2 class="fs-10 fs-sm-12 mb-4">Listado de Partidos</h2>
-                    </div>
-                    <div class="col-4 text-end">
-                        <router-link class="btn btn-primary" to="/matches/new-match">
-                            <i class="bi bi-plus-circle me-1"></i> Crear Partido
-                        </router-link>
+                <div class="mb-4">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <h2 class="fs-10 fs-sm-12 mb-0">Listado de Partidos</h2>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <router-link class="btn btn-primary" to="/matches/new-match">
+                                <i class="bi bi-plus-circle me-1"></i> Crear Partido
+                            </router-link>
+                        </div>
                     </div>
                 </div>
 
