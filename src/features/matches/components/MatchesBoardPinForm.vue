@@ -17,7 +17,8 @@
                                 <div class="form-floating">
                                     <input
                                         v-model="matchPlayerPin"
-                                        type="number"
+                                        type="text"
+                                        inputmode="numeric"
                                         class="form-control"
                                         :class="{ 'is-invalid': errors.matchPlayerPin }"
                                         v-maska 

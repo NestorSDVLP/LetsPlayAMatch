@@ -19,7 +19,8 @@
                 <div class="col-sm-6">
                     <div class="form-floating">
                         <input 
-                            type="number" 
+                            type="tel" 
+                            inputmode="tel"
                             class="form-control" 
                             :class="{ 'is-invalid': errors.matchPlayerPhone }"
                             v-model="matchPlayerPhone"

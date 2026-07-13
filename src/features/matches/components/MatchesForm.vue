@@ -58,6 +58,7 @@
                             <div class="input-group">
                                 <input 
                                     type="text"
+                                    inputmode="numeric"
                                     class="form-control"
                                     :class="{ 'is-invalid': errors.matchStartAt }"  
                                     v-maska 
@@ -76,6 +77,7 @@
                             <div class="input-group">
                                 <input 
                                     type="text"
+                                    inputmode="numeric"
                                     class="form-control"
                                     :class="{ 'is-invalid': errors.matchEndAt }"  
                                     v-maska 
