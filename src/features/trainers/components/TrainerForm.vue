@@ -33,13 +33,13 @@
                                 {{ errors.trainerLastName }}
                             </div>
                         </div>
-                        <div class="col-12">
+                        <!--<div class="col-12">
                             <label class="h6">Avatar (URL) *</label>
                             <input type="text" class="form-control" :class="{ 'is-invalid': errors.trainerAvatar }" placeholder="Avatar (URL)" v-model="trainerAvatar">
                             <div class="invalid-feedback d-block mt-1">
                                 {{ errors.trainerAvatar }}
                             </div>
-                        </div>
+                        </div>-->
                     </div>
 
                     <p class="small opacity-75 my-3">(*) Datos requeridos</p>
@@ -97,11 +97,15 @@
 
     /****************************************** */
 
+    import defaultAvatar from '@/assets/images/default_avatar.png'
+
+    /****************************************** */
+
     const initialValues = {
         trainerUserName: '',
         trainerFirstName: '',
         trainerLastName: '',
-        trainerAvatar: '',
+        trainerAvatar: defaultAvatar,
         ...props.initialData
     }
 

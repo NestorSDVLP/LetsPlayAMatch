@@ -4,26 +4,39 @@
         <nav class="my-4 my-sm-5">
             <div class="container">
                 <div class="row align-items-start">
-                    <div class="col-5 col-sm-3 col-lg-4">
+                    <div class="col-6 col-sm-3 col-lg-4">
                     <router-link to="/">
                         <img src="@/assets/images/logo.svg" class="logo w-100">
                     </router-link>
                     </div>
-                    <div class="col-7 col-sm-5 offset-sm-4 col-lg-4 offset-lg-4 text-end">
+                    <div class="col-6 col-sm-5 offset-sm-4 col-lg-4 offset-lg-4 text-end">
                         <div class="d-flex justify-content-end">
+
                             <div v-if="!authStore.isAuthenticated">
                                 <router-link class="btn btn-primary ps-sm-4 pe-5" to="/login">
-                                    <i class="bi bi-person-fill opacity-75 me-1"></i> 
+                                    <i class="bi bi-person-fill me-sm-1"></i> 
                                     <span class="d-none d-sm-inline">Entrenadores</span>
-                                    <i class="bi bi-chevron-right ms-1"></i>
+                                    <i class="bi bi-chevron-right ms-sm-1"></i>
                                 </router-link>
                             </div>
 
                             <div v-if="authStore.isAuthenticated" class="dropdown">
-                                <a class="dropdown-toggle btn btn-primary px-sm-4" href="#" data-bs-toggle="dropdown">
-                                    <i class="bi bi-person-fill"></i> 
-                                    <span class="d-none d-sm-inline-block ms-2">Hola, <h6 class="d-inline text-capitalize m-0">{{ authStore.user.email.split('@')[0] }}</h6></span>
+                                <a class="dropdown-toggle dropdown-toggle-trainer btn btn-primary pe-sm-4" href="#" data-bs-toggle="dropdown">
+
+                                    <img 
+                                        :src="trainerAvatar"
+                                        class="trainer-avatar me-2"
+                                        alt="Avatar entrenador"/>
+
+                                    <span class="d-none d-sm-inline-block ms-2">
+                                        Hola, 
+                                        <h6 class="d-inline text-capitalize m-0">
+                                            {{ authStore.user.email.split('@')[0] }}
+                                        </h6>
+                                    </span>
+
                                     <i class="bi bi-chevron-down ms-1"></i>
+
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end border-0 box-shadow">
                                     <li><h6 class="dropdown-header">Partidos</h6></li>
@@ -141,5 +154,13 @@
             immediate: true
         }
     )
+
+    /***************************************** */
+
+    import defaultAvatar from '@/assets/images/default_avatar.png'
+
+    const trainerAvatar = computed(() => {
+        return trainerStore.trainer?.trainerAvatar || defaultAvatar
+    })
 
 </script>

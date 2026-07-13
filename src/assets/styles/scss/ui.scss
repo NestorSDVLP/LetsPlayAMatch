@@ -25,6 +25,23 @@
             max-width: 200px;
             //filter: invert(1);
         }
+
+        .dropdown-toggle-trainer {
+            position: relative;
+            padding-left: 45px;
+
+            .trainer-avatar {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translate(-10px,-50%);
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 100%;
+                border: 3px solid $white;
+            }
+        }
     }
 }
 
@@ -35,7 +52,7 @@
 */
 .main-wrapper {
     .has-padding-top {
-        padding-top: 180px;
+        padding-top: 175px;
 
         @media (min-width: 768px) {
             padding-top: 240px;

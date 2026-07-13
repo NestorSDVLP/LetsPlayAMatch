@@ -3,13 +3,19 @@
     <section>
         <div class="card text-bg-dark border-0">
             <div class="card-img-overlay d-flex align-items-center rounded-0" style="background: radial-gradient(circle,rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, .9) 100%); z-index: 999;">
-                <div class="w-100 p-2 p-sm-5">
+                <div class="w-100 p-sm-5">
                     <div class="container">
                         <div class="text-center">
                             <div class="row justify-content-center">                                
                                 <h1 class="display-4 h1 lh-1 mt-5 mb-3">¿Tenés ganas de jugar hoy? <br class="d-none d-sm-block">Acá se arma el equipo</h1>
                                 <div class="col-lg-6">
-                                    <p class="m-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
+                                    <p class="mb-3 mb-sm-0">Creá partidos de vóley, fútbol, básquet, handball o hockey en segundos. <strong>Compartís un link, los jugadores se inscriben y todos a jugar</strong></p>
+                                    <div v-if="!authStore.isAuthenticated" class="d-block d-sm-none">
+                                        <router-link class="btn btn-primary ps-sm-4 pe-5" to="/login">
+                                            Ingresar
+                                            <i class="bi bi-chevron-right"></i>
+                                        </router-link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
