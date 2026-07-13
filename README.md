@@ -2,93 +2,131 @@
 
 > **Organizar un partido debería tomar segundos, no cientos de mensajes de WhatsApp.**
 
-Let's Play A Match es una aplicación web desarrollada para simplificar la organización de partidos deportivos entre entrenadores y jugadores.
+Let's Play A Match (LPAM) es una aplicación web mobile-first creada para simplificar la organización de partidos deportivos entre entrenadores y jugadores.
 
-La propuesta no busca reemplazar WhatsApp ni transformar la dinámica habitual de los grupos deportivos. Al contrario: nace para complementarla, resolviendo uno de los problemas más frecuentes durante la organización de un partido.
+El objetivo no es reemplazar WhatsApp, sino complementarlo.
 
-El entrenador crea un partido, comparte un enlace y los jugadores simplemente ingresan al Board para inscribirse.
+WhatsApp sigue siendo el canal donde los grupos deportivos se comunican. LPAM se encarga de resolver el problema de organización: creación del partido, gestión de cupos, inscripción de jugadores y visualización del estado de convocatoria.
 
-Sin registros.
-
-Sin descargar aplicaciones.
-
-Sin aprender una herramienta nueva.
+El entrenador crea un partido, comparte el enlace y los jugadores pueden inscribirse desde cualquier dispositivo sin necesidad de registrarse ni instalar una aplicación.
 
 ---
 
-# 🚀 ¿Por qué existe este proyecto?
+# 🚀 Problema que resuelve
 
-En la mayoría de los grupos deportivos la organización sigue un mismo patrón:
+En muchos grupos deportivos la organización sigue un proceso manual:
 
-* Se publica un mensaje en WhatsApp.
-* Cada jugador responde cuando puede.
-* Los confirmados se cuentan manualmente.
-* La lista de espera se mantiene escribiendo mensajes.
-* Es difícil saber rápidamente quién juega y quién espera.
+* Se publica una convocatoria en WhatsApp.
+* Los jugadores responden en diferentes momentos.
+* El entrenador cuenta confirmaciones manualmente.
+* La lista de espera se administra con mensajes.
+* Es difícil conocer rápidamente la disponibilidad real.
 
-Let's Play A Match automatiza todo ese proceso sin modificar el flujo de trabajo que los entrenadores ya utilizan diariamente.
+Let's Play A Match transforma ese proceso en un flujo simple:
 
-WhatsApp continúa siendo el canal de comunicación.
-
-Let's Play A Match se convierte en la herramienta que organiza la inscripción.
+**Crear → Compartir → Inscribirse → Organizar**
 
 ---
 
-# ✨ Funcionalidades implementadas
+# ✨ Funcionalidades
 
-### Gestión de partidos
+## Gestión de entrenadores
 
-* Creación de partidos
-* Edición de información
-* Persistencia en Firebase Firestore
+* Autenticación mediante Firebase Authentication.
+* Perfil de entrenador.
+* Creación y administración de partidos.
+* Acceso protegido mediante navegación autenticada.
 
-### Board público
+---
 
-* Acceso mediante URL pública
-* Información completa del partido
-* Fecha, horario y ubicación
-* Cupos mínimos y máximos
-* Información deportiva
+## Gestión de partidos
 
-### Inscripciones
+* Creación de partidos deportivos.
+* Edición de información.
+* Configuración de:
 
-* Formulario público
-* Validaciones con Vee Validate + Yup
-* Registro automático en Firestore
-* Reset del formulario luego de una inscripción exitosa
-* Mensajes de éxito y error mediante SweetAlert2
+  * Actividad deportiva.
+  * Fecha y horario.
+  * Ubicación.
+  * Tipo de partido.
+  * Nivel.
+  * Cantidad máxima de jugadores.
+  * PIN de acceso.
 
-### Gestión automática de participantes
+Persistencia completa mediante Cloud Firestore.
 
-Las listas se generan automáticamente a partir del orden de inscripción.
+---
 
-Los primeros jugadores ocupan los cupos disponibles.
+## Board público
 
-Una vez alcanzado el límite de participantes, las siguientes inscripciones pasan automáticamente a la Lista de Espera.
+Cada partido posee un Board accesible mediante URL compartida.
 
-No existen procesos manuales.
+Los jugadores pueden visualizar:
 
-No existen estados duplicados.
+* Información del partido.
+* Fecha y horario.
+* Ubicación.
+* Datos deportivos.
+* Estado actual de convocatoria.
 
-El propio orden de los documentos determina el estado de cada participante.
+El acceso puede validarse mediante PIN.
 
-### Experiencia de usuario
+---
 
-* Actualización reactiva del Board
-* Loading States
-* Navegación protegida
-* Scroll automático
-* Manejo de errores
-* Responsive Design
+## Inscripciones
+
+Los jugadores pueden registrarse sin crear una cuenta.
+
+Características:
+
+* Formulario público.
+* Validaciones con VeeValidate + Yup.
+* Registro automático en Firestore.
+* Actualización reactiva del Board.
+
+---
+
+## Confirmados y lista de espera
+
+La asignación de jugadores se determina automáticamente según el orden de inscripción.
+
+Ejemplo:
+
+```
+Cupos disponibles: 10
+
+Inscripciones:
+1 - Juan
+2 - Pedro
+...
+10 - Martín
+
+Confirmados:
+Juan → Martín
+
+Lista de espera:
+11 en adelante
+```
+
+No existen estados manuales.
+
+El orden de creación de los registros define la posición dentro del partido.
 
 ---
 
 # 🏗 Arquitectura
 
-El proyecto utiliza una arquitectura **Feature First**, donde cada módulo encapsula completamente su funcionalidad.
+El proyecto utiliza una arquitectura **Feature First**.
 
 ```
+src/
+
 features/
+
+    auth/
+        components/
+        services/
+        stores/
 
     matches/
         components/
@@ -96,50 +134,77 @@ features/
         schemas/
         services/
         stores/
-        schemas/
         views/
 
     trainers/
-    auth/
-    home/
+        components/
+        services/
+        stores/
+        views/
+
+shared/
+
+    services/
+    utils/
+    components/
 ```
 
-Cada Feature mantiene aislados sus:
+Cada feature encapsula:
 
-* Componentes
-* Estado (Pinia)
-* Servicios
-* Modelos
-* Validaciones
-* Vistas
+* Componentes.
+* Estado global.
+* Servicios.
+* Modelos.
+* Validaciones.
+* Vistas.
 
-Esta organización facilita el mantenimiento, reduce el acoplamiento y permite escalar la aplicación sin convertir el proyecto en un conjunto de carpetas compartidas.
+Esta estructura reduce el acoplamiento y facilita la evolución del proyecto.
 
 ---
 
-# 🧠 Decisiones de arquitectura
+# 🧠 Modelo de datos
 
-Uno de los objetivos principales de la V1 fue mantener el proyecto lo más simple posible.
+LPAM evita introducir complejidad innecesaria en su primera versión.
 
-Por esa razón **no existe una entidad Player**.
+Actualmente no existe una entidad Player.
 
-Cada inscripción genera únicamente un documento dentro de la colección:
+Los jugadores representan inscripciones dentro de un partido mediante:
 
 ```
 matchPlayers
 ```
 
-relacionado mediante:
+Cada registro mantiene la relación con:
 
 ```
-matchPlayerMatchId
+matchId
 ```
 
-La identidad del jugador continúa existiendo dentro del grupo de WhatsApp.
+La identidad del jugador continúa perteneciendo al contexto del grupo deportivo.
 
-Esto evita introducir autenticación, perfiles, permisos y sincronizaciones innecesarias durante la primera versión del producto.
+Esta decisión permite mantener un flujo simple:
 
-La complejidad se incorpora únicamente cuando realmente agrega valor.
+* Sin creación de cuentas.
+* Sin perfiles adicionales.
+* Sin gestión de usuarios innecesaria.
+
+---
+
+# 🔐 Seguridad
+
+La aplicación utiliza Firebase Security Rules para separar responsabilidades:
+
+## Trainer
+
+* Usuario autenticado.
+* Administración de partidos propios.
+* Gestión de información privada.
+
+## Guest / Player
+
+* Acceso público al Board.
+* Inscripción al partido.
+* Sin usuario persistente.
 
 ---
 
@@ -151,8 +216,9 @@ La complejidad se incorpora únicamente cuando realmente agrega valor.
 * Composition API
 * Pinia
 * Vue Router
+* Vite
 
-## Backend
+## Backend / Servicios
 
 * Firebase Authentication
 * Cloud Firestore
@@ -163,18 +229,24 @@ La complejidad se incorpora únicamente cuando realmente agrega valor.
 * Bootstrap Icons
 * SweetAlert2
 
-## Validaciones
+## Formularios y validaciones
 
-* Vee Validate
+* VeeValidate
 * Yup
+* Maska
 
 ---
 
 # 📱 Mobile First
 
-Aunque gran parte del desarrollo fue realizado desde escritorio, la interfaz fue diseñada pensando primero en dispositivos móviles.
+LPAM fue diseñado pensando principalmente en el uso desde dispositivos móviles.
 
-El objetivo es que cualquier entrenador pueda compartir el enlace del partido por WhatsApp y que los jugadores puedan inscribirse desde su teléfono en pocos segundos.
+El escenario principal:
+
+1. El entrenador crea un partido.
+2. Comparte el enlace por WhatsApp.
+3. Los jugadores ingresan desde su teléfono.
+4. Se registran en segundos.
 
 Sin instalación.
 
@@ -188,72 +260,59 @@ Sin fricción.
 
 ## Implementado
 
-* ✅ Creación de partidos
-* ✅ Visualización pública
-* ✅ Persistencia en Firestore
-* ✅ Inscripción pública
-* ✅ Confirmados automáticos
-* ✅ Lista de Espera automática
-* ✅ Actualización reactiva
-* ✅ Validaciones
-* ✅ Arquitectura Feature First
-
-## En desarrollo
-
-* Edición de partidos
-* Eliminación de partidos
-* Acceso mediante PIN
-* Fecha de última actualización dinámica
-* Mejoras de UX
-* Optimización visual
+✅ Autenticación de entrenadores
+✅ Gestión de perfil de entrenador
+✅ Creación y edición de partidos
+✅ Board público
+✅ Acceso mediante PIN
+✅ Inscripciones públicas
+✅ Confirmados automáticos
+✅ Lista de espera automática
+✅ Validaciones de formularios
+✅ Persistencia Firestore
+✅ Arquitectura Feature First
+✅ Diseño responsive Mobile First
 
 ---
 
-# 🔮 Roadmap
+# 🔮 Próximas mejoras
 
-## V1
+Algunas mejoras futuras consideradas:
 
-Finalizar la experiencia completa de organización de partidos.
+* Gestión avanzada de asistencia.
+* Historial de partidos.
+* Estadísticas básicas.
+* Mejoras de experiencia para entrenadores.
+* Notificaciones.
+* Evolución del modelo de usuarios según necesidades reales.
 
-## V2
-
-Evaluar funcionalidades adicionales según el uso real del sistema.
-
-Entre las ideas consideradas:
-
-* Gestión de asistencia
-* Confirmación de presencia
-* Notificaciones
-* Mejoras para entrenadores
-* Estadísticas básicas
-* Nuevas herramientas de organización
-
-La prioridad continuará siendo mantener una aplicación simple y enfocada en resolver problemas concretos.
+La prioridad continuará siendo mantener una herramienta simple, enfocada y fácil de usar.
 
 ---
 
-# 📚 Aprendizajes aplicados
+# 📚 Conceptos aplicados
 
-Durante el desarrollo se trabajó sobre conceptos como:
+Durante el desarrollo se trabajaron conceptos como:
 
-* Arquitectura Feature First
-* Separación de responsabilidades
-* Composition API
-* Gestión de estado con Pinia
-* Modelado de datos en Firestore
-* Formularios reactivos
-* Validaciones reutilizables
-* Componentización
-* Flujo Store → Service → Firestore
-* Re-renderizado reactivo
-* Diseño Mobile First
+* Arquitectura Feature First.
+* Vue 3 Composition API.
+* Gestión de estado con Pinia.
+* Separación Store → Service → Firestore.
+* Modelado NoSQL.
+* Firebase Authentication.
+* Firestore Security Rules.
+* Formularios reactivos.
+* Validaciones reutilizables.
+* Diseño Mobile First.
+* Componentización.
+* UX orientada a producto.
 
 ---
 
 # 🤝 Autor
 
-Desarrollado por **Néstor S** como proyecto personal de aprendizaje y portfolio.
+Desarrollado por **Néstor S.** como proyecto personal de portfolio.
 
-Let's Play A Match representa una forma de construir software orientada a resolver problemas reales mediante soluciones simples, escalables y mantenibles.
+Let's Play A Match representa una forma de construir software orientado a resolver problemas reales mediante soluciones simples, mantenibles y escalables.
 
-El objetivo nunca fue desarrollar la aplicación con mayor cantidad de funcionalidades, sino construir la herramienta correcta para el problema correcto.
+El objetivo no es agregar funcionalidades por cantidad, sino construir la herramienta adecuada para el problema adecuado.
