@@ -264,6 +264,7 @@
 
     import {
         parseDateTime,
+        formatDateTime,
         isValidDateTime,
         isValidDateRange } from '@/features/matches/utils/matches.date.utils'
 
@@ -302,13 +303,13 @@
         ...createEmptyMatch(),
         ...props.initialData,
 
-        matchStartAt: props.initialData.matchStartAt?.toDate?.() ??
-            props.initialData.matchStartAt ??
-            '',
+        matchStartAt: formatDateTime(
+            props.initialData.matchStartAt
+        ),
 
-        matchEndAt: props.initialData.matchEndAt?.toDate?.() ??
-            props.initialData.matchEndAt ??
-            '',
+        matchEndAt: formatDateTime(
+            props.initialData.matchEndAt
+        ),
     }
 
     /****************************************** */
