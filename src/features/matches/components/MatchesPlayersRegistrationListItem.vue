@@ -2,10 +2,10 @@
 
     <li class="fs-2 fs-sm-4 text-light px-0 py-2">
         <div class="row align-items-center">
-            <div class="col-9">
+            <div class="col-8">
                 <h6 class="fs-2 fs-sm-4 m-0">{{ player.matchPlayerName  }}</h6>
             </div>
-            <div v-if="props.mode === 'trainer'" class="col-3">
+            <div v-if="props.mode === 'trainer'" class="col-4">
                 <div class="btn-group btn-group-sm w-100">
 
                     <button 

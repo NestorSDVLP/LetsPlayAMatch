@@ -5,19 +5,19 @@
         class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body bg-g8 text-light box-shadow px-5 pt-4 pb-5">
+                <div class="modal-body bg-g8 text-light box-shadow p-4 px-sm-5 pt-sm-4 pb-sm-5">
                     <div class="text-end">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">
                             <i class="bi bi-x-lg"></i>
                         </button>
                     </div>
-                    <p class="fs-10 opacity-75 mb-1">{{ player.matchPlayerName }}</p>
+                    <p class="fs-8 opacity-75 mb-1">{{ player.matchPlayerName }}</p>
                     <div class="row g-0 align-items-center">
                         <div class="col-8">
-                            <h1 class="m-0">{{ player.matchPlayerPhone }}</h1>
+                            <h2 class="m-0">{{ player.matchPlayerPhone }}</h2>
                         </div>
                         <div class="col-4">
-                            <div class="btn-group w-100">
+                            <div class="btn-group btn-group-sm w-100">
                                 <button 
                                     class="btn btn-outline-light" 
                                     type="button"
